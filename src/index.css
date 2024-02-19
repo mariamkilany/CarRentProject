@@ -1,10 +1,32 @@
+/* Font Scaling
+  12px 14px 16px 18px 20px 24px 32px 36px 40px  72px
+*/
+
+
 :root {
-  --color-main: #05c7cf;
-  --color-main-50: #f5fdfd;
-  --color-main-900: #2193b0;
-  --color-white: #fff;
-  --color-black: #000;
-  --color-smoke-white: #f5f5f5;
+  --clr-m-900: #0A196F;
+  --clr-m-800: #102587;
+  --clr-m-700: #1A37A7;
+  --clr-m-600: #264BC8;
+  --clr-m: #3563E9;
+  --clr-m-400: #658DF1;
+  --clr-m-300: #85A8F8;
+  --clr-m-200: #AEC8FC;
+  --clr-m-100: #D6E4FD;
+
+  --clr-g-900: #040815;
+  --clr-g-800: #080C19;
+  --clr-g-700: #0D121F;
+  --clr-g-600: #131825;
+  --clr-g: #1A202C;
+  --clr-g-400: #596780;
+  --clr-g-300: #90A3BF;
+  --clr-g-200: #C3D4E9;
+  --clr-g-100: #E0E9F4;
+
+  --clr-white: #fff;
+  --clr-black: #000;
+  --clr-smoke-white: #f5f5f5;
 }
 
 * {
