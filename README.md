@@ -1,3 +1,12 @@
+# Pacages Installed 
+1- React Router Dom >> set pages routing
+2- Axios >> to fetch data from server
+3- UUID >> to generate a dynamic id
+4- Materail UI (all packges installed) >>  to genreate styles 
+5- Fontawesome >>  to  use icons if needed
+6-  React Redux and toolkit
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
