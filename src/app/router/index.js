@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import Login from "../../Pages/Login";
+// import Login from "../../pages/Login";
 import NotFound from "../../Pages/NotFound";
 import MainLayout from "../../Pages/MainLayout";
 import Category from "../../Pages/Category";
@@ -9,6 +9,7 @@ import Payment from "../../Pages/Payment";
 import Wishlist from "../../Pages/Wishlist";
 import Dashboard from "../../Pages/Dashboard";
 import Register from "../../Pages/Register";
+import Login from "../../pages/Login";
 
 const routerConfig = [
 	{
