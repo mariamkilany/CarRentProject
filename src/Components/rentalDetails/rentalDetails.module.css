@@ -1,0 +1,146 @@
+.parent {
+  grid-row: 1/-1;
+}
+
+.map {
+  width: 100%;
+  height: 272px;
+  border-radius: 10px;
+  margin-top: 2rem
+}
+
+.carDetails {
+  display: flex;
+  margin-top: 3.8rem;
+}
+
+.carDetails img {
+  width: 132px;
+  height: 72px;
+  border-radius: 8px;
+  background-color: var(--clr-m);
+  margin-right: 1.6rem;
+}
+
+.carDetails span {
+  margin-left: auto;
+}
+
+.carName {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: -0.03em;
+}
+
+.carType,
+.carDetails span {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: -0.02em;
+  color: var(--clr-g-400);
+}
+
+.locationDetails {
+  border-bottom: 1px solid var(--clr-g-100);
+  padding-bottom: 4rem;
+}
+
+.transactionLocation {
+  margin-top: 3.2rem;
+}
+
+.title {
+  position: relative;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--clr-g-800);
+  padding-left: 1.6rem;
+}
+
+.title::before,
+.title::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: var(--clr-m-100);
+  margin-top: 1.6rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.title::after {
+  width: 8px;
+  height: 8px;
+  background-color: var(--clr-m);
+}
+
+.transactionLocation .details {
+  margin-top: 2rem;
+  display: flex;
+}
+
+.selected {
+  flex-grow: 1;
+  border-right: 1px solid var(--clr-g-100);
+  margin-right: 2.4rem;
+}
+
+.selected:last-child {
+  border-right: none;
+  margin-right: 0;
+}
+
+.selected p {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+}
+
+.selected select {
+  height: 3.6rem;
+  border: none;
+  padding: 0 1.6rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--clr-g-400);
+}
+
+
+.priceDetails {
+  margin-top: 3.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.priceTitle {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: -0.03em;
+  color: var(--clr-g-800);
+}
+
+.priceNote {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: -0.02em;
+  color: var(--clr-g-300);
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: -0.03em;
+  color: var(--clr-m);
+}
