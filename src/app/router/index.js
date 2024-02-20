@@ -8,22 +8,24 @@ import Details from "../../Pages/Details";
 import Payment from "../../Pages/Payment";
 import Wishlist from "../../Pages/Wishlist";
 import Dashboard from "../../Pages/Dashboard";
+import Register from "../../Pages/Register";
 
 const routerConfig = [
-  {
-    path: "/",
-    element: <MainLayout />,
-    children: [
-      { path: "home", element: <Home /> },
-      { path: "category", element: <Category /> },
-      { path: "details/:id", element: <Details /> },
-      { path: "payment", element: <Payment /> },
-      { path: "wishlist", element: <Wishlist /> },
-      { path: "dashboard", element: <Dashboard /> },
-    ],
-  },
-  { path: "/login", element: <Login /> },
-  { path: "*", element: <NotFound /> },
+	{
+		path: "/",
+		element: <MainLayout />,
+		children: [
+			{ path: "home", element: <Home /> },
+			{ path: "category", element: <Category /> },
+			{ path: "details/:id", element: <Details /> },
+			{ path: "payment", element: <Payment /> },
+			{ path: "wishlist", element: <Wishlist /> },
+			{ path: "dashboard", element: <Dashboard /> },
+		],
+	},
+	{ path: "/login", element: <Login /> },
+	{ path: "/register", element: <Register /> },
+	{ path: "*", element: <NotFound /> },
 ];
 
 export const router = createBrowserRouter(routerConfig);
