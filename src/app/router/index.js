@@ -9,7 +9,8 @@ import Payment from "../../Pages/Payment";
 import Wishlist from "../../Pages/Wishlist";
 import Dashboard from "../../Pages/Dashboard";
 import Register from "../../Pages/Register";
-import Login from "../../pages/Login";
+import Login from "../../Pages/Login"
+
 
 const routerConfig = [
 	{
