@@ -1,0 +1,10 @@
+.car_name {
+    /* font-size: 3.2rem !important; */
+    font-weight: 700 !important;
+}
+
+.heart_icon {
+    width: 1.5em !important;
+    height: 1.5em !important;
+    color: rgb(237, 63, 63, 1);
+}
