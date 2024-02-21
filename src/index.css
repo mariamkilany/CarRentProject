@@ -13,9 +13,9 @@
   --clr-m-200: #aec8fc;
   --clr-m-100: #d6e4fd;
 
-  --clr-g-900: #040815;
-  --clr-g-800: #080c19;
-  --clr-g-700: #0d121f;
+  --clr-g-900: #07090e;
+  --clr-g-800: #080C19;
+  --clr-g-700: #0D121F;
   --clr-g-600: #131825;
   --clr-g: #1a202c;
   --clr-g-400: #596780;
@@ -39,4 +39,6 @@
 
 html {
   font-size: 62.5%;
+  /* width: 100vw; */
+  background-color: var(--clr-smoke-white);
 }
