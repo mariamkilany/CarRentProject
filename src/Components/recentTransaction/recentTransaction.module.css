@@ -1,0 +1,53 @@
+.parent {
+  align-self: self-start;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.6rem;
+}
+
+
+.btn {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 24px;
+  border: none;
+  background-color: transparent;
+  color: var(--clr-m);
+  cursor: pointer;
+}
+
+.transaction {
+  display: flex;
+  align-items: center;
+  padding-block: 1.6rem;
+  border-bottom: 1px solid var(--clr-g-200);
+}
+
+.transaction:last-child {
+  border-bottom: none;
+}
+
+.transaction img {
+  width: 116px;
+  height: 36px;
+  margin-right: 2.4rem;
+}
+
+
+.transaction div:last-child {
+  margin-left: auto;
+}
+
+.transaction div p {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: var(--clr-g-300);
+
+}

@@ -1,12 +1,28 @@
 import React from "react";
 import DashboardMUI from "../Components/dashboard/dashboardMUI";
+import RecentTransactions from "../Components/recentTransaction/RecentTransaction";
+import RentalDetails from "../Components/rentalDetails/RentalDetails";
+import TopRental from "../Components/topRental/TopRental";
 
 const Dashboard = () => {
-	return(
-		<div className="App">
+	const style = {
+		display: "grid",
+		backgroundColor: "var(--clr-smoke-white)",
+		gridTemplateColumns: "repeat(2, 1fr)",
+		gridTemplateRows: "repeat(2, auto)",
+		gridGap: "2.4rem 3.2rem",
+		padding: "3.2rem",
+		margin: "10px 0 0 318px",
+	};
+
+	return (
+		<div style={style}>
+			<RentalDetails />
+			<TopRental />
+			<RecentTransactions />
 			<DashboardMUI></DashboardMUI>;
 		</div>
-	) 
+	);
 };
 
 export default Dashboard;

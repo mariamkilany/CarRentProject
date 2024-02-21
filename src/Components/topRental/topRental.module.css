@@ -1,0 +1,42 @@
+.parent {
+  height: 324px;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: -0.03em;
+  text-align: left;
+}
+
+.chart {
+  position: relative;
+  margin-top: -6rem;
+  /* height: 220px; */
+}
+
+.chart canvas {
+  width: 500px !important;
+  height: 370px !important;
+}
+
+.total_Cars {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  left: 28%;
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+  color: var(--clr-g-300);
+}
+
+.total_Cars span {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--clr-g);
+}
