@@ -1,0 +1,237 @@
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Copyrights from "../Components/navbar/Copyrights";
+import { useState } from "react";
+import { useEffect } from "react";
+import { Backdrop, CircularProgress } from "@mui/material";
+import axios from "axios";
+
+const defaultTheme = createTheme({
+  typography: {
+    fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
+    fontSize: 25,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+  },
+});
+
+export default function Register() {
+  const [open, setOpen] = useState(false);
+  const [FaildRegister, setFaildRegister] = useState(false);
+  const [newUser, setNewUser] = useState({
+    firstName: "",
+    lastName: "",
+    Job: "",
+    email: "",
+    password: "",
+    agree: false,
+  });
+
+  const UsersApi = "https://65d24788987977636bfc333b.mockapi.io/api/users";
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setOpen(true);
+    const data = new FormData(event.currentTarget);
+    setNewUser({
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
+      Job: data.get("Job"),
+      email: data.get("email"),
+      password: data.get("password"),
+      agree: data.get("agree"),
+    });
+    axios
+      .get(`${UsersApi}?email=${data.get("email")}`)
+      .then((res) => {
+        if (res.data[0].email === data.get("email")) {
+          console.log("Email Already Register");
+          setFaildRegister(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setFaildRegister(false);
+        console.log("registered");
+      });
+    setTimeout(() => {
+      setOpen(false);
+    }, 1500);
+  };
+
+  useEffect(() => {
+    console.log(newUser);
+  }, [newUser]);
+
+  const isFormValid = () => {
+    return (
+      newUser.firstName &&
+      newUser.lastName &&
+      newUser.Job &&
+      newUser.email &&
+      newUser.password &&
+      newUser.agree
+    );
+  };
+
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <Container component="main" maxWidth="sm">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 3,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="firstName"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                  value={newUser.firstName}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, firstName: e.target.value })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="family-name"
+                  value={newUser.lastName}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, lastName: e.target.value })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="job"
+                  label="Job Title"
+                  name="Job"
+                  autoComplete="Job"
+                  value={newUser.Job}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, Job: e.target.value })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  error={FaildRegister}
+                  helperText={
+                    FaildRegister ? "Email is Already Registered Before" : "Please Enter Your Email"
+                  }
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  value={newUser.email}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, email: e.target.value })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                  value={newUser.password}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, password: e.target.value })
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      value={newUser.agree}
+                      name="agree"
+                      color="primary"
+                      onChange={(e) =>
+                        setNewUser({
+                          ...newUser,
+                          agree: e.target.checked,
+                        })
+                      }
+                    />
+                  }
+                  label="I Agree To The Guide Line Rules."
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              disabled={!isFormValid()}
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="/login" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        <Copyrights sx={{ mt: 5 }} />
+        <Backdrop
+          open={open}
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>{" "}
+      </Container>
+    </ThemeProvider>
+  );
+}
