@@ -1,17 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
-import NotFound from "../../Pages/NotFound";
-import MainLayout from "../../Pages/MainLayout";
-import Category from "../../Pages/Category";
-import Home from "../../Pages/Home";
-import Details from "../../Pages/Details";
-import Payment from "../../Pages/Payment";
-import Wishlist from "../../Pages/Wishlist";
-import Dashboard from "../../Pages/Dashboard";
+import NotFound from "../../pages/NotFound";
+import MainLayout from "../../pages/MainLayout";
+import Category from "../../pages/Category";
+import Home from "../../pages/Home";
+import Details from "../../pages/Details";
+import Payment from "../../pages/Payment";
+import Wishlist from "../../pages/Wishlist";
+import Dashboard from "../../pages/Dashboard";
 import DbCars from "../../Components/dashboard/components/dbCars";
 import DbHome from "../../Components/dashboard/components/dbHome";
-import Register from "../../Pages/Register";
-import Login from "../../Pages/Login"
-
+import Register from "../../pages/Register";
+import Login from "../../pages/Login";
+import MangerDashbord from "../../pages/MangerDashbord";
 
 const routerConfig = [
 	{
@@ -27,12 +27,14 @@ const routerConfig = [
 	},
 	{ path: "/login", element: <Login /> },
 	{ path: "/register", element: <Register /> },
-  {path: "/dashboard",
-  element: <Dashboard />,
-  children: [
-    { path: "home", element: <DbHome></DbHome> },
-    { path: "cars", element: <DbCars></DbCars> },
-  ]},
+	{
+		path: "/dashboard",
+		element: <Dashboard />,
+		children: [
+			{ index: true, element: <MangerDashbord /> },
+			{ path: "cars", element: <DbCars></DbCars> },
+		],
+	},
 	{ path: "*", element: <NotFound /> },
 ];
 
