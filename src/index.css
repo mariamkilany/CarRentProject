@@ -38,6 +38,7 @@
 html {
   font-size: 62.5%;
   /* width: 100vw; */
+  background-color: var(--clr-smoke-white);
 }
 
 body {

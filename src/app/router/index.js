@@ -12,6 +12,7 @@ import DbHome from "../../Components/dashboard/components/dbHome";
 import Register from "../../pages/Register";
 import Login from "../../pages/Login";
 import MangerDashbord from "../../pages/MangerDashbord";
+import CategoryLayout from "../../pages/CategoryLayout";
 
 const routerConfig = [
   {
@@ -19,8 +20,14 @@ const routerConfig = [
     element: <MainLayout />,
     children: [
       { path: "home", element: <Home /> },
-      { path: "category", element: <Category /> },
-      { path: "details/:id", element: <Details /> },
+      {
+        path: "category",
+        element: <CategoryLayout />,
+        children: [
+          { path: "", element: <Category /> },
+          { path: ":id", element: <Details /> },
+        ],
+      },
       { path: "payment", element: <Payment /> },
       { path: "wishlist", element: <Wishlist /> },
     ],
