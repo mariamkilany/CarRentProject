@@ -28,8 +28,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  top: 50%;
-  left: 28%;
+  top: 177px;
+  left: 105px;
   transform: translate(-50%, -50%);
   font-size: 1.6rem;
   color: var(--clr-g-300);

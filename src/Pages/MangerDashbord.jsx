@@ -5,18 +5,26 @@ import RecentTransactions from "../Components/recentTransaction/RecentTransactio
 
 const MangerDashbord = () => {
 	const style = {
-		display: "grid",
-		backgroundColor: "var(--clr-smoke-white)",
-		gridTemplateColumns: "repeat(2, 1fr)",
-		gridTemplateRows: "repeat(2, auto)",
-		gridGap: "2.4rem 3.2rem",
+		display: "flex",
+		flexWrap: "wrap",
+		gap: "2.4rem 3.2rem",
 		padding: "3.2rem",
 	};
 	return (
 		<div style={style}>
 			<RentalDetails />
-			<TopRental />
-			<RecentTransactions />
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					flexGrow: 1,
+					flexShrink: 1,
+					gap: "2.4rem",
+				}}
+			>
+				<TopRental />
+				<RecentTransactions />
+			</div>
 		</div>
 	);
 };
