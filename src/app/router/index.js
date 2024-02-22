@@ -8,7 +8,6 @@ import Payment from "../../pages/Payment";
 import Wishlist from "../../pages/Wishlist";
 import Dashboard from "../../pages/Dashboard";
 import DbCars from "../../Components/dashboard/components/dbCars";
-import DbHome from "../../Components/dashboard/components/dbHome";
 import Register from "../../pages/Register";
 import Login from "../../pages/Login";
 import MangerDashbord from "../../pages/MangerDashbord";

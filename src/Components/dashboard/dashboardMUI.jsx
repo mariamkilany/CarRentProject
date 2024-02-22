@@ -15,10 +15,14 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "./listItems";
+import { MainListItems, SecondaryListItems } from "./listItems";
 import { Outlet } from "react-router-dom";
+import { useTheme } from "@emotion/react";
+
 
 function Copyright(props) {
+
+
 	return (
 		<Typography variant="body2" color="text.secondary" align="center" {...props}>
 			{"Copyright © "}
@@ -77,8 +81,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: prop => prop !== "open" })
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
-
+	
 export default function DashboardMUI() {
+
+
+	const customTheme = useTheme();
 	const [open, setOpen] = React.useState(true);
 	const toggleDrawer = () => {
 		setOpen(!open);
@@ -106,12 +113,12 @@ export default function DashboardMUI() {
 						>
 							<MenuIcon />
 						</IconButton>
-						<Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+						<Typography component="h1"  variant="h4" noWrap sx={{ flexGrow: 1 }}>
 							Dashboard
 						</Typography>
 						<IconButton color="inherit">
-							<Badge badgeContent={4} color="secondary">
-								<NotificationsIcon />
+							<Badge badgeContent={4} color="secondary" sx={{fontSize:"3rem"}}  >
+								<NotificationsIcon sx={{fontSize:"2rem"}}  />
 							</Badge>
 						</IconButton>
 					</Toolbar>
@@ -132,11 +139,11 @@ export default function DashboardMUI() {
 					<Divider />
 
 					<Typography sx={{ display: "flex", justifyContent: "space-between", height: "100%", flexDirection: "column" }}>
-						<List component="nav" sx={{ fontSize: "3rem" }}>
-							{mainListItems}
+						<List component="nav" >
+							<MainListItems/>
 							{/* <Divider sx={{ my: 1 }} /> */}
 						</List>
-						<List>{secondaryListItems}</List>
+						<List><SecondaryListItems/></List>
 					</Typography>
 				</Drawer>
 				<Box

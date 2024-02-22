@@ -101,6 +101,19 @@ const theme = createTheme({
 			fontWeight: 600,
 			textTransform: "capitalize",
 		},
+		a:{
+			fontSize:"2rem"
+		}
+		
 	},
+	components: {
+		MuiListItemText: {
+		  styleOverrides: {
+			root: {
+			  fontSize: "4rem", // Adjust the font size here
+			},
+		  },
+		},
+	  },	
 });
 export default theme;
