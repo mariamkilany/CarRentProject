@@ -20,9 +20,6 @@ const routerConfig = [
     element: <MainLayout />,
     children: [
       { path: "home", element: <Home /> },
-      ,
-      // { path: "category", element: <Category /> },
-      // { path: "details/:id", element: <Details /> },
       {
         path: "category",
         element: <CategoryLayout />,
