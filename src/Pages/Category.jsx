@@ -1,12 +1,13 @@
 import React from "react";
 import Asidebar from "../Components/asidebar/asidebar";
+import { Container } from "@mui/material";
+import CarCard from "../Components/carCard/CarCard";
 
 const Category = () => {
   return (
-    <>
-      <div>Category</div>
-      <Asidebar />
-    </>
+    <Container>
+      <CarCard />
+    </Container>
   );
 };
 
