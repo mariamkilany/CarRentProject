@@ -5,14 +5,16 @@ import Footer from "../Components/footer/Footer";
 import Asidebar from "../Components/asidebar/asidebar";
 
 const MainLayout = () => {
-	return (
-		<>
-			<Navbar />
+  return (
+    <>
+      <container>
+        <Navbar />
 
-			<Outlet />
-			<Footer />
-		</>
-	);
+        <Outlet />
+        <Footer />
+      </container>
+    </>
+  );
 };
 
 export default MainLayout;

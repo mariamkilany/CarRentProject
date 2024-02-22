@@ -14,8 +14,8 @@
   --clr-m-100: #d6e4fd;
 
   --clr-g-900: #07090e;
-  --clr-g-800: #080C19;
-  --clr-g-700: #0D121F;
+  --clr-g-800: #080c19;
+  --clr-g-700: #0d121f;
   --clr-g-600: #131825;
   --clr-g: #1a202c;
   --clr-g-400: #596780;
@@ -26,8 +26,7 @@
   --clr-white: #fff;
   --clr-black: #000;
   --clr-smoke-white: #f5f5f5;
-  --clr-e-600: #DB2719;
-
+  --clr-e-600: #db2719;
 }
 
 * {
@@ -35,7 +34,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 
 html {
   font-size: 62.5%;
@@ -48,7 +46,6 @@ body {
   line-height: 1.6;
 }
 
-
 /* Custom Styles */
 
 .leaflet-container {
@@ -56,7 +53,6 @@ body {
   width: 100%;
   border-radius: 2rem;
 }
-
 
 /* General Styles */
 
@@ -80,7 +76,6 @@ body {
   line-height: 1.6;
 }
 
-
 /* Custom Styles */
 
 .leaflet-container {
@@ -88,7 +83,6 @@ body {
   width: 100%;
   border-radius: 2rem;
 }
-
 
 /* General Styles */
 

@@ -9,222 +9,298 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import styles from "./Navbar.module.css";
 
-import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Favorite, Settings } from "@mui/icons-material";
-import { Avatar } from "@mui/material";
+import { Avatar, Tab, Tabs } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
-	position: "relative",
-	borderRadius: theme.shape.borderRadius,
-	backgroundColor: alpha(theme.palette.common.white, 0.15),
-	"&:hover": {
-		backgroundColor: alpha(theme.palette.common.white, 0.25),
-	},
-	border: "1px solid #596780", // Border color added
-	marginRight: theme.spacing(2),
-	marginLeft: 0,
-	width: "100%",
-	[theme.breakpoints.up("sm")]: {
-		marginLeft: theme.spacing(3),
-		width: "auto",
-	},
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  border: "1px solid #596780", // Border color added
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(3),
+    width: "auto",
+  },
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
-	padding: theme.spacing(0, 2),
-	height: "100%",
-	position: "absolute",
-	pointerEvents: "none",
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "center",
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-	color: "inherit",
-	"& .MuiInputBase-input": {
-		padding: theme.spacing(1, 0, 1, 0),
-		// vertical padding + font size from searchIcon
-		paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-		transition: theme.transitions.create("width"),
-		width: "100%",
-		[theme.breakpoints.up("md")]: {
-			width: "20ch",
-		},
-	},
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 0, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
 }));
 
 const Navbar = () => {
-	const [anchorEl, setAnchorEl] = React.useState(null);
-	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [value, setValue] = React.useState("one");
 
-	const isMenuOpen = Boolean(anchorEl);
-	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-	const handleProfileMenuOpen = event => {
-		setAnchorEl(event.currentTarget);
-	};
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-	const handleMobileMenuClose = () => {
-		setMobileMoreAnchorEl(null);
-	};
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
 
-	const handleMenuClose = () => {
-		setAnchorEl(null);
-		handleMobileMenuClose();
-	};
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
 
-	const handleMobileMenuOpen = event => {
-		setMobileMoreAnchorEl(event.currentTarget);
-	};
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
+  );
 
-	const menuId = "primary-search-account-menu";
-	const renderMenu = (
-		<Menu
-			anchorEl={anchorEl}
-			anchorOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
-			id={menuId}
-			keepMounted
-			transformOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
-			open={isMenuOpen}
-			onClose={handleMenuClose}
-		>
-			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
-		</Menu>
-	);
+  const mobileMenuId = "primary-search-account-menu-mobile";
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <Badge badgeContent={4} color="error">
+            <MailIcon />
+          </Badge>
+        </IconButton>
+        <p>Messages</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+        >
+          <Badge badgeContent={17} color="error" sx={{ fontSize: "15px" }}>
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <p>Notifications</p>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+    </Menu>
+  );
 
-	const mobileMenuId = "primary-search-account-menu-mobile";
-	const renderMobileMenu = (
-		<Menu
-			anchorEl={mobileMoreAnchorEl}
-			anchorOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
-			id={mobileMenuId}
-			keepMounted
-			transformOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
-			open={isMobileMenuOpen}
-			onClose={handleMobileMenuClose}
-		>
-			<MenuItem>
-				<IconButton size="large" aria-label="show 4 new mails" color="inherit">
-					<Badge badgeContent={4} color="error">
-						<MailIcon />
-					</Badge>
-				</IconButton>
-				<p>Messages</p>
-			</MenuItem>
-			<MenuItem>
-				<IconButton size="large" aria-label="show 17 new notifications" color="inherit">
-					<Badge badgeContent={17} color="error" sx={{ fontSize: "15px" }}>
-						<NotificationsIcon />
-					</Badge>
-				</IconButton>
-				<p>Notifications</p>
-			</MenuItem>
-			<MenuItem onClick={handleProfileMenuOpen}>
-				<IconButton
-					size="large"
-					aria-label="account of current user"
-					aria-controls="primary-search-account-menu"
-					aria-haspopup="true"
-					color="inherit"
-				>
-					<AccountCircle />
-				</IconButton>
-				<p>Profile</p>
-			</MenuItem>
-		</Menu>
-	);
+  return (
+    <Box sx={{ display: "flex" }}>
+      <AppBar
+        position="static"
+        sx={{ backgroundColor: "#ffffff", padding: "15px" }}
+      >
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography
+            variant="h3"
+            noWrap
+            component="div"
+            sx={{
+              display: { xs: "none", sm: "block" },
+              color: "#3563E9",
+              marginRight: "100px",
+            }}
+          >
+            <b> MORENT</b>
+          </Typography>
+          {/* <Search sx={{ borderRadius: "75px", color: "#C3D4E9" }}>
+            <SearchIconWrapper>
+              <SearchIcon
+                sx={{ color: "#596780", fontSize: "30px", marginLeft: "-5px" }}
+              />
+            </SearchIconWrapper>
+            <StyledInputBase
+              sx={{ width: "400px", color: "#596780", fontSize: "15px" }}
+              placeholder="Search something here"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search> */}
 
-	return (
-		<Box sx={{ display: "flex" }}>
-			<AppBar position="static" sx={{ backgroundColor: "#ffffff", padding: "15px" }}>
-				<Toolbar>
-					<Typography
-						variant="h3"
-						noWrap
-						component="div"
-						sx={{
-							display: { xs: "none", sm: "block" },
-							color: "#3563E9",
-							marginRight: "100px",
-						}}
-					>
-						<b> MORENT</b>
-					</Typography>
-					<Search sx={{ borderRadius: "75px", color: "#C3D4E9" }}>
-						<SearchIconWrapper>
-							<SearchIcon sx={{ color: "#596780", fontSize: "30px", marginLeft: "-5px" }} />
-						</SearchIconWrapper>
-						<StyledInputBase
-							sx={{ width: "400px", color: "#596780", fontSize: "15px" }}
-							placeholder="Search something here"
-							inputProps={{ "aria-label": "search" }}
-						/>
-					</Search>
-					<Box sx={{ flexGrow: 1 }} />
-					<Box sx={{ display: { xs: "none", md: "flex" } }}>
-						<IconButton sx={{ fontSize: "10px" }} aria-label="show 4 new mails" color="inherit">
-							<Badge badgeContent={4} color="error" sx={{ fontSize: "20px" }}>
-								<Favorite sx={{ color: "#596780", fontSize: "30px" }} />
-							</Badge>
-						</IconButton>
-						<IconButton size="large" aria-label="show 17 new notifications" color="inherit">
-							<Badge badgeContent={17} color="error">
-								<NotificationsIcon sx={{ color: "#596780", fontSize: "30px" }} />
-							</Badge>
-						</IconButton>
-						<IconButton size="large" aria-label="show 4 new mails" color="inherit">
-							<Badge badgeContent={4} color="error">
-								<Settings sx={{ color: "#596780", fontSize: "30px" }} />
-							</Badge>
-						</IconButton>
-						<IconButton
-							size="xx-large"
-							edge="end"
-							aria-label="account of current user"
-							aria-controls={menuId}
-							aria-haspopup="true"
-							onClick={handleProfileMenuOpen}
-							color="inherit"
-						>
-							<Avatar sx={{ color: "#596780" }} />
-						</IconButton>
-					</Box>
-					<Box sx={{ display: { xs: "flex", md: "none" } }}>
-						<IconButton
-							size="large"
-							aria-label="show more"
-							aria-controls={mobileMenuId}
-							aria-haspopup="true"
-							onClick={handleMobileMenuOpen}
-							color="black"
-						>
-							<MoreIcon />
-						</IconButton>
-					</Box>
-				</Toolbar>
-			</AppBar>
-			{renderMobileMenu}
-			{renderMenu}
-		</Box>
-	);
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            sx={{
+              marginInline: "auto",
+            }}
+            aria-label="wrapped label tabs example"
+          >
+            <NavLink
+              className={({ isActive, isPending }) =>
+                isPending || isActive ? styles.active : styles.disactive
+              }
+              to="/home"
+              end
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              className={({ isActive, isPending }) =>
+                isPending || isActive ? styles.active : styles.disactive
+              }
+              to="/category"
+              end
+            >
+              Category
+            </NavLink>
+            <NavLink
+              className={({ isActive, isPending }) =>
+                isPending || isActive ? styles.active : styles.disactive
+              }
+              to="/wishlist"
+              end
+            >
+              Wishlist
+            </NavLink>
+            <NavLink
+              className={({ isActive, isPending }) =>
+                isPending || isActive ? styles.active : styles.disactive
+              }
+              to="/payment"
+              end
+            >
+              Payment
+            </NavLink>
+
+  
+          </Tabs>
+
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <IconButton
+              sx={{ fontSize: "10px" }}
+              aria-label="show 4 new mails"
+              color="inherit"
+            >
+              <Badge badgeContent={4} color="error" sx={{ fontSize: "20px" }}>
+                <Favorite sx={{ color: "#596780", fontSize: "30px" }} />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={17} color="error">
+                <NotificationsIcon
+                  sx={{ color: "#596780", fontSize: "30px" }}
+                />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+            >
+              <Badge badgeContent={4} color="error">
+                <Settings sx={{ color: "#596780", fontSize: "30px" }} />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="xx-large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <Avatar sx={{ color: "#596780" }} />
+            </IconButton>
+          </Box>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="black"
+            >
+              <MoreIcon />
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      {renderMobileMenu}
+      {renderMenu}
+    </Box>
+  );
 };
 export default Navbar;
