@@ -1,5 +1,5 @@
 .parent {
-  align-self: self-start;
+  max-width: 100%;
 }
 
 .header {
@@ -24,6 +24,7 @@
   display: flex;
   align-items: center;
   padding-block: 1.6rem;
+
   border-bottom: 1px solid var(--clr-g-200);
 }
 
@@ -49,5 +50,9 @@
   letter-spacing: -0.02em;
   text-align: left;
   color: var(--clr-g-300);
+}
 
+.transaction div h4 {
+  font-size: 1.6rem;
+  font-weight: 700;
 }

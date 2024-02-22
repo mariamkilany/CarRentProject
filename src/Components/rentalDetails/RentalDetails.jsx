@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./rentalDetails.module.css";
-import Map from "../../Components/map/Map";
+import Map from "../dashboard_content/map/Map";
+import TransactionFilter from "../dashboard_content/transactionFilter/TransactionFilter";
 
 const RentalDetails = () => {
 	return (
@@ -22,52 +23,8 @@ const RentalDetails = () => {
 					<span>#9761</span>
 				</div>
 				<div className={styles.locationDetails}>
-					<div className={styles.transactionLocation}>
-						<h3 className={styles.title}>Pickup</h3>
-						<div className={styles.details}>
-							<div className={styles.selected}>
-								<p className={styles.name}>Locations</p>
-								<select name="location" id="location">
-									<option value="Kota Semarang">Kota Semarang</option>
-								</select>
-							</div>
-							<div className={styles.selected}>
-								<p className={styles.name}>Date</p>
-								<select name="date" id="date">
-									<option value="20 July 2022">20 July 2022</option>
-								</select>
-							</div>
-							<div className={styles.selected}>
-								<p className={styles.name}>Time</p>
-								<select name="time" id="time">
-									<option value="07.00">07.00</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div className={styles.transactionLocation}>
-						<h3 className={styles.title}>Drop - Off</h3>
-						<div className={styles.details}>
-							<div className={styles.selected}>
-								<p className={styles.name}>Locations</p>
-								<select name="location" id="location">
-									<option value="Kota Semarang">Kota Semarang</option>
-								</select>
-							</div>
-							<div className={styles.selected}>
-								<p className={styles.name}>Date</p>
-								<select name="date" id="date">
-									<option value="21 July 2022">21 July 2022</option>
-								</select>
-							</div>
-							<div className={styles.selected}>
-								<p className={styles.name}>Time</p>
-								<select name="time" id="time">
-									<option value="01.00">01.00</option>
-								</select>
-							</div>
-						</div>
-					</div>
+					<TransactionFilter title="Pick - Up" locations={["Kota Semarang"]} dates={["20 July 2022"]} times={["07.00"]} />
+					<TransactionFilter title="Drop - off" locations={["Kota Semarang"]} dates={["21 July 2022"]} times={["01.00"]} />
 				</div>
 				<div className={styles.priceDetails}>
 					<div className={styles.priceInfo}>
