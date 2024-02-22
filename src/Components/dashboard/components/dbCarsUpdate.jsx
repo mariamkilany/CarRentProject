@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import PersonIcon from '@mui/icons-material/Person';
@@ -12,12 +12,10 @@ import { styled } from '@mui/material/styles';
 
 
 
-export default function BasicModal() {
-// theme for  modal for  different screns
-    const theme = useTheme();
+export default function UpdateModel() {
 
+    const theme = useTheme();
     const style = (theme) => ({
-    
         position: 'absolute',
         top: '50%',
         left: '50%',
@@ -25,7 +23,7 @@ export default function BasicModal() {
         width: "auto",
         height:"98%",
         bgcolor: 'background.paper',
-        boxShadow: 24,
+  
        
         p: 5,
         [theme.breakpoints.down('sm')]: {
@@ -40,19 +38,19 @@ export default function BasicModal() {
         }
     });
 
+    
     // upload image button
-      const VisuallyHiddenInput = styled('input')({
-        clip: 'rect(0 0 0 0)',
-        clipPath: 'inset(50%)',
-        height: 1,
-        overflow: 'hidden',
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        whiteSpace: 'nowrap',
-        width: 1,
-      });
-// open and closed functionality 
+    const VisuallyHiddenInput = styled('input')({
+      clip: 'rect(0 0 0 0)',
+      clipPath: 'inset(50%)',
+      height: 1,
+      overflow: 'hidden',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      whiteSpace: 'nowrap',
+      width: 1,
+    });
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -61,15 +59,9 @@ export default function BasicModal() {
   return (
     <div>
                    
-      <Button onClick={handleOpen} 
-        sx={{backgroundColor:"var(--clr-m)", 
-            color:"white",
-            "&:hover":{color:"white",
-            backgroundColor:" var(--clr-m-900)",
-            border:"1px solid var(--clr-m)"},
-            fontSize:"1.5rem",marginTop:"2rem"}} >
+      <Button onClick={handleOpen}  title='Edit' >
                 
-        <AddIcon /> Add New
+        <EditIcon />
        </Button >
 
       <Modal
@@ -80,8 +72,9 @@ export default function BasicModal() {
      sx={{ overflowY: 'auto'}}
      >
         <Box sx={style(theme)}>
-          <Typography id="modal-modal-title" variant="h4" component="h2" sx={{color:"var(--clr-m)", fontWeight:"bold"}}>
-            Add New Car
+          <Typography id="modal-modal-title" variant="h4" component="h2"
+          sx={{color:"var(--clr-m)", fontWeight:"bold"}}>
+            Update Car Info
             <hr></hr>
           </Typography>
 
@@ -187,7 +180,7 @@ export default function BasicModal() {
                     />
                 </Grid>
 
-                  <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6}>
                   <Button
                         component="label"
                         role={undefined}
@@ -209,10 +202,10 @@ export default function BasicModal() {
                 <Button type="submit" variant="contained"  sx={{backgroundColor:"var(--clr-m)", 
                         color:"white",padding:"8px 30px" , width:"20%", marginRight:"25px",
                         "&:hover":{color:"white",
-                        backgroundColor:" var(--clr-m-900)",
+                        backgroundColor:"var(--clr-m-900)",
                         border:"1px solid var(--clr-m)"},
                         fontSize:"1.5rem"}}>
-                            Add
+                            Update
                     </Button>
 
                     <Button onClick={handleClose} aria-label="close"  sx={{backgroundColor:"var(--clr-e-600)", 
