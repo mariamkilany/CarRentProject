@@ -52,7 +52,7 @@ const RentalSummaryCard = () => {
       </Stack>
 
       <Divider orientation="horizontal" sx={{ m: 2 }} />
-      <Stack direction={"row"} spacing={3}>
+      <Stack direction={"row"} spacing={49}>
         <Typography variant="subtitle2">Subtotal</Typography>
         <Typography
           sx={{ justifyContent: "space-between" }}
@@ -61,7 +61,7 @@ const RentalSummaryCard = () => {
           ${parseFloat(subtotal)}.00
         </Typography>
       </Stack>
-      <Stack direction={"row"} spacing={10}>
+      <Stack direction={"row"} spacing={55}>
         <Typography variant="subtitle2">Tax</Typography>
         <Typography
           sx={{ justifyContent: "space-between" }}
@@ -70,10 +70,13 @@ const RentalSummaryCard = () => {
           ${parseFloat(Tax)}.00
         </Typography>
       </Stack>
-      <Stack direction={"row"} spacing={10}>
+      <Stack direction={"row"} spacing={38}>
         <Typography variant="h3">Total Rental Price</Typography>
 
-        <Typography sx={{ justifyContent: "space-between" }}>
+        <Typography
+          sx={{ justifyContent: "space-between" }}
+          variant="subtitle2"
+        >
           ${parseFloat(Total)}.00
         </Typography>
       </Stack>
