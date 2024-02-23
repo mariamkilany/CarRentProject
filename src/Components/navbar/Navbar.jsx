@@ -193,14 +193,14 @@ const Navbar = () => {
             />
           </Search> */}
 
-          <Tabs
+          {/* <Tabs
             value={value}
             onChange={handleChange}
             sx={{
               marginInline: "auto",
             }}
             aria-label="wrapped label tabs example"
-          >
+          > */}
             <NavLink
               className={({ isActive, isPending }) =>
                 isPending || isActive ? styles.active : styles.disactive
@@ -240,7 +240,7 @@ const Navbar = () => {
             </NavLink>
 
   
-          </Tabs>
+          {/* </Tabs> */}
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
