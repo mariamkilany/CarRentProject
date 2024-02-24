@@ -9,6 +9,10 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, Stack, TextField } from '@mui/material';
 import { useTheme } from '@emotion/react';
 import { styled } from '@mui/material/styles';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCarAction, getAllCarAction } from '../../../features/car/carActions';
+import { useEffect } from 'react';
 
 
 
@@ -53,10 +57,118 @@ export default function BasicModal() {
         width: 1,
       });
 // open and closed functionality 
-
+ 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+//  handel add logic
+
+      const carInfo = useSelector((state)=>state.car.car)
+      const disaptch =useDispatch();
+
+      useEffect(()=>{
+        disaptch(getAllCarAction());
+      },[])
+
+
+     const id = carInfo.length > 0 ? parseInt(carInfo[carInfo.length - 1].id) : 0;
+     
+
+     ///form validation
+     
+    const [errors, setErrors] = useState({});
+    const [submitting, setSubmitting] = useState(false);
+    
+    const validateValues = (inputValues) => {
+      let errors = {};
+      if (!inputValues.name.trim()) {
+        errors.name = "Name is required";
+      }
+      if (!inputValues.type.trim()) {
+        errors.type = "Type is required";
+      }
+      if (!inputValues.gasoline) {
+        errors.gasoline = "gasoline is required";
+      }
+
+      if (!inputValues.steering) {
+        errors.steering = " Steering Type is required";
+      }
+      if (!inputValues.chairCapacity || inputValues.chairCapacity <= 0 || inputValues.chairCapacity >= 11) {
+        errors.chairCapacity = "Capacity should be between 1 and 10";
+      }
+
+      if (!inputValues.price || inputValues.price <= 0) {
+        errors.price = "Price is required and must be greater than 0";
+      }
+      if (!inputValues.carDesc) {
+        errors.carDesc = "Description is required ";
+      }
+      return errors;
+    };
+
+
+
+
+    const [formData , setformData] =useState({
+      id:"",
+      name:"",
+      type:"",
+      steering:"",
+      gasoline:"",
+      chairCapacity:"",
+      price:"",
+      carDesc:"",
+      image:""
+    })
+
+    const handleChange=(e)=>{
+      const newId = id+1
+      const chnagedId = newId.toString()
+
+        if (e.target.name === 'chairCapacity' || e.target.name === 'price') {
+          if (e.target.value !== '' && !/^[0-9]+$/.test(e.target.value)) {
+            return;
+          }
+        }
+
+        setformData((oldData)=>({
+          ...oldData,
+          id:chnagedId,[e.target.name]:e.target.value
+        })
+          
+        )  
+        const newErrors = validateValues({ ...formData, [e.target.name]:e.target.value });
+        // // setErrors(newErrors);
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [e.target.name]: newErrors[e.target.name]
+        }));   }
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        const formErrors = validateValues(formData);
+        setErrors(formErrors);
+        if (Object.keys(formErrors).length === 0) {
+          disaptch(addCarAction(formData));
+          setOpen(false);
+          setformData({
+            id: "",
+            name: "",
+            type: "",
+            steering: "",
+            gasoline: "",
+            chairCapacity: "",
+            price: "",
+            carDesc: "",
+            image: ""
+          });
+          setSubmitting(true);
+        } else {
+          setSubmitting(false);
+        }
+      };
 
   return (
     <div>
@@ -86,18 +198,27 @@ export default function BasicModal() {
           </Typography>
 
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <form>
+            <form  onSubmit={handleSubmit}>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                     <Typography  variant='h5'> Car Name </Typography >
                 <TextField
                     fullWidth
-                    name="carName"
+                    name="name"
                     InputProps={{
                         sx: { fontSize: "1.5rem" } // Adjust the font size as needed
                     }}
+                    onChange={handleChange}
+                    value={formData.name}
+                    required
                 />
+                  {errors.name &&(
+                  <p className="error" style={{color:"red"}}>
+                   Name Field is required
+                  </p>
+                )}
                 </Grid>
+              
                 <Grid item xs={12} sm={6}>
                    <Typography  variant='h5'> Type </Typography >
                     <TextField
@@ -106,7 +227,15 @@ export default function BasicModal() {
                         InputProps={{
                             sx: { fontSize: "1.5rem" } // Adjust the font size as needed
                         }}
+                        onChange={handleChange}
+                        value={formData.type}
+                        required
                     />
+                      {errors.type &&(
+                  <p className="error" style={{color:"red"}}>
+                     Type Field is required
+                  </p>
+                )}
                 </Grid>
                 <Grid item xs={12} sm={6}>
                    <Typography  variant='h5'> Steering type </Typography >
@@ -117,11 +246,19 @@ export default function BasicModal() {
                         "& .MuiMenuItem-root": {
                           fontSize: "1.5rem", // Adjust the font size of the menu items
                         }
-                      }} >
-                        
-                        <MenuItem value="manula">Manual</MenuItem>
+                      }}
+                      onChange={handleChange}
+                      value={formData?.steering}
+                      required
+                      >
+                        <MenuItem value="manual">Manual</MenuItem>
                         <MenuItem value="automatic">Automatic</MenuItem>
                     </Select>  
+                    {errors.steering &&(
+                  <p className="error" style={{color:"red"}}>
+                      Steering Type  is required 
+
+                  </p>)}
                 </FormControl>                   
 
                 </Grid>
@@ -137,15 +274,23 @@ export default function BasicModal() {
                           fontSize: "1.5rem", // Adjust the font size of the menu items
                         }
                       }}
+                      onChange={handleChange}
+                      value={formData?.gasoline}
+                      required
                     >
-                    <MenuItem value="petrol">80L</MenuItem>
-                    <MenuItem value="diesel">90L</MenuItem>
-                    <MenuItem value="electric">92L</MenuItem>
-                    <MenuItem value="electric">95L</MenuItem>
-                    <MenuItem value="electric">Gas</MenuItem>
+                    <MenuItem value="80">80L</MenuItem>
+                    <MenuItem value="90">90L</MenuItem>
+                    <MenuItem value="92">92L</MenuItem>
+                    <MenuItem value="95">95L</MenuItem>
+                    <MenuItem value="Gas">Gas</MenuItem>
 
 
                     </Select>
+                    {errors.gasoline &&(
+                  <p className="error" style={{color:"red"}}>
+                  Gasoline Field is required 
+
+                  </p>)}
                 </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -157,20 +302,41 @@ export default function BasicModal() {
                         id="outlined-adornment-capacity"
                         startAdornment={<InputAdornment position="start"> <PersonIcon/> </InputAdornment>}
                         label="capacity"
+                        name='chairCapacity'
                         sx={{ fontSize: "1.5rem" }} 
+                        onChange={handleChange}
+                        value={formData.chairCapacity}
+                        required
                     />
+                      {errors.chairCapacity &&(
+                  <p className="error" style={{color:"red"}}>
+                    chairCapacity must not exceed 10  <br></br>
+                    chairCapacity is required 
+
+                  </p>
+                )}
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
                 <FormControl fullWidth >
-                    <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-price">Price</InputLabel>
                     <OutlinedInput
-                        id="outlined-adornment-amount"
+                        id="outlined-adornment-price"
                         startAdornment={<InputAdornment position="start">EGP</InputAdornment>}
-                        label="Amount"
+                       name='price'
+                        label="price"
                         sx={{ fontSize: "1.5rem" }} 
+                        onChange={handleChange}
+                        value={formData.price}
+                        required
                     />
+                      {errors.price &&(
+                  <p className="error" style={{color:"red"}}>
+                    Price should be number  <br></br>
+                    Price is required
+                  </p>
+                )}
                     </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -179,12 +345,21 @@ export default function BasicModal() {
                     </Typography >
                     <TextField fullWidth
                     id="filled-multiline-static"
+                    name='carDesc'
                     multiline
+                    required
                     rows={4}
                     InputProps={{
                         sx: { fontSize: "1.5rem" } // Adjust the font size as needed
-                    }}
+                      }}
+                      value={formData.carDesc}
+                      onChange={handleChange}
                     />
+                      {errors.carDesc &&(
+                  <p className="error" style={{color:"red"}}>
+                    Description is requied 
+                 </p>
+                )}
                 </Grid>
 
                   <Grid item xs={12} sm={6}>

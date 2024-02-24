@@ -12,6 +12,11 @@ import Register from "../../pages/Register";
 import Login from "../../pages/Login";
 import MangerDashbord from "../../pages/MangerDashbord";
 import CategoryLayout from "../../pages/CategoryLayout";
+import DbCustomers from "../../Components/dashboard/components/dbCustomers";
+import DbTransactions from "../../Components/dashboard/components/dbTransactions";
+import DbCarsUpdate from '../../Components/dashboard/components/dbCarsUpdate';
+import LandingPage from "../../pages/LandingPage";
+
 
 const routerConfig = [
   {
@@ -29,6 +34,8 @@ const routerConfig = [
       },
       { path: "payment", element: <Payment /> },
       { path: "wishlist", element: <Wishlist /> },
+      { path: "land", element: <LandingPage /> },
+
     ],
   },
   { path: "/login", element: <Login /> },
@@ -39,6 +46,10 @@ const routerConfig = [
     children: [
       { index: true, element: <MangerDashbord /> },
       { path: "cars", element: <DbCars></DbCars> },
+      { path: "customers", element: <DbCustomers></DbCustomers> },
+      { path: "transactions", element:<DbTransactions></DbTransactions>  },
+      { path: "cars:id", element: <DbCarsUpdate></DbCarsUpdate> },
+
     ],
   },
   { path: "*", element: <NotFound /> },
