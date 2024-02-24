@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import styles from "./payment-form.module.css";
+import { Alert, Checkbox, FormControlLabel } from "@mui/material";
 
-const PaymentForm = () => {
+const PaymentForm = ({ passed, setPassed }) => {
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState(null);
 	const stripe = useStripe();
@@ -78,9 +79,13 @@ const PaymentForm = () => {
 						},
 					}}
 				/>
-				{message && <div className={styles.paymentMessage}>{message}</div>}
-				<button type="submit" disabled={!stripe || loading}>
-					{loading ? "Processing..." : "Pay"}
+				<FormControlLabel
+					control={<Checkbox checked={passed} onChange={e => setPassed(e.target.checked)} color="primary" />}
+					label="I have read and agree to the terms and conditions."
+				/>
+				{message && <Alert severity={message === "Payment successful!" ? "success" : "error"}>{message}</Alert>}
+				<button className={styles.payButton} type="submit" disabled={!stripe || loading || !passed}>
+					{loading ? "Loading..." : "Pay"}
 				</button>
 			</form>
 		</div>
