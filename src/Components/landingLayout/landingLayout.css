@@ -1,0 +1,109 @@
+.choosingSection{
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; */
+    background-color: var(--clr-white);
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-bottom: 2px solid var(--clr-smoke-white);
+}
+.choosingSection > h6 ,.joiningSection h6{
+    color: var(--clr-e-600);
+    font-size: 1.8rem;
+    text-transform: capitalize;
+}
+.choosingSection h5 ,.joiningSection h5{
+    text-transform: capitalize;
+    font-size: 3rem;
+    margin-bottom: 2.5rem;
+
+}
+.choosing{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+.choosing h6 {
+    margin:10px auto ;
+    font-weight: bold;
+    font-size: 2.7rem;
+    text-transform: capitalize;
+}
+.choosing p {
+    line-height: 2;
+    text-align: center;
+
+}
+.stepsSection h6 {
+    font-size: 1.5rem;
+}
+
+.stepsSection span{
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--clr-m-900);
+}
+.getStarted{
+    background-color: var(--clr-m-800);
+    color: var(--clr-white);
+    padding: 20px 25px;
+    border: none;
+    border-radius: 30px;
+    text-transform: uppercase;
+    font-size: 2rem;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+.joining{
+    background-color: whitesmoke;
+}
+.landingSection{
+    height: 80vh;
+    /* background: linear-gradient(90deg, rgba(56,55,55,1) 0%, rgba(238,238,238,1) 64%) url("./../../../public/Images/backgorund.jpg") no-repeat; */
+    background: #888 url("./../../../public/Images/backgorund.jpg") no-repeat;
+    background-size:cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-blend-mode: multiply;
+    overflow: hidden;
+}
+
+.headerText {
+    width: 60%;
+    height: 100%;
+    padding: 30px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.headerBtns {
+    display: flex;
+    gap: 50px;
+}
+.headerBtns .rentBtn {
+    width: 100px;
+    height: 50px;
+    background-color: crimson;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+
+}
+
+.headerBtns .rentBtn:hover {
+    background-color: rgb(251, 5, 54);
+}

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchCar,deleteCarAction,getAllCarAction,addCarAction,updateCarAction } from "./carActions";
 import { deleteCarAction, getAllCarAction, getCarById } from "./carActions";
 
 const initialState = {
@@ -10,12 +11,32 @@ const initialState = {
 };
 
 const carSlice = createSlice({
-  name: "car",
-  initialState,
-  reducers: {
-    reset: (state) => initialState,
-  },
-  extraReducers: (builder) => {
+	name: "car",
+	initialState,
+	reducers: {
+		reset: state => initialState,
+	},
+	extraReducers: builder => {
+		builder.addCase(fetchCar.fulfilled, (state, action) => {
+			state.car = action.payload;
+		});
+		builder.addCase(fetchCar.pending, state => {
+			state.loading = true;
+		});
+		builder.addCase(fetchCar.rejected, (state, action) => {
+			state.loading = false;
+			state.error = action.error;
+			state.errorMessage = action.payload;
+		});
+		builder.addCase(addCarAction.fulfilled, (state, action) => {
+			 state.car.push(action.payload);
+		});
+		builder.addCase(updateCarAction.fulfilled, (state, action) => {
+			console.log(action.payload.id)
+			const filteredCar = state.car.findIndex(car=>car.id==action.payload.id)
+			console.log(filteredCar)
+			state.car[filteredCar] =action.payload;
+		});
     builder.addCase(getAllCarAction.fulfilled, (state, action) => {
       state.car = action.payload;
     });
