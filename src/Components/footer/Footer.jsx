@@ -1,29 +1,16 @@
 import * as React from "react";
-// import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-// import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Divider, ListItemText, Stack, Typography } from "@mui/material";
 import { ListItemButton } from "@mui/material";
-
-// const Item = styled(Paper)(({ theme }) => ({
-// 	backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-// 	...theme.typography.body2,
-// 	padding: theme.spacing(1),
-// 	textAlign: "center",
-// 	color: theme.palette.text.secondary,
-// 	border: "none", // Remove border
-// }));
 
 const Footer = () => {
   const mystyle = { textAlign: "left", fontSize: "15px" };
   return (
     <div
       style={{
-        marginTop: "15px",
         width: "100%",
-        boxShadow:
-          "0px -7px 4px -1px rgba(0,0,0,0.2), 2px -3px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+        backgroundColor: "white",
       }}
     >
       <Box>
