@@ -37,6 +37,9 @@ const theme = createTheme({
 			smokeWhite: "#f5f5f5",
 			information: "#54A6FF",
 		},
+		info:{
+			main: "#54A6FF",
+		}
 	},
 	typography: {
 		fontFamily: ["Plus Jakarta Sans", "sans-serif"].join(","),

@@ -1,0 +1,5 @@
+.card {
+    background-color: #54A6FF !important;
+    background-image: url("./bg.png");
+    background-size: contain;
+}
