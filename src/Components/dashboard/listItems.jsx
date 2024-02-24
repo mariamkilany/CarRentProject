@@ -11,7 +11,8 @@ import { LogoutOutlined } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from "@emotion/react";
 import { Badge, Typography } from '@mui/material';
-
+import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
+import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 
 export const MainListItems =()=>{ 
   const theme = useTheme();
@@ -74,7 +75,7 @@ export const MainListItems =()=>{
         <Badge  sx={{width:"56px",color:"var(  --clr-m-800)",
             color: location.pathname === "/dashboard/cars" ? "white" : "var(--clr-m)",
           }}>
-            <ShoppingCartIcon  sx={{fontSize:"2rem"}} />
+            <DirectionsCarFilledOutlinedIcon  sx={{fontSize:"2rem"}} />
           </Badge>
           <Typography 
           sx={{
@@ -87,8 +88,8 @@ export const MainListItems =()=>{
     <ListItemButton
       sx={{
         flexDirection: "row",
-        color: location.pathname === "/customers" ? "var(--clr-m)" : "white",
-        bgcolor: location.pathname === "/customers" ? "var(--clr-m)" : "white",
+        color: location.pathname === "dashboard/customers" ? "var(--clr-m)" : "white",
+        bgcolor: location.pathname === "dashboard/customers" ? "var(--clr-m)" : "white",
         "&:hover": {
           color: "white",
           bgcolor: "var(--clr-m)",
@@ -98,15 +99,15 @@ export const MainListItems =()=>{
         },
       }}
       >
-     <Link to="" style={{display:"contents"}}>
+     <Link to="customers" style={{display:"contents"}}>
       <Badge sx={{width:"56px",color:"var(  --clr-m-800)",
-        color: location.pathname === "/customers" ? "white" : "var(--clr-m)",
+        color: location.pathname === "dashboard/customers" ? "white" : "var(--clr-m)",
       }}>
           <PeopleIcon  sx={{fontSize:"2rem"}} />
         </Badge>
         <Typography  
         sx={{
-          color: location.pathname === "/customers" ? "white" : "var(--clr-m)" , fontSize:"1.7rem"
+          color: location.pathname === "dashboard/customers" ? "white" : "var(--clr-m)" , fontSize:"1.7rem"
         }}
         > Customers </Typography>
 
@@ -126,16 +127,16 @@ export const MainListItems =()=>{
         },
       }}
       >
-        <Link to="" style={{display:"contents" }}>
+        <Link to="transactions" style={{display:"contents" }}>
           <Badge sx={{width:"56px" ,
         color: location.pathname === "/reports" ? "white" : "var(--clr-m)",}}>
-          <BarChartIcon  sx={{fontSize:"2rem"}}/>
+          <ReceiptOutlinedIcon  sx={{fontSize:"2rem"}}/>
           </Badge>
           <Typography  
           sx={{
             color: location.pathname === "/reports" ? "white" : "var(--clr-m)" , fontSize:"1.7rem"
           }}
-          > Reports </Typography>
+          > Transactions </Typography>
         </Link>
     </ListItemButton>
 

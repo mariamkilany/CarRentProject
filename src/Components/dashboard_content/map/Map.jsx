@@ -8,30 +8,32 @@ const customIcon = new Icon({
 	iconSize: [38, 38], // size of the icon
 });
 
-const markers = [
-	{
-		geocode: [30.03497, 31.56346],
-		popUp: "Pick-up location",
+const Map = ({
+	dropOffLocation = {
+		latitude: 29.98486,
+		longitude: 31.1685,
 	},
-	{
-		geocode: [29.98486, 31.1685],
-		popUp: "Drop-off location",
+	pickUpLocation = {
+		latitude: 30.03497,
+		longitude: 31.56346,
 	},
-];
-
-const Map = () => {
+}) => {
+	console.log(dropOffLocation, pickUpLocation);
 	return (
-		<MapContainer center={markers[0].geocode} zoom={8}>
+		<MapContainer
+			center={[(pickUpLocation.latitude + dropOffLocation.latitude) / 2, (pickUpLocation.longitude + dropOffLocation.longitude) / 2]}
+			zoom={8}
+		>
 			<TileLayer
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
-
-			{markers.map(marker => (
-				<Marker position={marker.geocode} icon={customIcon}>
-					<Popup>{marker.popUp}</Popup>
-				</Marker>
-			))}
+			<Marker position={[dropOffLocation.latitude, dropOffLocation.longitude]} icon={customIcon}>
+				<Popup>Drop-off location</Popup>
+			</Marker>
+			<Marker position={[pickUpLocation.latitude, pickUpLocation.longitude]} icon={customIcon}>
+				<Popup>Pick-up location</Popup>
+			</Marker>
 		</MapContainer>
 	);
 };

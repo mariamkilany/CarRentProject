@@ -189,14 +189,7 @@ const Navbar = () => {
           >
             <b> MORENT</b>
           </Typography>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            sx={{
-              marginInline: "auto",
-            }}
-            aria-label="wrapped label tabs example"
-          >
+
             <NavLink
               className={({ isActive, isPending }) =>
                 isPending || isActive ? styles.active : styles.disactive
@@ -234,7 +227,6 @@ const Navbar = () => {
             >
               Payment
             </NavLink>
-          </Tabs>
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
