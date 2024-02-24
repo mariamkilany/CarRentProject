@@ -47,119 +47,55 @@ export function PhotoCard() {
         )}
       </Box>
       <Grid container spacing={2} mt={2}>
-        {
-          // <Grid item xs={4}>
-          //   <Box
-          //     p={1}
-          //     id="1"
-          //     className={selectedImg.id === "1" && styles.active_img}
-          //     onClick={(e) => {
-          //       console.log(e);
-          //       setSelectedImg({ id: e.target.id, src: e.target.src });
-          //     }}
-          //   >
-          //     <Box p={3} className={`${styles.gallary_item} ${styles.first} `}>
-          //       <img
-          //         src="/images/car-1.png"
-          //         style={{ marginTop: "30%" }}
-          //         alt="car-1"
-          //         id="1"
-          //         width={"100%"}
-          //         height={50}
-          //       />
-          //     </Box>
-          //   </Box>
-          // </Grid>
-          // <Grid item xs={4}>
-          //   <Box
-          //     p={1}
-          //     id="2"
-          //     className={selectedImg.id === "2" && styles.active_img}
-          //     onClick={(e) => {
-          //       setSelectedImg({ id: e.target.id, src: e.target.src });
-          //     }}
-          //   >
-          //     <Box className={`${styles.gallary_item} `}>
-          //       <img
-          //         src="/images/car-2.png"
-          //         id="2"
-          //         alt="2"
-          //         width={"100%"}
-          //         height={130}
-          //       />
-          //     </Box>
-          //   </Box>
-          // </Grid>
-          // <Grid item xs={4}>
-          //   <Box
-          //     p={1}
-          //     id="3"
-          //     className={selectedImg.id === "3" && styles.active_img}
-          //     onClick={(e) =>
-          //       setSelectedImg({ id: e.target.id, src: e.target.src })
-          //     }
-          //   >
-          //     <Box className={`${styles.gallary_item}  `}>
-          //       <img
-          //         src="/images/car-3.png"
-          //         id="3"
-          //         alt="3"
-          //         width={"100%"}
-          //         height={130}
-          //       />
-          //     </Box>
-          //   </Box>
-          // </Grid>
-          ["/images/car-1.png", "/images/car-2.png", "/images/car-3.png"].map(
-            (src, id) => {
-              if (id === 0) {
-                return (
-                  <Grid item xs={4}>
+        {["/images/car-1.png", "/images/car-2.png", "/images/car-3.png"].map(
+          (src, id) => {
+            if (id === 0) {
+              return (
+                <Grid item xs={4}>
+                  <Box
+                    p={1}
+                    className={selectedImg.id === id && styles.active_img}
+                    onClick={(e) => {
+                      setSelectedImg({ id, src });
+                    }}
+                  >
                     <Box
-                      p={1}
-                      className={selectedImg.id === id && styles.active_img}
-                      onClick={(e) => {
-                        setSelectedImg({ id, src });
-                      }}
+                      p={3}
+                      className={`${styles.gallary_item} ${styles.first} `}
                     >
-                      <Box
-                        p={3}
-                        className={`${styles.gallary_item} ${styles.first} `}
-                      >
-                        <img
-                          src={src}
-                          style={{ marginTop: "30%" }}
-                          alt="carImage"
-                          width={"100%"}
-                          height={50}
-                        />
-                      </Box>
+                      <img
+                        src={src}
+                        style={{ marginTop: "30%" }}
+                        alt="carImage"
+                        width={"100%"}
+                        height={50}
+                      />
                     </Box>
-                  </Grid>
-                );
-              } else {
-                return (
-                  <Grid item xs={4}>
-                    <Box
-                      p={1}
-                      className={selectedImg.id === id && styles.active_img}
-                      onClick={(e) => setSelectedImg({ id, src })}
-                    >
-                      <Box className={`${styles.gallary_item}  `}>
-                        <img
-                          src={src}
-                          alt="carImage"
-                          width={"100%"}
-                          height={130}
-                        />
-                      </Box>
+                  </Box>
+                </Grid>
+              );
+            } else {
+              return (
+                <Grid item xs={4}>
+                  <Box
+                    p={1}
+                    className={selectedImg.id === id && styles.active_img}
+                    onClick={(e) => setSelectedImg({ id, src })}
+                  >
+                    <Box className={`${styles.gallary_item}  `}>
+                      <img
+                        src={src}
+                        alt="carImage"
+                        width={"100%"}
+                        height={130}
+                      />
                     </Box>
-                  </Grid>
-                );
-              }
+                  </Box>
+                </Grid>
+              );
             }
-          )
-        }
+          }
+        )}
       </Grid>
     </Stack>
   );

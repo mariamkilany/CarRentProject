@@ -162,12 +162,21 @@ const Navbar = () => {
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", boxShadow: "0 !important" }}>
       <AppBar
         position="static"
-        sx={{ backgroundColor: "#ffffff", padding: "15px" }}
+        sx={{
+          backgroundColor: "#ffffff",
+          padding: "15px",
+          boxShadow: "none !important",
+        }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
           <Typography
             variant="h3"
             noWrap
@@ -180,19 +189,6 @@ const Navbar = () => {
           >
             <b> MORENT</b>
           </Typography>
-          {/* <Search sx={{ borderRadius: "75px", color: "#C3D4E9" }}>
-            <SearchIconWrapper>
-              <SearchIcon
-                sx={{ color: "#596780", fontSize: "30px", marginLeft: "-5px" }}
-              />
-            </SearchIconWrapper>
-            <StyledInputBase
-              sx={{ width: "400px", color: "#596780", fontSize: "15px" }}
-              placeholder="Search something here"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search> */}
-
           <Tabs
             value={value}
             onChange={handleChange}
@@ -238,8 +234,6 @@ const Navbar = () => {
             >
               Payment
             </NavLink>
-
-  
           </Tabs>
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>

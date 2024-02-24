@@ -1,0 +1,5 @@
+.card {
+    background-color: var(--clr-m) !important;
+    background-image: url("./bg-arrows.png");
+    background-size: contain;
+}
