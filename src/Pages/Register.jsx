@@ -14,8 +14,10 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Copyrights from "../Components/navbar/Copyrights";
 import { useState } from "react";
-import { useEffect } from "react";
 import { Backdrop, CircularProgress } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { RegisterUser } from "../features/authentication/authActions";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const defaultTheme = createTheme({
@@ -34,52 +36,61 @@ export default function Register() {
   const [newUser, setNewUser] = useState({
     firstName: "",
     lastName: "",
-    Job: "",
+    jobTitle: "",
     email: "",
     password: "",
     agree: false,
   });
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const setCookie = (payload) => {
+    const d = new Date();
+    d.setTime(d.getTime() + 2 * 24 * 60 * 60 * 1000);
+    let expires = "expires=" + d.toUTCString();
+    document.cookie =
+      "user=" + JSON.stringify(payload) + ";" + expires + ";path=/";
+  };
 
   const UsersApi = "https://65d24788987977636bfc333b.mockapi.io/api/users";
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setOpen(true);
-    const data = new FormData(event.currentTarget);
-    setNewUser({
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      Job: data.get("Job"),
-      email: data.get("email"),
-      password: data.get("password"),
-      agree: data.get("agree"),
+    setNewUser(newUser);
+    const response = await axios({
+      method: "get",
+      url: `${UsersApi}`,
     });
-    axios
-      .get(`${UsersApi}?email=${data.get("email")}`)
-      .then((res) => {
-        if (res.data[0].email === data.get("email")) {
-          console.log("Email Already Register");
-          setFaildRegister(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setFaildRegister(false);
-        console.log("registered");
+    const isUserAlreadyRegistered = response.data.filter(
+      (user) => user.email === newUser.email
+    )[0];
+    console.log("isUserAlreadyRegistered: ", !!isUserAlreadyRegistered);
+
+    if (!isUserAlreadyRegistered) {
+      dispatch(RegisterUser(newUser));
+      setFaildRegister(false);
+      setCookie({
+        ...newUser,
+        name: newUser.firstName + " " + newUser.lastName,
       });
+      navigate("/home");
+    } else {
+      setFaildRegister(true);
+      console.log("Email Already Register");
+    }
+
     setTimeout(() => {
       setOpen(false);
     }, 1500);
   };
 
-  useEffect(() => {
-    console.log(newUser);
-  }, [newUser]);
-
   const isFormValid = () => {
     return (
       newUser.firstName &&
       newUser.lastName &&
-      newUser.Job &&
+      newUser.jobTitle &&
       newUser.email &&
       newUser.password &&
       newUser.agree
@@ -144,13 +155,13 @@ export default function Register() {
                 <TextField
                   required
                   fullWidth
-                  id="job"
-                  label="Job Title"
-                  name="Job"
-                  autoComplete="Job"
-                  value={newUser.Job}
+                  id="jobTitle"
+                  label="jobTitle"
+                  name="jobTitle"
+                  autoComplete="jobTitle"
+                  value={newUser.jobTitle}
                   onChange={(e) =>
-                    setNewUser({ ...newUser, Job: e.target.value })
+                    setNewUser({ ...newUser, jobTitle: e.target.value })
                   }
                 />
               </Grid>
@@ -160,7 +171,9 @@ export default function Register() {
                   fullWidth
                   error={FaildRegister}
                   helperText={
-                    FaildRegister ? "Email is Already Registered Before" : "Please Enter Your Email"
+                    FaildRegister
+                      ? "Email is Already Registered Before"
+                      : "Please Enter Your Email"
                   }
                   id="email"
                   label="Email Address"
@@ -215,6 +228,7 @@ export default function Register() {
             >
               Sign Up
             </Button>
+            <Button onClick={() => console.log(user)}>Get User</Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/login" variant="body2">
