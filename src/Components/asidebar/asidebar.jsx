@@ -11,7 +11,7 @@ import { Checkbox } from "@mui/material";
 import { Slider } from "@mui/material";
 
 const Asidebar = () => {
-  const [sliderValue, setSliderValue] = React.useState(50);
+	const [sliderValue, setSliderValue] = React.useState(50);
 
   const types = [
     { type: "Sport", num: 10 },

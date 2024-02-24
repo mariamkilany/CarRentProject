@@ -24,8 +24,8 @@
   display: flex;
   align-items: center;
   padding-block: 1.6rem;
-
   border-bottom: 1px solid var(--clr-g-200);
+  transition: all 0.3s ease;
 }
 
 .transaction:last-child {
@@ -55,4 +55,13 @@
 .transaction div h4 {
   font-size: 1.6rem;
   font-weight: 700;
+}
+
+.transaction:hover,
+.selected {
+  transform: scale(1.1);
+  padding: 1.6rem;
+  background-color: var(--clr-m);
+  border-radius: 8px;
+  color: var(--clr-white);
 }

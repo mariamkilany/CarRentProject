@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "./transaction-filter.module.css";
 
-const TransactionFilter = ({ title, locations, dates, times }) => {
+const TransactionFilter = ({ title = "Transaction Details", locations = [], date = new Date() }) => {
+	const selectedDate = date.toDateString();
+	const selectedTime = date.toLocaleTimeString();
 	return (
 		<div className={styles.transactionLocation}>
 			<h3 className={styles.title}>{title}</h3>
@@ -17,17 +19,13 @@ const TransactionFilter = ({ title, locations, dates, times }) => {
 				<div className={styles.selected}>
 					<p>Date</p>
 					<select name="date" id="date">
-						{dates.map(date => (
-							<option value={date}>{date}</option>
-						))}
+						<option value={selectedDate}>{selectedDate}</option>
 					</select>
 				</div>
 				<div className={styles.selected}>
 					<p className={styles.name}>Time</p>
 					<select name="time" id="time">
-						{times.map(time => (
-							<option value={time}>{time}</option>
-						))}
+						<option value={selectedTime}>{selectedTime}</option>
 					</select>
 				</div>
 			</div>

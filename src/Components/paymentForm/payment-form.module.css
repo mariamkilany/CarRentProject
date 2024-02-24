@@ -1,0 +1,90 @@
+:root {
+  --light-grey: #f6f9fc;
+  --dark-terminal-color: #0a2540;
+  --accent-color: #635bff;
+  --radius: 3px;
+}
+
+.paymentForm {
+  background-color: var(--clr-white)
+}
+
+.paymentForm form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.cardElement {
+  width: 100%;
+  border: 1px solid var(--clr-m);
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: var(--radius);
+}
+
+.paymentForm button {
+  background: var(--clr-m);
+  border-radius: var(--radius);
+  color: white;
+  border: 0;
+  padding: 12px 24px;
+  margin-top: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.paymentForm button:hover {
+  filter: contrast(115%);
+}
+
+.paymentForm button:active {
+  transform: translateY(0px) scale(0.98);
+  filter: brightness(0.9);
+}
+
+.paymentForm button:disabled {
+  opacity: 0.5;
+  cursor: none;
+}
+
+.paymentForm input,
+.paymentForm select {
+  display: block;
+  font-size: 1.1em;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.paymentForm a {
+  color: var(--clr-m);
+  font-weight: 900;
+}
+
+.paymentForm small {
+  font-size: 0.6em;
+}
+
+.paymentForm form {
+  border-radius: var(--radius);
+  /* padding: 20px; */
+  margin: 20px 0;
+}
+
+.paymentMessage {
+  color: red;
+  padding: 0px 20px;
+  border-radius: var(--radius);
+  font-size: 0.7em;
+  float: right;
+}
+
+.paymentForm #payment-element {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

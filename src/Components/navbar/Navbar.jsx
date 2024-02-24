@@ -190,7 +190,6 @@ const Navbar = () => {
             <b> MORENT</b>
           </Typography>
 
-
             <NavLink
               className={({ isActive, isPending }) =>
                 isPending || isActive ? styles.active : styles.disactive
