@@ -37,6 +37,9 @@ const theme = createTheme({
 			smokeWhite: "#f5f5f5",
 			information: "#54A6FF",
 		},
+		info:{
+			main: "#54A6FF",
+		}
 	},
 	typography: {
 		fontFamily: ["Plus Jakarta Sans", "sans-serif"].join(","),
@@ -101,6 +104,19 @@ const theme = createTheme({
 			fontWeight: 600,
 			textTransform: "capitalize",
 		},
+		a:{
+			fontSize:"2rem"
+		}
+		
 	},
+	components: {
+		MuiListItemText: {
+		  styleOverrides: {
+			root: {
+			  fontSize: "4rem", // Adjust the font size here
+			},
+		  },
+		},
+	  },	
 });
 export default theme;

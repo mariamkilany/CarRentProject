@@ -8,60 +8,159 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import { LogoutOutlined } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useTheme } from "@emotion/react";
+import { Badge, Typography } from '@mui/material';
 
 
-export const mainListItems = (
-  <React.Fragment>
-    <ListItemButton sx={{flexDirection:"row"}} >
-      <Link to='/dashboard' style={{display:"contents"}} >
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard"  />
+export const MainListItems =()=>{ 
+  const theme = useTheme();
+  const location = useLocation();
+
+  return(
+  <>
+      <React.Fragment>
+      <ListItemButton
+      sx={{
+        flexDirection: "row",
+        color: location.pathname === "/dashboard" ? "var(--clr-m)" : "white",
+        bgcolor: location.pathname === "/dashboard" ? "var(--clr-m)" : "white",
+        "&:hover": {
+          color: "white",
+          bgcolor: "var(--clr-m)",
+          "& .MuiBadge-root, & .MuiTypography-root": {
+            color: "white",
+          },
+        },
+      }}
+      >
+      <Link to='/dashboard' style={{display:"contents"}} > 
+            <Badge
+                sx={{
+                  width: "56px",
+                  color: location.pathname === "/dashboard" ? "white" : "var(--clr-m)",
+                  
+                }}
+              >
+            <DashboardIcon sx={{fontSize:"2rem"}} />
+            </Badge>
+            <Typography
+            
+              sx={{
+               color: location.pathname === "/dashboard" ? "white" : "var(--clr-m)" , fontSize:"1.7rem"
+              }}
+          >
+             Dashboard
+            </Typography>
       </Link>
     </ListItemButton>
 
-    <ListItemButton>
+    <ListItemButton
+      sx={{
+        flexDirection: "row",
+        color: location.pathname === "/dashboard/cars" ? "var(--clr-m)" : "white",
+        bgcolor: location.pathname === "/dashboard/cars" ? "var(--clr-m)" : "white",
+        "&:hover": {
+          color: "white",
+          bgcolor: "var(--clr-m)",
+          "& .MuiBadge-root, & .MuiTypography-root": {
+            color: "white",
+          },
+        },
+      }}
+      >
+
       <Link to="cars" style={{display:"contents"}}>
-        <ListItemIcon>
-            <ShoppingCartIcon />
-          </ListItemIcon>
-          <ListItemText primary="Cars" />
+        <Badge  sx={{width:"56px",color:"var(  --clr-m-800)",
+            color: location.pathname === "/dashboard/cars" ? "white" : "var(--clr-m)",
+          }}>
+            <ShoppingCartIcon  sx={{fontSize:"2rem"}} />
+          </Badge>
+          <Typography 
+          sx={{
+            color: location.pathname === "/dashboard/cars" ? "white" : "var(--clr-m)", fontSize:"1.7rem"
+          }}
+          > Cars </Typography>
       </Link>
   
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton
+      sx={{
+        flexDirection: "row",
+        color: location.pathname === "/customers" ? "var(--clr-m)" : "white",
+        bgcolor: location.pathname === "/customers" ? "var(--clr-m)" : "white",
+        "&:hover": {
+          color: "white",
+          bgcolor: "var(--clr-m)",
+          "& .MuiBadge-root, & .MuiTypography-root": {
+            color: "white",
+          },
+        },
+      }}
+      >
      <Link to="" style={{display:"contents"}}>
-      <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Customers" />
+      <Badge sx={{width:"56px",color:"var(  --clr-m-800)",
+        color: location.pathname === "/customers" ? "white" : "var(--clr-m)",
+      }}>
+          <PeopleIcon  sx={{fontSize:"2rem"}} />
+        </Badge>
+        <Typography  
+        sx={{
+          color: location.pathname === "/customers" ? "white" : "var(--clr-m)" , fontSize:"1.7rem"
+        }}
+        > Customers </Typography>
+
      </Link>
     </ListItemButton>
-    <ListItemButton>
-        <Link to="" style={{display:"contents"}}>
-          <ListItemIcon>
-          <BarChartIcon />
-          </ListItemIcon>
-          <ListItemText primary="Reports" />
+    <ListItemButton
+      sx={{
+        flexDirection: "row",
+        color: location.pathname === "/reports" ? "var(--clr-m)" : "white",
+        bgcolor: location.pathname === "/reports" ? "var(--clr-m)" : "white",
+        "&:hover": {
+          color: "white",
+          bgcolor: "var(--clr-m)",
+          "& .MuiBadge-root, & .MuiTypography-root": {
+            color: "white",
+          },
+        },
+      }}
+      >
+        <Link to="" style={{display:"contents" }}>
+          <Badge sx={{width:"56px" ,
+        color: location.pathname === "/reports" ? "white" : "var(--clr-m)",}}>
+          <BarChartIcon  sx={{fontSize:"2rem"}}/>
+          </Badge>
+          <Typography  
+          sx={{
+            color: location.pathname === "/reports" ? "white" : "var(--clr-m)" , fontSize:"1.7rem"
+          }}
+          > Reports </Typography>
         </Link>
     </ListItemButton>
 
-    <ListItemButton>
+    {/* <ListItemButton>
       <Link to="" style={{display:"contents"}}>
-          <ListItemIcon>
+          <Badge>
             <LayersIcon />
-          </ListItemIcon>
-          <ListItemText primary="Integrations" />
+          </Badge>
+          <Typography > integration </Typography>
+
       </Link>
-    </ListItemButton>
+    </ListItemButton> */}
  
 
   </React.Fragment>
-);
+  </>
+)
+};
 
-export const secondaryListItems = (
+export const SecondaryListItems = ()=>{
+  const theme = useTheme();
+  const location = useLocation();
+
+  return(
+    <>  
   <React.Fragment >
     {/* <ListSubheader component="div" inset>
       Saved reports
@@ -84,11 +183,39 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText primary="Year-end sale" />
     </ListItemButton> */}
-    <ListItemButton>
-      <ListItemIcon>
-        <LogoutOutlined />
-      </ListItemIcon>
-      <ListItemText primary="Logout" />
+        <ListItemButton
+      sx={{
+        flexDirection: "row",
+        color: location.pathname === "/login" ? "var(--clr-m)" : "white",
+        bgcolor: location.pathname === "/login" ? "var(--clr-m)" : "white",
+        "&:hover": {
+          color: "white",
+          bgcolor: "var(--clr-m)",
+          "& .MuiBadge-root, & .MuiTypography-root": {
+            color: "white",
+          },
+        },
+      }}
+      >
+        <Link to="" style={{display:"contents" }}>
+          <Badge sx={{width:"56px" ,
+        color: location.pathname === "/login" ? "white" : "var(--clr-m)",}}>
+            <LogoutOutlined  sx={{fontSize:"2rem"}}/>
+          </Badge>
+          <Typography  
+          sx={{
+            color: location.pathname === "/login" ? "white" : "var(--clr-m)" , fontSize:"1.7rem"
+          }}
+          > Logout  </Typography>
+        </Link>
     </ListItemButton>
+{/* 
+    <ListItemButton>
+      <Badge  sx={{fontSize:"2rem"}}>
+      
+      </Badge>
+      <Typography variant='span' > Logout</Typography>
+    </ListItemButton> */}
   </React.Fragment>
-);
+    </>
+)};
