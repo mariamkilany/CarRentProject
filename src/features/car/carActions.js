@@ -17,42 +17,20 @@ export const fetchCar = createAsyncThunk("car/fetchCar", async (_, thunkAPI) => 
 	}
 });
 
-export const getAllCarAction = createAsyncThunk(
-  "car/getAll",
-  async (_, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
-    try {
-      const response = await axios.get(
-        "https://65d24788987977636bfc333b.mockapi.io/api/cars"
-      );
-      return response.data;
-    } catch (error) {
-      const message = error.response?.data || error.message;
-      return rejectWithValue(message);
-    }
-  }
-);
-
-export const deleteCarAction = createAsyncThunk(
-  "car/delete",
-  async (id, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
-    try {
-      const response = await axios.delete(
-        `https://65d24788987977636bfc333b.mockapi.io/api/cars/${id}`
-      );
-      return id;
-    } catch (error) {
-      const message = error.response?.data || error.message;
-      return rejectWithValue(message);
-    }
-  }
-);
-
-export const deleteCarAction = createAsyncThunk("car/delete", async (id,thunkAPI) => {
+export const getAllCarAction = createAsyncThunk("car/getAll", async (_, thunkAPI) => {
 	const { rejectWithValue } = thunkAPI;
 	try {
-	
+		const response = await axios.get("https://65d24788987977636bfc333b.mockapi.io/api/cars");
+		return response.data;
+	} catch (error) {
+		const message = error.response?.data || error.message;
+		return rejectWithValue(message);
+	}
+});
+
+export const deleteCarAction = createAsyncThunk("car/delete", async (id, thunkAPI) => {
+	const { rejectWithValue } = thunkAPI;
+	try {
 		const response = await axios.delete(`https://65d24788987977636bfc333b.mockapi.io/api/cars/${id}`);
 		return id;
 	} catch (error) {
@@ -61,41 +39,35 @@ export const deleteCarAction = createAsyncThunk("car/delete", async (id,thunkAPI
 	}
 });
 
-export const addCarAction = createAsyncThunk("car/add", async (car,thunkAPI) => {
+export const addCarAction = createAsyncThunk("car/add", async (car, thunkAPI) => {
 	const { rejectWithValue } = thunkAPI;
 	try {
 		// console.log(car)
-	 await axios.post(`https://65d24788987977636bfc333b.mockapi.io/api/cars`,car);
-	return car;
-
+		await axios.post(`https://65d24788987977636bfc333b.mockapi.io/api/cars`, car);
+		return car;
 	} catch (error) {
 		const message = error.response?.data || error.message;
 		return rejectWithValue(message);
 	}
 });
-export const updateCarAction = createAsyncThunk("car/update", async ({id,updatedInfo},thunkAPI) => {
+export const updateCarAction = createAsyncThunk("car/update", async ({ id, updatedInfo }, thunkAPI) => {
 	const { rejectWithValue } = thunkAPI;
 	try {
 		// console.log(car)
-		const response = await axios.put(`https://65d24788987977636bfc333b.mockapi.io/api/cars/${id}`,updatedInfo);
+		const response = await axios.put(`https://65d24788987977636bfc333b.mockapi.io/api/cars/${id}`, updatedInfo);
 		return response.data;
 	} catch (error) {
 		const message = error.response?.data || error.message;
 		return rejectWithValue(message);
 	}
 });
-export const getCarById = createAsyncThunk(
-  "car/getCarById",
-  async (id, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
-    try {
-      const response = await axios.get(
-        `https://65d24788987977636bfc333b.mockapi.io/api/cars/${id}`
-      );
-      return response.data;
-    } catch (error) {
-      const message = error.response?.data || error.message;
-      return rejectWithValue(message);
-    }
-  }
-);
+export const getCarById = createAsyncThunk("car/getCarById", async (id, thunkAPI) => {
+	const { rejectWithValue } = thunkAPI;
+	try {
+		const response = await axios.get(`https://65d24788987977636bfc333b.mockapi.io/api/cars/${id}`);
+		return response.data;
+	} catch (error) {
+		const message = error.response?.data || error.message;
+		return rejectWithValue(message);
+	}
+});
