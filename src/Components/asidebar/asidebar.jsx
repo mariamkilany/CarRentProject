@@ -13,143 +13,65 @@ import { Slider } from "@mui/material";
 const Asidebar = () => {
 	const [sliderValue, setSliderValue] = React.useState(50);
 
-	const handleSliderChange = (event, newValue) => {
-		setSliderValue(newValue);
-	};
-	return (
-		<Box sx={{ py: 2, pr: 2, width: 320 }}>
-			<List
-				aria-label="Sidebar"
-				sx={{
-					"--ListItem-paddingLeft": "0px",
-					"--ListItemDecorator-size": "64px",
-					"--ListItem-minHeight": "0px",
-					"--List-nestedInsetStart": "13px",
-					'& [role="button"]': {
-						borderRadius: "0 20px 20px 0",
-					},
-					marginLeft: "100px",
-				}}
-			>
-				<Typography variant="p" sx={{ marginBottom: "10px" }}>
-					Type
-				</Typography>
-				<ListItem sx={{ display: "contents" }}>
-					<ListItemButton>
-						<Checkbox label="Solid" variant="solid" defaultChecked />
-						<ListItemText>Sport</ListItemText>
-						<Typography level="body-sm">(10)</Typography>
-					</ListItemButton>
-				</ListItem>
-				<ListItem sx={{ display: "contents" }}>
-					<ListItemButton>
-						<Checkbox label="Solid" variant="solid" />
-						<ListItemText>SUV</ListItemText>
-						<Typography level="body-sm">(12)</Typography>
-					</ListItemButton>
-				</ListItem>
-				<ListItem sx={{ display: "contents" }}>
-					<ListItemButton>
-						<Checkbox label="Solid" variant="solid" />
-						<ListItemText>MVP</ListItemText>
-						<Typography level="body-sm">(16)</Typography>
-					</ListItemButton>
+  const types = [
+    { type: "Sport", num: 10 },
+    { type: "SUV", num: 12 },
+    { type: "MPV", num: 16 },
+    { type: "Sedan", num: 20 },
+    { type: "Coupe", num: 14 },
+    { type: "Hatchback", num: 14 },
+  ];
 
-					<ListItem sx={{ display: "contents" }}>
-						<ListItemButton>
-							<Checkbox label="Solid" variant="solid" />
-							<ListItemText>Seden</ListItemText>
-							<Typography level="body-sm">(20)</Typography>
-						</ListItemButton>
-					</ListItem>
-					<ListItem sx={{ display: "contents" }}>
-						<ListItemButton>
-							<Checkbox label="Solid" variant="solid" />
-							<ListItemText>Coupe</ListItemText>
-							<Typography level="body-sm">(20)</Typography>
-						</ListItemButton>
-					</ListItem>
-					<ListItem sx={{ display: "contents" }}>
-						<ListItemButton>
-							<Checkbox label="Solid" variant="solid" />
-							<ListItemText>Hatchback</ListItemText>
-							<Typography level="body-sm">(20)</Typography>
-						</ListItemButton>
-					</ListItem>
-				</ListItem>
-			</List>
+  const capacity = [
+    { capacity: 2, num: 10 },
+    { capacity: 4, num: 14 },
+    { capacity: 2, num: 12 },
+    { capacity: 8, num: 16 },
+  ];
 
-			<List
-				aria-label="Sidebar"
-				sx={{
-					"--ListItem-paddingLeft": "0px",
-
-					"--ListItemDecorator-size": "64px",
-					"--ListItem-minHeight": "0px",
-					"--List-nestedInsetStart": "13px",
-
-					'& [role="button"]': {
-						borderRadius: "0 20px 20px 0",
-					},
-					marginLeft: "100px",
-				}}
-			>
-				<Typography variant="p" sx={{ marginBottom: "10px" }}>
-					Capacity
-				</Typography>
-				<ListItem sx={{ display: "contents" }}>
-					<ListItemButton>
-						<Checkbox label="Solid" variant="solid" defaultChecked />
-						<ListItemText>2 Person</ListItemText>
-						<Typography level="body-sm">(10)</Typography>
-					</ListItemButton>
-				</ListItem>
-				<ListItem sx={{ display: "contents" }}>
-					<ListItemButton>
-						<Checkbox label="Solid" variant="solid" />
-						<ListItemText>4 Person</ListItemText>
-						<Typography level="body-sm">(12)</Typography>
-					</ListItemButton>
-				</ListItem>
-				<ListItem sx={{ display: "contents" }}>
-					<ListItemButton>
-						<Checkbox label="Solid" variant="solid" />
-						<ListItemText>6 Person</ListItemText>
-						<Typography level="body-sm">(16)</Typography>
-					</ListItemButton>
-
-					<ListItem sx={{ display: "contents" }}>
-						<ListItemButton>
-							<Checkbox label="Solid" variant="solid" />
-							<ListItemText>8 or More</ListItemText>
-							<Typography level="body-sm">(20)</Typography>
-						</ListItemButton>
-					</ListItem>
-				</ListItem>
-			</List>
-			<List
-				aria-label="Sidebar"
-				sx={{
-					"--ListItem-paddingLeft": "0px",
-
-					"--ListItem-minHeight": "0px",
-					"--List-nestedInsetStart": "13px",
-
-					'& [role="button"]': {
-						borderRadius: "0 20px 20px 0",
-					},
-					marginLeft: "100px",
-				}}
-			>
-				<Typography variant="p" sx={{ marginBottom: "5px" }}>
-					Price
-				</Typography>
-				<Slider value={sliderValue} onChange={handleSliderChange} aria-labelledby="sliderValue" min={0} max={7000} step={1} />
-				<Typography variant="p" sx={{ fontSize: "15px" }}>
-					Max.{sliderValue} LE
-				</Typography>
-			</List>
-		</Box>
-	);
+  const handleSliderChange = (event, newValue) => {
+    setSliderValue(newValue);
+  };
+  return (
+    <Box p={4} bgcolor={"white"}>
+      <List aria-label="Sidebar">
+        <Typography variant="body1" sx={{ marginBottom: "10px" }}>
+          Type
+        </Typography>
+        {types.map((item) => (
+          <ListItem sx={{ display: "contents" }}>
+            <ListItemButton>
+              <Checkbox label="Solid" variant="solid" size="large" />
+              <Typography variant="h4">{item.type}</Typography>
+              <Typography level="body-sm">({item.num})</Typography>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <List aria-label="Sidebar">
+        <Typography variant="body1" sx={{ marginBottom: "10px" }}>
+          Capacity
+        </Typography>
+        {capacity.map((item) => (
+          <ListItem sx={{ display: "contents" }}>
+            <ListItemButton>
+              <Checkbox label="Solid" variant="solid" size="large" />
+              <Typography variant="h4">{item.capacity} Person</Typography>
+              <Typography level="body-sm">({item.num})</Typography>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Slider
+        value={sliderValue}
+        onChange={handleSliderChange}
+        aria-labelledby="sliderValue"
+        min={0}
+        max={7000}
+        step={1}
+      />
+      <Typography variant="h4">Max.{sliderValue} LE</Typography>
+    </Box>
+  );
 };
 export default Asidebar;

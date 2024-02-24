@@ -15,27 +15,21 @@ import PeopleIcon from '@mui/icons-material/People';
 import PriceChangeIcon from '@mui/icons-material/PriceChange';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import RateReviewIcon from '@mui/icons-material/RateReview';
+import WorkOutlinedIcon from '@mui/icons-material/WorkOutlined';
+import MoveToInboxIcon from '@mui/icons-material/MoveToInbox';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import '../dashboardtrial.css'
+import { getAllUsersAction , deleteUsersAction } from '../../../features/car/usersAction';
 
-import UpdateModel from './dbCarsUpdate';
 
-
-function DbCars() {
+function DbCustomers() {
 //redaing data 
-  const carsInfo = useSelector((state)=>state.car.car)|| []
+    const usersInfo = useSelector((state)=>state.users.users)
 	const dispatch = useDispatch();
-  console.log(carsInfo);
-	
 
 	useEffect(()=>{
-		dispatch(getAllCarAction());	
+		dispatch(getAllUsersAction());	
 	},[])
-
-
-   
-	// console.log(carsInfo);
-
-
 
 /////////////////////////////////////////////////
   const theme = useTheme();
@@ -53,141 +47,96 @@ function DbCars() {
     setPage(0);
   };
 
- 
-  ////////////////////////////////////  slicing dscription 
-  const truncateDescription = (text, maxLength) => {
-    if (text.length <= maxLength) {
-      return text;
-    } else {
-      return text.slice(0, maxLength) + '...';
-    }
-  };
 
   return (
     <div>
-      <div style={{ marginBottom: '20px', textAlign:"end" }}>   
-        <DbCarsAdd></DbCarsAdd>
-      </div>
-
- <div className="table-responsive">
+        <br /><br />
+        <div className="table-responsive">
             <table className="table table-hover table-nowrap">
                 <thead className="thead-light">
                 <tr>
                 <td style={{paddingRight:"15px"}} >Id</td>
-                <td >Car Name</td>
+                <td > UserName</td>
                
-                <td >Type</td>
-                <td >Steering </td>
-                <td>Capacity</td>
-                <td>Gasoline</td>
-                <td>Price</td>
-                <td>Reviews</td>
+                <td >UserEmail</td>
+                <td >JobTitle </td>
                 <td title='No.Of Transaction'>No.Of Trans..</td>
-                <td style={{width:"100px"}} title='No.Of Transaction'>Description</td>
                 </tr>
                 </thead>
                 <tbody>
-
                   {(rowsPerPage > 0
-                   ? carsInfo.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    : carsInfo ).map((c, index) => (
-                      c? <tr key={index}>
+                   ? usersInfo.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    : usersInfo ).map((c, index) => (
+                      c? <tr>
                       <td >
                           <div className='CarInfo'>
                           <LocalOfferIcon sx={{fontSize:"20px" , color:"#1A4393"}}></LocalOfferIcon>
                           <span className='carData' >
                           
-                                {c?.id}
+                                {c.id}
                           </span>
                           </div>
                       </td>
 
                     <td >
                           <div className='CarInfo'>
-                          <img className="carImage" alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" />
+                            {c.avatar?<img className="carImage" alt="..." src={c.avatar} />
+
+                            :<AccountCircleOutlinedIcon  sx={{fontSize:'20px'}}></AccountCircleOutlinedIcon>}
                           <span className='carData'>
-                          {c?.name}
+                          {c.name}
                           </span>
                           </div>
                       </td>
                   <td >
                        <div className='CarInfo'>
+                       <MoveToInboxIcon sx={{fontSize:'20px'}}></MoveToInboxIcon>   
                        <span className='carData'>
-                       {c?.type}
+                      
+                       {c.email}
                           </span>
                        </div>
                       </td> 
                       <td >
                           <div className='CarInfo'>
-                          <CarRentalIcon sx={{fontSize:'20px'}}></CarRentalIcon>
-                      <span className='carData'>
-                      {c?.steering}
+                          <WorkOutlinedIcon sx={{fontSize:'20px'}}></WorkOutlinedIcon>
+                      <span className='carData' style={{fontSize:"1.3rem"}}>
+                      {c.jobTitle}
                       </span>
                           </div>
                   </td>
-                      <td >
-                      <div className='CarInfo'>
-                      <PeopleIcon sx={{fontSize:'20px'}}></PeopleIcon>
-                          <span className='carData'>
-                          {c?.chairCapacity}
-                          </span>
-                      </div>
-                      </td>
-                      <td >
-                          <div className='CarInfo'>
-                          <LocalGasStationIcon sx={{fontSize:'20px'}}></LocalGasStationIcon>
-                          <span className='carData'>
-                          {c.gasoline} L
-                          </span>
-                          </div>
-                      </td>
-                  <td >
-                      <div className='CarInfo'>
-                      <PriceChangeIcon sx={{color:"#306844", fontSize:"20px"}}></PriceChangeIcon>
-                          <span className='carData'>
-                          {c.price?c.price:0}lE
-                          </span>
-                      </div>
-                      </td>
-                      <td >
+                      {/* <td >
                          <div  className='CarInfo'>
                          <RateReviewIcon sx={{fontSize:'20px' , color:"#FAAF00"}}></RateReviewIcon>
                               <span className='carData'>
-                              
-                              {c.reviews?c.reviews.length:0}
+                              {c.reviews.length}
                               </span>
                          </div>
-                          </td>
+                          </td> */}
                   <td >
                       <div className='CarInfo'>
                       {/* <RateReviewIcon sx={{fontSize:'20px'}}></RateReviewIcon> */}
                       <span className='carData'>
-                      {c.transactions?c.transactions.length:0}
+                      {/* {c} */}
                       </span>
                       </div>
                   </td>
 
-                  <td >
-                    <div className='CarInfo'>
-                    {/* <ReviewsIcon></ReviewsIcon> */}
-                          <span className='carData' title={c.carDesc}>
-                          {truncateDescription( c.carDesc , 20)}                           </span>
-                    
-                    </div>
-                    </td>
-                    <td>
-                      
-                    <UpdateModel carId={c.id}></UpdateModel> 
 
-                    <Button title='delete' onClick={()=>dispatch(deleteCarAction(c.id))} sx={{color:"var(--clr-e-600)"}}>
-                    <DeleteIcon/>
-                    </Button >
+                    <td>
+                      <Button title='delete' onClick={()=>dispatch(deleteUsersAction(c.id))} sx={{color:"var(--clr-e-600)"}}>
+                      <DeleteIcon/>
+                      </Button >
                     </td>
                   </tr>:<CircularProgress color="primary" size={40} thickness={4} />
                   ))
-                  }                  
+                  }
+                   
+                   
                 </tbody> 
+              
               </table>
+
               <TablePagination sx={{ '& .css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar'  :{
                     fontSize: '1.5rem !important',
                     width:"100% !important"
@@ -198,15 +147,15 @@ function DbCars() {
 
                 rowsPerPageOptions={[5, 10, 25]} // Change the options as needed
                 component="div"
-                count={carsInfo.length} // Total number of rows
+                count={usersInfo.length} // Total number of rows
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}/>
-            </div>
+        </div>
 
     </div>
   );
 }
 
-export default DbCars;
+export default DbCustomers;
