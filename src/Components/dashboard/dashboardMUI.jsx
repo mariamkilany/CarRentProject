@@ -116,17 +116,8 @@ export default function DashboardMUI() {
               <MenuIcon />
             </IconButton>
             <Typography component="h1" variant="h4" noWrap sx={{ flexGrow: 1 }}>
-              Dashboard
+              MORENT Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge
-                badgeContent={4}
-                color="secondary"
-                sx={{ fontSize: "3rem" }}
-              >
-                <NotificationsIcon sx={{ fontSize: "2rem" }} />
-              </Badge>
-            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
