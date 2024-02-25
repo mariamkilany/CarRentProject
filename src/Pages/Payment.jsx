@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PaymentForm from "../Components/paymentForm/PaymentForm";
 import TransactionFilter from "../Components/dashboard_content/transactionFilter/TransactionFilter";
 import BillingInfoCard from "../Components/BillingInfo/billingInfoCard";
 import { Stack, Typography } from "@mui/material";
 import RentalSummaryCard from "../Components/RentalSummary/rentalSummaryCard";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 const sectionStyle = {
@@ -20,12 +20,18 @@ const Payment = () => {
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState(null);
 	const location = useLocation();
-	const selectedCar = location.state.car;
+	const selectedCar = location.state?.car;
 	const [passed, setPassed] = useState(false);
 	const User = useSelector(state => state.user.user);
 	const [currentUser] = useState(User);
 	const elements = useElements();
 	const stripe = useStripe();
+	const navgiate = useNavigate();
+
+	useEffect(() => {
+		console.log("Selected Car", selectedCar);
+		if (!selectedCar) navgiate("/home");
+	}, [selectedCar, navgiate]);
 
 	const handlePaymentSubmit = async event => {
 		event.preventDefault();
@@ -76,58 +82,62 @@ const Payment = () => {
 	};
 
 	return (
-		<div
-			style={{
-				display: "flex",
-				flexDirection: "row-reverse",
-				alignItems: "flex-start",
-				flexWrap: "wrap",
-				gap: "3.2rem",
-				margin: "6rem auto",
-				padding: "0 3.2rem",
-				justifyContent: "center",
-			}}
-		>
-			<div style={sectionStyle}>
-				<RentalSummaryCard selectedCar={selectedCar} />
-			</div>
+		selectedCar && (
+			<>
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "row-reverse",
+						alignItems: "flex-start",
+						flexWrap: "wrap",
+						gap: "3.2rem",
+						margin: "6rem auto",
+						padding: "0 3.2rem",
+						justifyContent: "center",
+					}}
+				>
+					<div style={sectionStyle}>
+						<RentalSummaryCard selectedCar={selectedCar} />
+					</div>
 
-			<div
-				style={{
-					flexGrow: 1,
-				}}
-			>
-				<div style={sectionStyle}>
-					<BillingInfoCard currentUser={currentUser} />
-				</div>
+					<div
+						style={{
+							flexGrow: 1,
+						}}
+					>
+						<div style={sectionStyle}>
+							<BillingInfoCard currentUser={currentUser} />
+						</div>
 
-				<div style={sectionStyle}>
-					<h3>Rental Info</h3>
-					<Stack direction={"row"} spacing={2} justifyContent="space-between">
-						<Typography variant="body2">Please select your rental date</Typography>
-						<Typography variant="body2"> Step 2 of 3</Typography>
-					</Stack>
-					<TransactionFilter title="Pick - Up" />
-					<TransactionFilter title="Drop - off" />
-				</div>
+						<div style={sectionStyle}>
+							<h3>Rental Info</h3>
+							<Stack direction={"row"} spacing={2} justifyContent="space-between">
+								<Typography variant="body2">Please select your rental date</Typography>
+								<Typography variant="body2"> Step 2 of 3</Typography>
+							</Stack>
+							<TransactionFilter title="Pick - Up" />
+							<TransactionFilter title="Drop - off" />
+						</div>
 
-				<div style={sectionStyle}>
-					<h3>Payment Method</h3>
-					<Stack direction={"row"} spacing={2} justifyContent="space-between">
-						<Typography variant="body2">Please enter your payment method</Typography>
-						<Typography variant="body2"> Step 3 of 3</Typography>
-					</Stack>
-					<PaymentForm
-						passed={passed}
-						setPassed={setPassed}
-						onSubmitPayment={handlePaymentSubmit}
-						message={message}
-						loading={loading}
-						stripe={stripe}
-					/>
+						<div style={sectionStyle}>
+							<h3>Payment Method</h3>
+							<Stack direction={"row"} spacing={2} justifyContent="space-between">
+								<Typography variant="body2">Please enter your payment method</Typography>
+								<Typography variant="body2"> Step 3 of 3</Typography>
+							</Stack>
+							<PaymentForm
+								passed={passed}
+								setPassed={setPassed}
+								onSubmitPayment={handlePaymentSubmit}
+								message={message}
+								loading={loading}
+								stripe={stripe}
+							/>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
+			</>
+		)
 	);
 };
 
