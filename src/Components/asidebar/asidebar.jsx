@@ -9,41 +9,57 @@ import Box from "@mui/material/Box";
 
 import { Checkbox } from "@mui/material";
 import { Slider } from "@mui/material";
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getCarsByTypes,
+  getCarsCapacity,
+  getCarsTypes,
+} from "../../features/car/carActions";
 const Asidebar = () => {
-	const [sliderValue, setSliderValue] = React.useState(50);
+  const [sliderValue, setSliderValue] = React.useState(50);
+  const [checkedOptions, setCheckedOptions] = React.useState({});
+  const [open, setOpen] = React.useState(false);
 
-  const types = [
-    { type: "Sport", num: 10 },
-    { type: "SUV", num: 12 },
-    { type: "MPV", num: 16 },
-    { type: "Sedan", num: 20 },
-    { type: "Coupe", num: 14 },
-    { type: "Hatchback", num: 14 },
-  ];
+  const { carsTypes: types, carsCapacity: capacity } = useSelector(
+    (state) => state.car
+  );
+  const dispatch = useDispatch();
 
-  const capacity = [
-    { capacity: 2, num: 10 },
-    { capacity: 4, num: 14 },
-    { capacity: 2, num: 12 },
-    { capacity: 8, num: 16 },
-  ];
+  React.useEffect(() => {
+    dispatch(getCarsTypes());
+    dispatch(getCarsCapacity());
+  }, []);
 
   const handleSliderChange = (event, newValue) => {
     setSliderValue(newValue);
   };
+  const handleChange = (event) => {
+    setCheckedOptions({
+      ...checkedOptions,
+      [event.target.name]: event.target.checked,
+    });
+    dispatch(
+      getCarsByTypes({
+        ...checkedOptions,
+        [event.target.name]: event.target.checked,
+      })
+    );
+  };
   return (
-    <Box p={4} bgcolor={"white"}>
+    <Box p={4} bgcolor={"white"} sx={{ display: { xs: "none", lg: "block" } }}>
       <List aria-label="Sidebar">
-        <Typography variant="body1" sx={{ marginBottom: "10px" }}>
-          Type
-        </Typography>
-        {types.map((item) => (
+        <Typography variant="body1">Type</Typography>
+        {types.map((type) => (
           <ListItem sx={{ display: "contents" }}>
             <ListItemButton>
-              <Checkbox label="Solid" variant="solid" size="large" />
-              <Typography variant="h4">{item.type}</Typography>
-              <Typography level="body-sm">({item.num})</Typography>
+              <Checkbox
+                label="Solid"
+                variant="solid"
+                size="large"
+                name={type}
+                onChange={(e) => handleChange(e)}
+              />
+              <Typography variant="subtitle2">{type}</Typography>
             </ListItemButton>
           </ListItem>
         ))}
@@ -52,12 +68,13 @@ const Asidebar = () => {
         <Typography variant="body1" sx={{ marginBottom: "10px" }}>
           Capacity
         </Typography>
-        {capacity.map((item) => (
+        {capacity?.map((capacity) => (
           <ListItem sx={{ display: "contents" }}>
             <ListItemButton>
               <Checkbox label="Solid" variant="solid" size="large" />
-              <Typography variant="h4">{item.capacity} Person</Typography>
-              <Typography level="body-sm">({item.num})</Typography>
+              <Typography variant="subtitle2" mr={1}>
+                {capacity} Person
+              </Typography>
             </ListItemButton>
           </ListItem>
         ))}
@@ -70,7 +87,9 @@ const Asidebar = () => {
         max={7000}
         step={1}
       />
-      <Typography variant="h4">Max.{sliderValue} LE</Typography>
+      <Typography variant="subtitle2" textAlign={"center"}>
+        Max.{sliderValue} LE
+      </Typography>
     </Box>
   );
 };

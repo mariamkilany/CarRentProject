@@ -1,16 +1,9 @@
-import {
-  Button,
-  Container,
-  Grid,
-  Link,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Button, Grid, Link, Stack, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import RightCard from "../Components/HomeCards/RightCard";
 import LeftCard from "../Components/HomeCards/LeftCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCarAction } from "../features/car/carActions";
+import { getAllCarAction, getCarsTypes } from "../features/car/carActions";
 import CardCard from "../Components/carCard/CarCard";
 
 const Home = () => {
@@ -19,7 +12,10 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getAllCarAction());
+    dispatch(getCarsTypes());
   }, []);
+  // const disaptch = useDispatch();
+
   return (
     <Grid container p={3} justifyContent={"center"} spacing={3}>
       <Grid item md={6}>

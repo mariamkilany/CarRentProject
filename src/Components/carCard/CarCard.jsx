@@ -17,13 +17,18 @@ export default function CarCard({ car }) {
   const theme = useTheme();
   const iconStyle = { color: "var(--clr-g-300)" };
   const navigate = useNavigate();
+
   return (
     <Box
+      onClick={() => {
+        navigate(`/category/${car.id}`);
+      }}
       component="div"
       borderRadius={2}
       p={2}
       bgcolor={theme.palette.common.white}
       boxShadow={2}
+      sx={{ cursor: "pointer" }}
     >
       <Stack spacing={3} justifyContent={"center"}>
         <Stack direction={"row"} justifyContent={"space-between"}>
@@ -38,7 +43,6 @@ export default function CarCard({ car }) {
         <Stack justifyContent={"center"} alignItems={"center"}>
           <img src="images/car-1.png" width={"85%"} />
         </Stack>
-
         <Grid container justifyContent={"space-between"}>
           <Grid md={4}>
             <Stack component={"div"} direction={"row"} spacing={1}>
@@ -46,7 +50,6 @@ export default function CarCard({ car }) {
               <Typography variant="caption">90L</Typography>
             </Stack>
           </Grid>
-
           <Grid md={4}>
             <Stack component={"div"} direction={"row"} spacing={1}>
               <DataSaverOffRoundedIcon fontSize="large" style={iconStyle} />
@@ -60,7 +63,6 @@ export default function CarCard({ car }) {
             </Stack>
           </Grid>
         </Grid>
-
         <Stack direction={"row"} justifyContent={"space-between"}>
           <Stack>
             <Stack
@@ -73,10 +75,7 @@ export default function CarCard({ car }) {
             </Stack>
             <Typography variant="sale">$80.00</Typography>
           </Stack>
-          <Button
-            variant="contained"
-            onClick={() => navigate(`/category/${car.id}`)}
-          >
+          <Button variant="contained" onClick={() => navigate(`/payment`)}>
             Rent Now
           </Button>
         </Stack>

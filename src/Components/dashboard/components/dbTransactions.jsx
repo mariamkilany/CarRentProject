@@ -1,75 +1,60 @@
-import React from 'react';
-import {  TablePagination, Button, Tooltip, tooltipClasses, CircularProgress } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import DbCarsAdd from './dbCarsAdd';
-import { useTheme } from '@emotion/react';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';
-import RateReviewIcon from '@mui/icons-material/RateReview';
-import WorkOutlinedIcon from '@mui/icons-material/WorkOutlined';
-import MoveToInboxIcon from '@mui/icons-material/MoveToInbox';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import '../dashboardtrial.css'
-import { getAllUsersAction , deleteUsersAction } from '../../../features/car/usersAction';
+import React from "react";
+import { Tooltip, tooltipClasses } from "@mui/material";
+import { useTheme } from "@emotion/react";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import styles from "../dashboardtrial.module.css";
+import { getAllUsersAction } from "../../../features/car/usersAction";
 
 const DbTransactions = () => {
-      //redaing data 
-  const usersInfo = useSelector((state)=>state.users.users)
+  //redaing data
+  const usersInfo = useSelector((state) => state.users.users);
   const dispatch = useDispatch();
 
-  
+  useEffect(() => {
+    dispatch(getAllUsersAction());
+  }, []);
 
-  useEffect(()=>{
-      dispatch(getAllUsersAction());	
-  },[])
+  //   console.log(usersInfo);
 
- 
-//   console.log(usersInfo);
+  /////////////////////////////////////////////////
+  const theme = useTheme();
 
+  ////////////////////////////////pagination
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5); // Change the number of rows per page as needed
 
-
-/////////////////////////////////////////////////
-    const theme = useTheme();
-
-    ////////////////////////////////pagination
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5); // Change the number of rows per page as needed
-
-    const handleChangePage = (event, newPage) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
-    };
+  };
 
-    const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-    };
-    ////////////////////////////////// tooltip
-    const CustomWidthTooltip = styled(({ className, ...props }) => (
+  };
+  ////////////////////////////////// tooltip
+  const CustomWidthTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
-    ))({
+  ))({
     [`& .${tooltipClasses.tooltip}`]: {
-        maxWidth: 500,
-        fontSize:"1.5rem"
+      maxWidth: 500,
+      fontSize: "1.5rem",
     },
-    });
+  });
 
-
-
-////////////////////////////////////  slicing dscription 
-    const truncateDescription = (text, maxLength) => {
+  ////////////////////////////////////  slicing dscription
+  const truncateDescription = (text, maxLength) => {
     if (text.length <= maxLength) {
-        return text;
+      return text;
     } else {
-        return text.slice(0, maxLength) + '...';
+      return text.slice(0, maxLength) + "...";
     }
-    };
+  };
 
-return (
-  <div>
-
-    {/* <div className="table-responsive">
+  return (
+    <div>
+      {/* <div className="table-responsive">
         <table className="table table-hover table-nowrap">
             <thead className="thead-light">
             <tr>
@@ -171,10 +156,8 @@ return (
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}/>
     </div> */}
-
-  </div>
-
-    );
-}
+    </div>
+  );
+};
 
 export default DbTransactions;

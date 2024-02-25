@@ -1,0 +1,105 @@
+.carImage {
+  width: 50px;
+}
+
+.table_responsive {
+  width: 1300px;
+}
+
+.table {
+  width: -webkit-fill-available;
+  border-collapse: collapse;
+  text-align: left;
+  padding: 20px !important;
+  overflow-x: scroll;
+  border: 1px solid white;
+}
+
+.thead_light {
+  width: 100%;
+  border-bottom: 1px solid whitesmoke;
+  background-color: whitesmoke;
+}
+
+.thead_light tr {
+  font-weight: 500;
+  text-transform: uppercase;
+
+}
+
+.thead_light tr td {
+  padding: 15px 25px;
+  margin: 20px;
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.table tbody {
+  background-color: white;
+  margin-top: 20px;
+  padding-top: 10px;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid whitesmoke;
+  height: 70px;
+}
+
+.CarInfo {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+
+}
+
+.carImage {
+  width: 50px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+
+}
+
+.carData {
+  font-size: 1.6rem;
+  padding-left: 10px;
+
+}
+
+.carData::first-letter {
+  text-transform: capitalize;
+}
+
+.table {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  border: 1px solid #ddd;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+}
+
+.table_responsive {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.table tbody tr:hover {
+  background-color: var(--clr-m-100);
+  cursor: pointer;
+}

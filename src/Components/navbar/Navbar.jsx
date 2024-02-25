@@ -190,44 +190,34 @@ const Navbar = () => {
             <b> MORENT</b>
           </Typography>
 
-            <NavLink
-              className={({ isActive, isPending }) =>
-                isPending || isActive ? styles.active : styles.disactive
-              }
-              to="/home"
-              end
-            >
-              Home
-            </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending || isActive ? styles.active : styles.disactive
+            }
+            to="/home"
+            end
+          >
+            Home
+          </NavLink>
 
-            <NavLink
-              className={({ isActive, isPending }) =>
-                isPending || isActive ? styles.active : styles.disactive
-              }
-              to="/category"
-              end
-            >
-              Category
-            </NavLink>
-            <NavLink
-              className={({ isActive, isPending }) =>
-                isPending || isActive ? styles.active : styles.disactive
-              }
-              to="/wishlist"
-              end
-            >
-              Wishlist
-            </NavLink>
-            <NavLink
-              className={({ isActive, isPending }) =>
-                isPending || isActive ? styles.active : styles.disactive
-              }
-              to="/payment"
-              end
-            >
-              Payment
-            </NavLink>
-
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending || isActive ? styles.active : styles.disactive
+            }
+            to="/category"
+            end
+          >
+            Category
+          </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending || isActive ? styles.active : styles.disactive
+            }
+            to="/wishlist"
+            end
+          >
+            Wishlist
+          </NavLink>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               sx={{ fontSize: "10px" }}
