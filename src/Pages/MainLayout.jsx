@@ -7,15 +7,15 @@ import { Container } from "@mui/material";
 import NavbarAdmin from "../Components/navbar/NavbarAdmin";
 
 const MainLayout = () => {
-  return (
-    <>
-      {/* <Navbar /> */}
-      <NavbarAdmin />
+	return (
+		<>
+			<Navbar />
+			{/* <NavbarAdmin /> */}
 
-      <Outlet />
-      <Footer />
-    </>
-  );
+			<Outlet />
+			<Footer />
+		</>
+	);
 };
 
 export default MainLayout;

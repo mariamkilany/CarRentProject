@@ -1,10 +1,9 @@
 import React from "react";
 import DashboardMUI from "../Components/dashboard/dashboardMUI";
-// import Dashboardtrial from "../Components/dashboard/dashboardtrial";
+import withGuard from "../utils/withGuard";
 
 const Dashboard = () => {
-	return <DashboardMUI></DashboardMUI> ;
-	// return <Dashboardtrial></Dashboardtrial>
+	return <DashboardMUI />;
 };
 
-export default Dashboard;
+export default withGuard(Dashboard);

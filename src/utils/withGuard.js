@@ -1,18 +1,18 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const withGuard = (Component) => {
-  return (props) => {
-    const isAuthenticated = useSelector((state) => state.user.user);
-    console.log("isAuthenticated: ", isAuthenticated);
-    const navigate = useNavigate();
+const withGuard = Component => {
+	return props => {
+		const { isAdmin } = useSelector(state => state.user.user);
+		const navigate = useNavigate();
 
-    if (isAuthenticated) {
-      navigate("/home");
-      return null;
-    }
-    return <Component {...props} />;
-  };
+		useEffect(() => {
+			if (!isAdmin) navigate("/login");
+		}, [isAdmin, navigate]);
+
+		return <Component {...props} />;
+	};
 };
 
 export default withGuard;
