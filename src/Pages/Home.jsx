@@ -7,14 +7,12 @@ import { getAllCarAction, getCarsTypes } from "../features/car/carActions";
 import CardCard from "../Components/carCard/CarCard";
 
 const Home = () => {
-  const cars = useSelector((store) => store.car.car);
+  const { car, loading } = useSelector((store) => store.car);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllCarAction());
-    dispatch(getCarsTypes());
   }, []);
-  // const disaptch = useDispatch();
 
   return (
     <Grid container p={3} justifyContent={"center"} spacing={3}>
@@ -30,7 +28,7 @@ const Home = () => {
           <Link>View All</Link>
         </Stack>
         <Grid container mt={2} spacing={3} justifyContent={"center"}>
-          {cars.map((car) => (
+          {car?.map((car) => (
             <Grid item md={3} sm={6}>
               <CardCard car={car} />
             </Grid>
@@ -42,13 +40,7 @@ const Home = () => {
           <Typography variant="body2">Recommended Car</Typography>
           <Link>View All</Link>
         </Stack>
-        <Grid container mt={2} spacing={3} justifyContent={"center"}>
-          {cars.map((car) => (
-            <Grid car={car} item md={3} sm={6}>
-              <CardCard />
-            </Grid>
-          ))}
-        </Grid>
+        <Grid container mt={2} spacing={3} justifyContent={"center"}></Grid>
       </Grid>
       <Stack alignItems={"center"} mt={5}>
         <Button variant="contained">Show more car</Button>

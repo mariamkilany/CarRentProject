@@ -1,20 +1,17 @@
 import * as React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-
-import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-
 import { Checkbox } from "@mui/material";
 import { Slider } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getCarsByTypes,
-  getCarsCapacity,
   getCarsTypes,
-} from "../../features/car/carActions";
+  getCarsCapacity,
+  getCarsByTypes,
+} from "../../features/car/carSlice";
 const Asidebar = () => {
   const [sliderValue, setSliderValue] = React.useState(50);
   const [checkedOptions, setCheckedOptions] = React.useState({});
