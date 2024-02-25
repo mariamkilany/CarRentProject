@@ -10,11 +10,11 @@ import Menu from "@mui/material/Menu";
 import styles from "./Navbar.module.css";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Favorite, Login, Logout } from "@mui/icons-material";
+import { Favorite, Login, Logout, Settings } from "@mui/icons-material";
 import { Avatar, Button, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const NavbarAdmin = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [loggedIn, setLogged] = React.useState(true);
@@ -24,7 +24,6 @@ const Navbar = () => {
   const handelLogging = () => {
     setLogged(!loggedIn);
   };
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -43,7 +42,7 @@ const Navbar = () => {
   };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = !loggedIn && (
+  const renderMenu = loggedIn && (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -117,7 +116,7 @@ const Navbar = () => {
           >
             <Login />
           </IconButton>
-          <Button>Signup</Button>
+          <Button onClick={handelLogging}>Signup</Button>
         </MenuItem>
       )}
       {loggedIn && (
@@ -131,7 +130,7 @@ const Navbar = () => {
           >
             <Logout />
           </IconButton>
-          <Button>SignOut</Button>
+          <Button onClick={handelLogging}>SignOut</Button>
         </MenuItem>
       )}
     </Menu>
@@ -219,6 +218,18 @@ const Navbar = () => {
 
             {loggedIn && (
               <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+              >
+                <Badge badgeContent={4} color="error">
+                  <Settings sx={{ color: "#596780", fontSize: "30px" }} />
+                </Badge>
+              </IconButton>
+            )}
+
+            {loggedIn && (
+              <IconButton
                 size="xx-large"
                 edge="end"
                 aria-label="account of current user"
@@ -272,4 +283,4 @@ const Navbar = () => {
     </Box>
   );
 };
-export default Navbar;
+export default NavbarAdmin;
