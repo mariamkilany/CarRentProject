@@ -73,9 +73,21 @@ const NavbarAdmin = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Signup</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{user.name}</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{user.email}</MenuItem>
+      {user.isAdmin && (
+        <MenuItem onClick={handleMenuClose}>
+          <a
+            href="/dashboard"
+            style={{
+              color: "#596780",
+              textDecoration: "none",
+            }}
+          >
+            Dashboard
+          </a>
+        </MenuItem>
+      )}
     </Menu>
   );
 
@@ -151,7 +163,7 @@ const NavbarAdmin = () => {
               googleLogout();
               dispatch(setUser({ user: {} }));
               setCookie("");
-              navigate("/home");
+              navigate("/");
             }}
           >
             SignOut
@@ -286,7 +298,7 @@ const NavbarAdmin = () => {
                     googleLogout();
                     dispatch(setUser({ user: {} }));
                     setCookie("");
-                    navigate("/home");
+                    navigate("/");
                   }}
                 >
                   <Logout sx={{ mr: 1 }} />

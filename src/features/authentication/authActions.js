@@ -36,15 +36,15 @@ export const RegisterUser = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       console.log("Post User");
-      await axios
-        .post(UsersApi, {
-          ...newUser,
-          name: newUser.firstName + " " + newUser.lastName,
-        })
-        .then((res) => {
-          // console.log(res.data);
-          return res;
-        });
+      const response = await axios.post(UsersApi, {
+        ...newUser,
+        name: newUser.firstName + " " + newUser.lastName,
+      });
+
+      return {
+        ...newUser,
+        name: newUser.firstName + " " + newUser.lastName,
+      };
     } catch (error) {
       const message = error.response?.data || error.message;
       console.log(message);

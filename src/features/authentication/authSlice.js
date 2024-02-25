@@ -47,7 +47,6 @@ const userSlice = createSlice({
     });
     builder.addCase(RegisterUser.fulfilled, (state, action) => {
       state.user = action.payload;
-      console.log('action.payload: ', action.payload);
     });
   },
 });

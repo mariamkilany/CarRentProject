@@ -174,7 +174,7 @@ const Navbar = () => {
               googleLogout();
               dispatch(setUser({ user: {} }));
               setCookie("");
-              navigate("/home");
+              navigate("/");
             }}
           >
             SignOut
@@ -297,7 +297,7 @@ const Navbar = () => {
                     googleLogout();
                     dispatch(setUser({ user: {} }));
                     setCookie("");
-                    navigate("/home");
+                    navigate("/");
                   }}
                 >
                   <Logout sx={{ mr: 1 }} />

@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RegisterUser } from "../features/authentication/authActions";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { setUser } from "../features/authentication/authSlice";
 
 const defaultTheme = createTheme({
   typography: {
@@ -70,6 +71,7 @@ export default function Register() {
 
     if (!isUserAlreadyRegistered) {
       dispatch(RegisterUser(newUser));
+      dispatch(setUser(newUser));
       setFaildRegister(false);
       setCookie({
         ...newUser,
