@@ -2,7 +2,7 @@ import { Palette } from "@mui/icons-material";
 import { Box, FormControl, FormGroup, FormLabel, Grid, Stack, TextField, Typography } from "@mui/material";
 import React from "react";
 
-const BillingInfoCard = () => {
+const BillingInfoCard = ({ currentUser }) => {
 	return (
 		<Stack>
 			<Typography variant="h2">Billing Info</Typography>
@@ -34,6 +34,7 @@ const BillingInfoCard = () => {
 											ml: 2,
 											mb: 3,
 										}}
+										value={currentUser.name}
 									/>
 									<FormLabel
 										sx={{
@@ -51,6 +52,7 @@ const BillingInfoCard = () => {
 											ml: 2,
 											mb: 3,
 										}}
+										value={currentUser.phone}
 									/>
 								</FormControl>
 							</FormGroup>

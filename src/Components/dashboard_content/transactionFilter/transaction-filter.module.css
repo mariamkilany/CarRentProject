@@ -58,7 +58,8 @@
   letter-spacing: -0.02em;
 }
 
-.selected select {
+.selected select,
+.selected input {
   height: 3.6rem;
   border: none;
   padding: 0 1.6rem;
