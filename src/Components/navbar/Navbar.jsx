@@ -16,8 +16,11 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Favorite, Settings } from "@mui/icons-material";
-import { Avatar, Tab, Tabs } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Avatar, Button, Tab, Tabs } from "@mui/material";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { googleLogout } from "@react-oauth/google";
+import { setUser } from "../../features/authentication/authSlice";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -67,6 +70,17 @@ const Navbar = () => {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const setCookie = (payload) => {
+    const d = new Date();
+    d.setTime(d.getTime() + 2 * 24 * 60 * 60 * 1000);
+    let expires = "expires=" + d.toUTCString();
+    document.cookie =
+      "user=" + JSON.stringify(payload) + ";" + expires + ";path=/";
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -87,6 +101,7 @@ const Navbar = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -106,6 +121,17 @@ const Navbar = () => {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem
+        onClick={() => {
+          googleLogout();
+          dispatch(setUser({ user: {} }));
+          setCookie("{ user: {} }");
+          handleMenuClose();
+          navigate("/");
+        }}
+      >
+        Logout
+      </MenuItem>
     </Menu>
   );
 
@@ -190,43 +216,47 @@ const Navbar = () => {
             <b> MORENT</b>
           </Typography>
 
-            <NavLink
-              className={({ isActive, isPending }) =>
-                isPending || isActive ? styles.active : styles.disactive
-              }
-              to="/home"
-              end
-            >
-              Home
-            </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending || isActive ? styles.active : styles.disactive
+            }
+            key="home"
+            to="/home"
+            end
+          >
+            Home
+          </NavLink>
 
-            <NavLink
-              className={({ isActive, isPending }) =>
-                isPending || isActive ? styles.active : styles.disactive
-              }
-              to="/category"
-              end
-            >
-              Category
-            </NavLink>
-            <NavLink
-              className={({ isActive, isPending }) =>
-                isPending || isActive ? styles.active : styles.disactive
-              }
-              to="/wishlist"
-              end
-            >
-              Wishlist
-            </NavLink>
-            <NavLink
-              className={({ isActive, isPending }) =>
-                isPending || isActive ? styles.active : styles.disactive
-              }
-              to="/payment"
-              end
-            >
-              Payment
-            </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending || isActive ? styles.active : styles.disactive
+            }
+            key="category"
+            to="/category"
+            end
+          >
+            Category
+          </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending || isActive ? styles.active : styles.disactive
+            }
+            key="wishlist"
+            to="/wishlist"
+            end
+          >
+            Wishlist
+          </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending || isActive ? styles.active : styles.disactive
+            }
+            key="payment"
+            to="/payment"
+            end
+          >
+            Payment
+          </NavLink>
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
