@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 export default function CarCard({ car }) {
   const theme = useTheme();
   const iconStyle = { color: "var(--clr-g-300)" };
+  
   const navigate = useNavigate();
   return (
     <Box
