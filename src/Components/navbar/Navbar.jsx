@@ -10,6 +10,7 @@ import Menu from "@mui/material/Menu";
 import styles from "./Navbar.module.css";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
+
 import { Favorite, Login, Logout } from "@mui/icons-material";
 import { Avatar, Button, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
@@ -21,6 +22,7 @@ const Navbar = () => {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
   const handelLogging = () => {
     setLogged(!loggedIn);
   };
@@ -41,6 +43,8 @@ const Navbar = () => {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+
 
   const menuId = "primary-search-account-menu";
   const renderMenu = !loggedIn && (
