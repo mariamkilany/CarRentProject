@@ -4,11 +4,6 @@ import {
   getAllCarAction,
   addCarAction,
   updateCarAction,
-  getCarById,
-  // getCarsTypes,
-  // getCarsCapacity,
-  // getCarsByTypes,
-  // getCarsTransactions,
 } from "./carActions";
 import { useDispatch } from "react-redux";
 
@@ -71,6 +66,21 @@ const carSlice = createSlice({
       const transactions = state.car.map((car) => car.transactions);
       return { ...state, carsTransactions: transactions };
     },
+    addCarToWishList: (state, action) => {
+      return {
+        ...state,
+        wishList: [...state.wishList, action.payload],
+      };
+    },
+    deleteFromWishList: (state, action) => {
+      const newWishList = state.wishList.filter(
+        (ele) => ele.id !== action.payload
+      );
+      return {
+        ...state,
+        wishList: newWishList,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(addCarAction.fulfilled, (state, action) => {
@@ -103,16 +113,6 @@ const carSlice = createSlice({
     builder.addCase(deleteCarAction.rejected, (state, action) => {
       state.loading = false;
       state.error = true;
-    });
-    builder.addCase(getCarById.fulfilled, (state, action) => {
-      state.loading = false;
-      state.selectedCar = state.payload;
-    });
-    builder.addCase(getCarById.pending, (state, action) => {
-      state.loading = true;
-    });
-    builder.addCase(getCarById.rejected, (state, action) => {
-      state.loading = false;
     });
   },
 });

@@ -23,6 +23,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateCarAction } from "../../../features/car/carActions";
 import axios from "axios";
+import CloudinaryButton from "../../cloudinaryButton/CloudinaryButton";
 
 export default function UpdateModel({ carId }) {
   const theme = useTheme();
@@ -124,9 +125,9 @@ export default function UpdateModel({ carId }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const formErrors = validateValues(formData);
     if (Object.keys(formErrors).length === 0) {
+      console.log(updatedState);
       dispatch(updateCarAction({ id: carId, updatedInfo: updatedState }));
       setOpen(false);
       setformData({
@@ -162,10 +163,15 @@ export default function UpdateModel({ carId }) {
       ...formData,
       [e.target.name]: e.target.value,
     });
+
     setErrors((prevErrors) => ({
       ...prevErrors,
       [e.target.name]: newErrors[e.target.name],
     }));
+  };
+  const handleImageUpload = (url) => {
+    setformData((prev) => ({ ...prev, image: url }));
+    setUpdatedState({ ...updatedState, image: url });
   };
 
   return (
@@ -173,7 +179,6 @@ export default function UpdateModel({ carId }) {
       <Button onClick={handleOpen} title="Edit">
         <EditIcon />
       </Button>
-
       <Modal
         open={open}
         onClose={handleClose}
@@ -198,6 +203,19 @@ export default function UpdateModel({ carId }) {
             ) : null}
 
             <form onSubmit={handleSubmit}>
+              <Stack direction={"row"} gap={2} my={1} alignItems={"end"}>
+                <img
+                  borderRadius={2}
+                  width={"200px"}
+                  height={"100px"}
+                  boxShadow={1}
+                  my={2}
+                  src={formData.image}
+                />
+                <Box>
+                  <CloudinaryButton onImageUpload={handleImageUpload} />
+                </Box>
+              </Stack>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <Typography variant="h5"> Car Name </Typography>
@@ -364,19 +382,6 @@ export default function UpdateModel({ carId }) {
                       Description is requied
                     </p>
                   )}
-                </Grid>
-
-                <Grid item xs={12} sm={6}>
-                  <Button
-                    component="label"
-                    role={undefined}
-                    variant="contained"
-                    tabIndex={-1}
-                    startIcon={<CloudUploadIcon />}
-                  >
-                    Upload Image
-                    <VisuallyHiddenInput type="file" />
-                  </Button>
                 </Grid>
               </Grid>
               <br></br>
