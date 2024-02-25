@@ -219,6 +219,24 @@ const Navbar = () => {
             Payment
           </NavLink>
 
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending || isActive ? styles.active : styles.disactive
+            }
+            to="/category"
+            end
+          >
+            Category
+          </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending || isActive ? styles.active : styles.disactive
+            }
+            to="/wishlist"
+            end
+          >
+            Wishlist
+          </NavLink>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {loggedIn && (
               <IconButton

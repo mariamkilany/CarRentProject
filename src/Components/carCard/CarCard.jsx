@@ -18,50 +18,54 @@ export default function CarCard({ car }) {
   const iconStyle = { color: "var(--clr-g-300)" };
   
   const navigate = useNavigate();
+
   return (
     <Box
+      onClick={() => {
+        navigate(`/category/${car.id}`);
+      }}
       component="div"
       borderRadius={2}
       p={2}
       bgcolor={theme.palette.common.white}
       boxShadow={2}
+      sx={{ cursor: "pointer" }}
     >
       <Stack spacing={3} justifyContent={"center"}>
         <Stack direction={"row"} justifyContent={"space-between"}>
           <Stack>
-            <Typography varient="h3">Koenigsegg</Typography>
-            <Typography variant="caption">Sport</Typography>
+            <Typography varient="h3">{car.name}</Typography>
+            <Typography variant="caption">{car.type}</Typography>
           </Stack>
           <IconButton size="large">
             <FavoriteBorderRoundedIcon fontSize="large" />
           </IconButton>
         </Stack>
         <Stack justifyContent={"center"} alignItems={"center"}>
-          <img src="images/car-1.png" width={"85%"} />
+          <img src={car.image} width={"85%"} />
         </Stack>
-
         <Grid container justifyContent={"space-between"}>
           <Grid md={4}>
             <Stack component={"div"} direction={"row"} spacing={1}>
               <LocalGasStationRoundedIcon fontSize="large" style={iconStyle} />
-              <Typography variant="caption">90L</Typography>
+              <Typography variant="caption">{car.gasoline}L</Typography>
             </Stack>
           </Grid>
-
           <Grid md={4}>
             <Stack component={"div"} direction={"row"} spacing={1}>
               <DataSaverOffRoundedIcon fontSize="large" style={iconStyle} />
-              <Typography variant="caption">Manual</Typography>
+              <Typography variant="caption">{car.steering}</Typography>
             </Stack>
           </Grid>
           <Grid md={4}>
             <Stack component={"div"} direction={"row"} spacing={1}>
               <GroupRoundedIcon fontSize="large" style={iconStyle} />
-              <Typography variant="caption">2 People</Typography>
+              <Typography variant="caption">
+                {car.chairCapacity} People
+              </Typography>
             </Stack>
           </Grid>
         </Grid>
-
         <Stack direction={"row"} justifyContent={"space-between"}>
           <Stack>
             <Stack
@@ -69,15 +73,12 @@ export default function CarCard({ car }) {
               justifyContent={"center"}
               alignItems={"end"}
             >
-              <Typography variant="h3">$72.00/ </Typography>
+              <Typography variant="h3">${car.price}/ </Typography>
               <Typography variant="caption">day</Typography>
             </Stack>
             <Typography variant="sale">$80.00</Typography>
           </Stack>
-          <Button
-            variant="contained"
-            onClick={() => navigate(`/category/${car.id}`)}
-          >
+          <Button variant="contained" onClick={() => navigate(`/payment`)}>
             Rent Now
           </Button>
         </Stack>
