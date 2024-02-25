@@ -232,7 +232,7 @@ export default function Register() {
             >
               Sign Up
             </Button>
-            <Button onClick={() => console.log(user)}>Get User</Button>
+            {/* <Button onClick={() => console.log(user)}>Get User</Button> */}
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/login" variant="body2">

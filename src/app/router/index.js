@@ -44,7 +44,6 @@ const routerConfig = [
 				),
 			},
 			{ path: "wishlist", element: <Wishlist /> },
-			{ path: "land", element: <LandingPage /> },
 		],
 	},
 	{ path: "/login", element: <Login /> },

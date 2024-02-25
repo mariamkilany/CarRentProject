@@ -181,13 +181,13 @@ export default function Login() {
             >
               Sign In
             </Button>
-            <Button onClick={() => console.log(user)}>Get User</Button>
+            {/* <Button onClick={() => console.log(user)}>Get User</Button> */}
             <GoogleLogin
               useOneTap
               onSuccess={responseMessage}
               onError={errorMessage}
             />
-            <Button
+            {/* <Button
               onClick={() => {
                 googleLogout();
                 dispatch(setUser({ user: {} }));
@@ -196,7 +196,7 @@ export default function Login() {
               }}
             >
               LogOut
-            </Button>
+            </Button> */}
             <Grid container>
               {/* <Grid item xs>
                 <Link href="" variant="body2">
