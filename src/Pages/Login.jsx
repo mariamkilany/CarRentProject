@@ -67,6 +67,7 @@ export default function Login() {
     };
     dispatch(setUser(user));
     setCookie(user);
+    navigate("/home");
   };
   const errorMessage = (error) => {
     console.log(error);
@@ -198,11 +199,11 @@ export default function Login() {
             </Button>
             {/* <GoogleLogin onSuccess={responseMessage} onError={errorMessage} /> */}
             <Grid container>
-              <Grid item xs>
+              {/* <Grid item xs>
                 <Link href="" variant="body2">
                   Forgot password?
                 </Link>
-              </Grid>
+              </Grid> */}
               <Grid item>
                 <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}

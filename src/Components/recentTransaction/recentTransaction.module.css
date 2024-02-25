@@ -26,6 +26,7 @@
   padding-block: 1.6rem;
   border-bottom: 1px solid var(--clr-g-200);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .transaction:last-child {
@@ -34,7 +35,6 @@
 
 .transaction img {
   width: 116px;
-  height: 36px;
   margin-right: 2.4rem;
 }
 

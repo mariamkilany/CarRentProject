@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Grid,
-  IconButton,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, IconButton, Stack, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import LocalGasStationRoundedIcon from "@mui/icons-material/LocalGasStationRounded";
@@ -16,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCarAction } from "../../features/car/carActions";
-export default function CarCard({ car }) {
+export default function CarCard({ car }){
   const theme = useTheme();
   const iconStyle = { color: "var(--clr-g-300)" };
   const navigate = useNavigate();
@@ -118,4 +111,3 @@ export default function CarCard({ car }) {
       </Stack>
     </Box>
   );
-}
