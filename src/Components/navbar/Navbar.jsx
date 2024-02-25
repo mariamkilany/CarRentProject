@@ -86,17 +86,16 @@ const Navbar = () => {
       <MenuItem onClick={handleMenuClose}>{user.name}</MenuItem>
       <MenuItem onClick={handleMenuClose}>{user.email}</MenuItem>
       {user.isAdmin && (
-        <MenuItem onClick={handleMenuClose}>
-          <a
-            href="/dashboard"
-            style={{
-              color: "#596780",
-              textDecoration: "none",
-            }}
-          >
-            Dashboard
-          </a>
-        </MenuItem>
+        <a
+          href="/dashboard"
+          onClick={handleMenuClose}
+          style={{
+            color: "#596780",
+            textDecoration: "none",
+          }}
+        >
+          <MenuItem>Dashboard</MenuItem>
+        </a>
       )}
       {/* <MenuItem onClick={handleMenuClose}>Signup</MenuItem> */}
     </Menu>
