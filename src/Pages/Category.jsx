@@ -11,8 +11,8 @@ const Category = () => {
 
   useEffect(() => {
     dispatch(getAllCarAction());
-  }, []);
   if (loading) return <div>loading...</div>;
+  }, [dispatch]);
   return (
     <Grid container p={3} spacing={3} justifyContent={"center"}>
       {filteredCars.map((car) => (

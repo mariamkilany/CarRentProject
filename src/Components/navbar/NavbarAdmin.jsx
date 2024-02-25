@@ -10,36 +10,20 @@ import Menu from "@mui/material/Menu";
 import styles from "./Navbar.module.css";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
-
-import { Favorite, Login, Logout } from "@mui/icons-material";
+import { Favorite, Login, Logout, Settings } from "@mui/icons-material";
 import { Avatar, Button, Stack } from "@mui/material";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const NavbarAdmin = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const { user } = useSelector((state) => state.user);
-  const [loggedIn, setLogged] = React.useState(
-    Object.keys(user).length > 0 ? true : false
-  );
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    console.log(user);
-    console.log(loggedIn);
-  }, [loggedIn, user]);
+  const [loggedIn, setLogged] = React.useState(true);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const handleLogin = () => {
-    if (loggedIn) {
-      setLogged(false);
-    } else {
-      navigate("/login");
-    }
+  const handelLogging = () => {
+    setLogged(!loggedIn);
   };
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -58,7 +42,7 @@ const Navbar = () => {
   };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = !loggedIn && (
+  const renderMenu = loggedIn && (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -132,7 +116,7 @@ const Navbar = () => {
           >
             <Login />
           </IconButton>
-          <Button>Signup</Button>
+          <Button onClick={handelLogging}>Signup</Button>
         </MenuItem>
       )}
       {loggedIn && (
@@ -146,7 +130,7 @@ const Navbar = () => {
           >
             <Logout />
           </IconButton>
-          <Button>SignOut</Button>
+          <Button onClick={handelLogging}>SignOut</Button>
         </MenuItem>
       )}
     </Menu>
@@ -219,24 +203,6 @@ const Navbar = () => {
             Payment
           </NavLink>
 
-          <NavLink
-            className={({ isActive, isPending }) =>
-              isPending || isActive ? styles.active : styles.disactive
-            }
-            to="/category"
-            end
-          >
-            Category
-          </NavLink>
-          <NavLink
-            className={({ isActive, isPending }) =>
-              isPending || isActive ? styles.active : styles.disactive
-            }
-            to="/wishlist"
-            end
-          >
-            Wishlist
-          </NavLink>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {loggedIn && (
               <IconButton
@@ -246,6 +212,18 @@ const Navbar = () => {
               >
                 <Badge badgeContent={4} color="error" sx={{ fontSize: "20px" }}>
                   <Favorite sx={{ color: "#596780", fontSize: "30px" }} />
+                </Badge>
+              </IconButton>
+            )}
+
+            {loggedIn && (
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+              >
+                <Badge badgeContent={4} color="error">
+                  <Settings sx={{ color: "#596780", fontSize: "30px" }} />
                 </Badge>
               </IconButton>
             )}
@@ -265,7 +243,7 @@ const Navbar = () => {
             )}
             {!loggedIn && (
               <Box>
-                <Button variant="contained" onClick={handleLogin}>
+                <Button variant="contained" onClick={handelLogging}>
                   <Login sx={{ mr: 1 }} />
                   SignUp
                 </Button>
@@ -278,7 +256,7 @@ const Navbar = () => {
                   sx={{
                     ml: 4,
                   }}
-                  onClick={handleLogin}
+                  onClick={handelLogging}
                 >
                   <Logout sx={{ mr: 1 }} />
                   Signout
@@ -305,4 +283,4 @@ const Navbar = () => {
     </Box>
   );
 };
-export default Navbar;
+export default NavbarAdmin;
