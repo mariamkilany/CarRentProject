@@ -158,7 +158,17 @@ const Navbar = () => {
           >
             <Logout />
           </IconButton>
-          <Button>SignOut</Button>
+          <Button
+            onClick={() => {
+              handleLogin();
+              googleLogout();
+              dispatch(setUser({ user: {} }));
+              setCookie("");
+              navigate("/home");
+            }}
+          >
+            SignOut
+          </Button>
         </MenuItem>
       )}
     </Menu>
@@ -272,12 +282,12 @@ const Navbar = () => {
                   sx={{
                     ml: 4,
                   }}
-                  onClick={()=>{
-                    handleLogin()
-                      googleLogout();
-                      dispatch(setUser({ user: {} }));
-                      setCookie("{ user: {} }");
-                      navigate("/home");
+                  onClick={() => {
+                    handleLogin();
+                    googleLogout();
+                    dispatch(setUser({ user: {} }));
+                    setCookie("");
+                    navigate("/home");
                   }}
                 >
                   <Logout sx={{ mr: 1 }} />
