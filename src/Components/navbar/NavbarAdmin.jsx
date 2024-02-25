@@ -12,12 +12,27 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Favorite, Login, Logout, Settings } from "@mui/icons-material";
 import { Avatar, Button, Stack } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { googleLogout } from "@react-oauth/google";
+import { setUser } from "../../features/authentication/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const NavbarAdmin = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [loggedIn, setLogged] = React.useState(true);
+
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const setCookie = (payload) => {
+    const d = new Date();
+    d.setTime(d.getTime() + 2 * 24 * 60 * 60 * 1000);
+    let expires = "expires=" + d.toUTCString();
+    document.cookie =
+      "user=" + JSON.stringify(payload) + ";" + expires + ";path=/";
+  };
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -58,9 +73,21 @@ const NavbarAdmin = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Signup</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{user.name}</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{user.email}</MenuItem>
+      {user.isAdmin && (
+        <MenuItem onClick={handleMenuClose}>
+          <a
+            href="/dashboard"
+            style={{
+              color: "#596780",
+              textDecoration: "none",
+            }}
+          >
+            Dashboard
+          </a>
+        </MenuItem>
+      )}
     </Menu>
   );
 
@@ -130,7 +157,17 @@ const NavbarAdmin = () => {
           >
             <Logout />
           </IconButton>
-          <Button onClick={handelLogging}>SignOut</Button>
+          <Button
+            onClick={() => {
+              handelLogging();
+              googleLogout();
+              dispatch(setUser({ user: {} }));
+              setCookie("");
+              navigate("/");
+            }}
+          >
+            SignOut
+          </Button>
         </MenuItem>
       )}
     </Menu>
@@ -238,7 +275,7 @@ const NavbarAdmin = () => {
                 onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                <Avatar sx={{ color: "#596780" }} />
+                <Avatar sx={{ color: "#596780" }} src={user.avatar} />
               </IconButton>
             )}
             {!loggedIn && (
@@ -256,7 +293,13 @@ const NavbarAdmin = () => {
                   sx={{
                     ml: 4,
                   }}
-                  onClick={handelLogging}
+                  onClick={() => {
+                    handelLogging();
+                    googleLogout();
+                    dispatch(setUser({ user: {} }));
+                    setCookie("");
+                    navigate("/");
+                  }}
                 >
                   <Logout sx={{ mr: 1 }} />
                   Signout

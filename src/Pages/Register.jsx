@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RegisterUser } from "../features/authentication/authActions";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { setUser } from "../features/authentication/authSlice";
 
 const defaultTheme = createTheme({
   typography: {
@@ -70,12 +71,15 @@ export default function Register() {
 
     if (!isUserAlreadyRegistered) {
       dispatch(RegisterUser(newUser));
+      dispatch(setUser(newUser));
       setFaildRegister(false);
       setCookie({
         ...newUser,
         name: newUser.firstName + " " + newUser.lastName,
       });
-      navigate("/home");
+      setTimeout(() => {
+        navigate("/home");
+      }, 3000);
     } else {
       setFaildRegister(true);
       console.log("Email Already Register");
@@ -83,7 +87,7 @@ export default function Register() {
 
     setTimeout(() => {
       setOpen(false);
-    }, 1500);
+    }, 3000);
   };
 
   const isFormValid = () => {

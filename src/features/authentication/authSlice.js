@@ -17,6 +17,16 @@ function getCookie(cname) {
   }
   return "";
 }
+const setCookie = (payload) => {
+  const d = new Date();
+  d.setTime(d.getTime() + 2 * 24 * 60 * 60 * 1000);
+  let expires = "expires=" + d.toUTCString();
+  document.cookie =
+    "user=" + JSON.stringify(payload) + ";" + expires + ";path=/";
+};
+// const initUser = getCookie('user')
+// console.log('initUser: ', initUser);
+// console.log('initUser: ', !!initUser);
 
 const userSlice = createSlice({
   name: "user",

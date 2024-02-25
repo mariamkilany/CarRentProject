@@ -192,12 +192,11 @@ export default function Login() {
                 googleLogout();
                 dispatch(setUser({ user: {} }));
                 setCookie("{ user: {} }");
-                navigate("/home");
+                navigate("/");
               }}
             >
-              LogOut From Google
+              LogOut
             </Button>
-            {/* <GoogleLogin onSuccess={responseMessage} onError={errorMessage} /> */}
             <Grid container>
               {/* <Grid item xs>
                 <Link href="" variant="body2">
