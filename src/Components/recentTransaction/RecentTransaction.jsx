@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./recentTransaction.module.css";
+import { useNavigate } from "react-router-dom";
 
 const RecentTransaction = ({ recentCars, onCarSelect, selectedCarId }) => {
 	const data = [
@@ -14,7 +15,9 @@ const RecentTransaction = ({ recentCars, onCarSelect, selectedCarId }) => {
 		<div className={`parent-section ${styles.parent}`}>
 			<div className={styles.header}>
 				<h3 className="section-title">Recent Transaction</h3>
-				<button className={styles.btn}>View All</button>
+				<button className={styles.btn} onClick={() => window.location.replace("https://dashboard.stripe.com/test/payments")}>
+					View All
+				</button>
 			</div>
 			<div className={styles.transactions}>
 				{recentCars.map((item, idx) => (

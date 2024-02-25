@@ -34,37 +34,38 @@ const Navbar = () => {
       "user=" + JSON.stringify(payload) + ";" + expires + ";path=/";
   };
 
-  React.useEffect(() => {
-    console.log(user);
-    console.log(loggedIn);
-  }, [loggedIn, user]);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const handleLogin = () => {
-    if (loggedIn) {
-      setLogged(false);
-    } else {
-      navigate("/login");
-    }
-  };
+	React.useEffect(() => {
+		console.log(user);
+		console.log(loggedIn);
+	}, [loggedIn, user]);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+	const isMenuOpen = Boolean(anchorEl);
+	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+	const handleLogin = () => {
+		if (loggedIn) {
+			setLogged(false);
+		} else {
+			navigate("/login");
+		}
+	};
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
+	const handleProfileMenuOpen = event => {
+		setAnchorEl(event.currentTarget);
+	};
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
+	const handleMobileMenuClose = () => {
+		setMobileMoreAnchorEl(null);
+	};
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+	const handleMenuClose = () => {
+		setAnchorEl(null);
+		handleMobileMenuClose();
+	};
+
+	const handleMobileMenuOpen = event => {
+		setMobileMoreAnchorEl(event.currentTarget);
+	};
 
   const menuId = "primary-search-account-menu";
   const renderMenu = loggedIn && (
@@ -183,73 +184,68 @@ const Navbar = () => {
     </Menu>
   );
 
-  return (
-    <Box sx={{ display: "flex", boxShadow: "0 !important" }}>
-      <AppBar
-        position="static"
-        sx={{
-          backgroundColor: "#ffffff",
-          padding: "15px",
-          boxShadow: "none !important",
-        }}
-      >
-        <Toolbar
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Typography
-            variant="h3"
-            noWrap
-            component="div"
-            sx={{
-              display: { xs: "none", sm: "block" },
-              color: "#3563E9",
-              marginRight: "100px",
-            }}
-          >
-            <b> MORENT</b>
-          </Typography>
+	return (
+		<Box sx={{ display: "flex", boxShadow: "0 !important" }}>
+			<AppBar
+				position="static"
+				sx={{
+					backgroundColor: "#ffffff",
+					padding: "15px",
+					boxShadow: "none !important",
+				}}
+			>
+				<Toolbar
+					sx={{
+						display: "flex",
+						justifyContent: "space-between",
+					}}
+				>
+					<Typography
+						variant="h3"
+						noWrap
+						component="div"
+						sx={{
+							display: { xs: "none", sm: "block" },
+							color: "#3563E9",
+							marginRight: "100px",
+						}}
+					>
+						<b> MORENT</b>
+					</Typography>
 
-          <NavLink
-            className={({ isActive, isPending }) =>
-              isPending || isActive ? styles.active : styles.disactive
-            }
-            to="/home"
-            end
-          >
-            Home
-          </NavLink>
+					<NavLink className={({ isActive, isPending }) => (isPending || isActive ? styles.active : styles.disactive)} to="/home" end>
+						Home
+					</NavLink>
 
-          <NavLink
-            className={({ isActive, isPending }) =>
-              isPending || isActive ? styles.active : styles.disactive
-            }
-            to="/category"
-            end
-          >
-            Category
-          </NavLink>
-          <NavLink
-            className={({ isActive, isPending }) =>
-              isPending || isActive ? styles.active : styles.disactive
-            }
-            to="/wishlist"
-            end
-          >
-            Wishlist
-          </NavLink>
-          <NavLink
-            className={({ isActive, isPending }) =>
-              isPending || isActive ? styles.active : styles.disactive
-            }
-            to="/payment"
-            end
-          >
-            Payment
-          </NavLink>
-
+					<NavLink
+						className={({ isActive, isPending }) => (isPending || isActive ? styles.active : styles.disactive)}
+						to="/category"
+						end
+					>
+						Category
+					</NavLink>
+					<NavLink
+						className={({ isActive, isPending }) => (isPending || isActive ? styles.active : styles.disactive)}
+						to="/wishlist"
+						end
+					>
+						Wishlist
+					</NavLink>
+					<NavLink
+						className={({ isActive, isPending }) => (isPending || isActive ? styles.active : styles.disactive)}
+						to="/payment"
+						end
+					>
+						Payment
+					</NavLink>
+					<Box sx={{ display: { xs: "none", md: "flex" } }}>
+						{loggedIn && (
+							<IconButton sx={{ fontSize: "10px" }} aria-label="show 4 new mails" color="inherit">
+								<Badge badgeContent={4} color="error" sx={{ fontSize: "20px" }}>
+									<Favorite sx={{ color: "#596780", fontSize: "30px" }} />
+								</Badge>
+							</IconButton>
+						)}
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {loggedIn && (
               <IconButton
@@ -323,5 +319,6 @@ const Navbar = () => {
       {renderMenu}
     </Box>
   );
+
 };
 export default Navbar;
