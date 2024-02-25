@@ -102,7 +102,7 @@ export default function CarCard({ car }){
             variant="contained"
             onClick={(e) => {
               e.stopPropagation();
-              navigate(`/payment/${car.id}`);
+              navigate(`/payment`, { state: { car: car } });
             }}
           >
             Rent Now
@@ -110,4 +110,4 @@ export default function CarCard({ car }){
         </Stack>
       </Stack>
     </Box>
-  );
+  )}
