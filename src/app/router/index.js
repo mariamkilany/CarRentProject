@@ -14,7 +14,7 @@ import MangerDashbord from "../../pages/MangerDashbord";
 import CategoryLayout from "../../pages/CategoryLayout";
 import DbCustomers from "../../Components/dashboard/components/dbCustomers";
 import DbTransactions from "../../Components/dashboard/components/dbTransactions";
-import DbCarsUpdate from '../../Components/dashboard/components/dbCarsUpdate';
+import DbCarsUpdate from "../../Components/dashboard/components/dbCarsUpdate";
 import LandingPage from "../../pages/LandingPage";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -25,6 +25,7 @@ const routerConfig = [
 		path: "/",
 		element: <MainLayout />,
 		children: [
+			{ index: true, element: <LandingPage /> },
 			{ path: "home", element: <Home /> },
 			{
 				path: "category",
@@ -43,23 +44,22 @@ const routerConfig = [
 				),
 			},
 			{ path: "wishlist", element: <Wishlist /> },
-              { path: "land", element: <LandingPage /> },
+			{ path: "land", element: <LandingPage /> },
 		],
 	},
 	{ path: "/login", element: <Login /> },
 	{ path: "/register", element: <Register /> },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
-    children: [
-      { index: true, element: <MangerDashbord /> },
-      { path: "cars", element: <DbCars></DbCars> },
-      { path: "customers", element: <DbCustomers></DbCustomers> },
-      { path: "transactions", element:<DbTransactions></DbTransactions>  },
-      { path: "cars:id", element: <DbCarsUpdate></DbCarsUpdate> },
-
-    ],
-  },
+	{
+		path: "/dashboard",
+		element: <Dashboard />,
+		children: [
+			{ index: true, element: <MangerDashbord /> },
+			{ path: "cars", element: <DbCars></DbCars> },
+			{ path: "customers", element: <DbCustomers></DbCustomers> },
+			{ path: "transactions", element: <DbTransactions></DbTransactions> },
+			{ path: "cars:id", element: <DbCarsUpdate></DbCarsUpdate> },
+		],
+	},
 	{ path: "*", element: <NotFound /> },
 ];
 
