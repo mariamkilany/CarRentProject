@@ -1,7 +1,8 @@
 import React from "react";
+import Error from "../Components/error/Error";
 
 const NotFound = () => {
-	return <div>NotFound</div>;
+	return <Error />;
 };
 
 export default NotFound;

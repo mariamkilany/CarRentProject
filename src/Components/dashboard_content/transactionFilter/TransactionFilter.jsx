@@ -1,9 +1,8 @@
 import React from "react";
 import styles from "./transaction-filter.module.css";
+import { GEOS } from "../../../config";
 
-const TransactionFilter = ({ title = "Transaction Details", locations = [], date = new Date() }) => {
-	const selectedDate = date.toDateString();
-	const selectedTime = date.toLocaleTimeString();
+const TransactionFilter = ({ title = "Transaction Details", locations = GEOS.map(geo => geo.name), date }) => {
 	return (
 		<div className={styles.transactionLocation}>
 			<h3 className={styles.title}>{title}</h3>
@@ -18,15 +17,25 @@ const TransactionFilter = ({ title = "Transaction Details", locations = [], date
 				</div>
 				<div className={styles.selected}>
 					<p>Date</p>
-					<select name="date" id="date">
-						<option value={selectedDate}>{selectedDate}</option>
-					</select>
+					{date ? (
+						<input type="date" name="date" id="date" value={new Date(date).toISOString().split("T")[0]} />
+					) : (
+						<input type="date" name="date" id="date" />
+					)}
 				</div>
+
 				<div className={styles.selected}>
-					<p className={styles.name}>Time</p>
-					<select name="time" id="time">
-						<option value={selectedTime}>{selectedTime}</option>
-					</select>
+					<p>Time</p>
+					{date ? (
+						<input
+							type="time"
+							name="time"
+							id="time"
+							value={new Date(date).getHours() + ":" + new Date(date).getMinutes() + ":" + new Date(date).getSeconds()}
+						/>
+					) : (
+						<input type="time" name="time" id="time" />
+					)}
 				</div>
 			</div>
 		</div>

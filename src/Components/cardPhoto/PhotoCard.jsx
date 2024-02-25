@@ -8,11 +8,11 @@ import Typography from "@mui/material/Typography";
 import styles from "./photo-card.module.css";
 import { Grid, Stack, useTheme } from "@mui/material";
 
-export function PhotoCard() {
+export function PhotoCard({ car }) {
   const theme = useTheme();
   const [selectedImg, setSelectedImg] = React.useState({
     id: 0,
-    src: "/images/car-1.png",
+    src: car?.image,
   });
 
   return (
@@ -37,7 +37,7 @@ export function PhotoCard() {
                   sports car
                 </Typography>
                 <Box className={styles.card_img_continer} mt={5}>
-                  <img src="/Images/car-1.png" width={"100%"} />
+                  <img src={car?.image} width={"100%"} />
                 </Box>
               </Stack>
             </CardContent>
@@ -47,7 +47,7 @@ export function PhotoCard() {
         )}
       </Box>
       <Grid container spacing={2} mt={2}>
-        {["/images/car-1.png", "/images/car-2.png", "/images/car-3.png"].map(
+        {[car?.image, "/images/car-2.png", "/images/car-3.png"].map(
           (src, id) => {
             if (id === 0) {
               return (

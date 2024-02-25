@@ -36,7 +36,11 @@ const RentalDetails = ({ selectedCar }) => {
 								locations={["Kota Semarang"]}
 								date={new Date(selectedCar.transactions[0].pickUp.date)}
 							/>
-							<TransactionFilter title="Drop - off" locations={["Kota Semarang"]} dates={["21 July 2022"]} times={["01.00"]} />
+							<TransactionFilter
+								title="Drop - Off"
+								locations={["Kota Semarang"]}
+								date={new Date(selectedCar.transactions[0].dropoff.date)}
+							/>
 						</div>
 						<div className={styles.priceDetails}>
 							<div className={styles.priceInfo}>

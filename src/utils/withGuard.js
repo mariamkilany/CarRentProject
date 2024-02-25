@@ -10,7 +10,7 @@ const withGuard = Component => {
 		console.log(isAdmin);
 
 		useEffect(() => {
-			if (!isAdmin) navigate("/error");
+			if (isAdmin) navigate("/error");
 		}, [isAdmin, navigate]);
 
 		return <Component {...props} />;

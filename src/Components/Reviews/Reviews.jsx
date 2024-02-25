@@ -4,8 +4,9 @@ import { useTheme } from "@mui/material";
 import Review from "../Review/Review";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-export default function Reviews() {
+export default function Reviews({ car }) {
   const theme = useTheme();
+  console.log(car);
   return (
     <Card sx={{ padding: "25px" }}>
       <Stack spacing={3}>
@@ -16,16 +17,11 @@ export default function Reviews() {
           alignItems={"center"}
         >
           <Typography variant="h3">Reviews</Typography>
-          <Button variant="contained">13</Button>
+          <Button variant="contained">{car?.reviews.length}</Button>
         </Stack>
-        <Review />
-        <Review />
-        <Stack direction={"row"} justifyContent={"center"}>
-          <Button>
-            Show All{" "}
-            <KeyboardArrowDownIcon sx={{ width: "20px", height: "20px" }} />
-          </Button>
-        </Stack>
+        {car?.reviews.map((reviewText) => (
+          <Review reviewText={reviewText} />
+        ))}
       </Stack>
     </Card>
   );
