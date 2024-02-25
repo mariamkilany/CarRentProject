@@ -19,8 +19,8 @@ const Wishlist = () => {
   );
   const navigate = useNavigate();
   return (
-    <Container>
-      <Stack justifyContent={"center"} my={2}>
+    <Container py={4}>
+      <Stack justifyContent={"center"} py={4}>
         <Typography variant="h2" color={"primary"} textAlign={"center"}>
           My WishList <FavoriteIcon fontSize="25px" />
         </Typography>

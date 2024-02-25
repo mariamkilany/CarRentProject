@@ -63,6 +63,11 @@
     -moz-border-radius: 30px;
     -ms-border-radius: 30px;
     -o-border-radius: 30px;
+    cursor: pointer;
+}
+
+.getStarted:hover {
+    box-shadow: -4px 5px 5px #0000004f;
 }
 
 .landingSection {
@@ -98,6 +103,22 @@
     font-size: 2.2rem;
     text-align: center;
     margin-bottom: 2rem;
+}
+
+@media (max-width:1100px) {
+    .headerText {
+        width: 100%;
+
+    }
+
+    .headerText h1 {
+        font-size: 3.5rem;
+    }
+
+    .headerText p {
+        width: 100%;
+        font-size: 2.2rem;
+    }
 }
 
 .headerBtns {

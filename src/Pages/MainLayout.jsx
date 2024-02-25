@@ -7,15 +7,15 @@ import { Container } from "@mui/material";
 import NavbarAdmin from "../Components/navbar/NavbarAdmin";
 
 const MainLayout = () => {
-	return (
-		<>
-			<Navbar />
-			{/* <NavbarAdmin /> */}
-
-			<Outlet />
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      <Navbar />
+      <div style={{ backgroundColor: " var(--clr-smoke-white)" }}>
+        <Outlet />
+      </div>
+      <Footer />
+    </>
+  );
 };
 
 export default MainLayout;

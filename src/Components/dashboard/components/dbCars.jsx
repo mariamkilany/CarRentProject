@@ -65,7 +65,6 @@ function DbCars() {
               <td>Gasoline</td>
               <td>Price</td>
               <td>Reviews</td>
-              <td title="No.Of Transaction">No.Of Trans..</td>
               <td style={{ width: "100px" }} title="No.Of Transaction">
                 Description
               </td>
@@ -91,7 +90,7 @@ function DbCars() {
                   </td>
                   <td>
                     <div className={styles.CarInfo}>
-                      <img className={styles.carImage} alt="" src={c.image} />
+                      <img width={"100px"} alt="" src={c.image} />
                       <span className={styles.carData}>{c?.name}</span>
                     </div>
                   </td>
@@ -137,14 +136,6 @@ function DbCars() {
                       ></RateReviewIcon>
                       <span className={styles.carData}>
                         {c?.reviews?.length}
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className={styles.CarInfo}>
-                      {/* <RateReviewIcon sx={{fontSize:'20px'}}></RateReviewIcon> */}
-                      <span className={styles.carData}>
-                        {c?.transactions?.length}
                       </span>
                     </div>
                   </td>

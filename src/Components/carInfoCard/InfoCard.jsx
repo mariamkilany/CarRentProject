@@ -85,7 +85,7 @@ export default function InfoCard({ car }) {
           <Button
             variant="contained"
             onClick={() => {
-              navigate(`/payment/${car?.id}`);
+              navigate(`/payment`, { state: { car: car } });
             }}
           >
             Rent Now

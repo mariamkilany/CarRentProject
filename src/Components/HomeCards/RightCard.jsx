@@ -32,18 +32,12 @@ export default function RightCard() {
             Providing cheap car rental services and safe and comfortable
             facilities.
           </Typography>
-          <Button
-            variant="contained"
-            style={{ width: "120px", backgroundColor: "#54A6FF" }}
-          >
-            Rental Car
-          </Button>
           <Box
             className={styles.card_img_continer}
             style={{ width: "50%" }}
             mt={5}
           >
-            <img src="/Images/car-1.png" width={"100%"} />
+            <img src="/Images/car-1.png" width={"100%"} height={"100px"} />
           </Box>
         </Stack>
       </CardContent>

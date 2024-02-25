@@ -157,53 +157,6 @@ export const MainListItems = () => {
             </Typography>
           </Link>
         </ListItemButton>
-        <ListItemButton
-          sx={{
-            flexDirection: "row",
-            color: location.pathname === "/reports" ? "var(--clr-m)" : "white",
-            bgcolor:
-              location.pathname === "/reports" ? "var(--clr-m)" : "white",
-            "&:hover": {
-              color: "white",
-              bgcolor: "var(--clr-m)",
-              "& .MuiBadge-root, & .MuiTypography-root": {
-                color: "white",
-              },
-            },
-          }}
-        >
-          <Link to="transactions" style={{ display: "contents" }}>
-            <Badge
-              sx={{
-                width: "56px",
-                color:
-                  location.pathname === "/reports" ? "white" : "var(--clr-m)",
-              }}
-            >
-              <ReceiptOutlinedIcon sx={{ fontSize: "2rem" }} />
-            </Badge>
-            <Typography
-              sx={{
-                color:
-                  location.pathname === "/reports" ? "white" : "var(--clr-m)",
-                fontSize: "1.7rem",
-              }}
-            >
-              {" "}
-              Transactions{" "}
-            </Typography>
-          </Link>
-        </ListItemButton>
-
-        {/* <ListItemButton>
-      <Link to="" style={{display:"contents"}}>
-          <Badge>
-            <LayersIcon />
-          </Badge>
-          <Typography > integration </Typography>
-
-      </Link>
-    </ListItemButton> */}
       </React.Fragment>
     </>
   );
@@ -225,27 +178,6 @@ export const SecondaryListItems = () => {
   return (
     <>
       <React.Fragment>
-        {/* <ListSubheader component="div" inset>
-      Saved reports
-    </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItemButton> */}
         <ListItemButton
           onClick={() => {
             googleLogout();
@@ -288,13 +220,6 @@ export const SecondaryListItems = () => {
             </Typography>
           </Link>
         </ListItemButton>
-        {/* 
-    <ListItemButton>
-      <Badge  sx={{fontSize:"2rem"}}>
-      
-      </Badge>
-      <Typography variant='span' > Logout</Typography>
-    </ListItemButton> */}
       </React.Fragment>
     </>
   );

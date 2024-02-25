@@ -34,38 +34,37 @@ const Navbar = () => {
       "user=" + JSON.stringify(payload) + ";" + expires + ";path=/";
   };
 
+  React.useEffect(() => {
+    console.log(user);
+    console.log(loggedIn);
+  }, [loggedIn, user]);
 
-	React.useEffect(() => {
-		console.log(user);
-		console.log(loggedIn);
-	}, [loggedIn, user]);
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const handleLogin = () => {
+    if (loggedIn) {
+      setLogged(false);
+    } else {
+      navigate("/login");
+    }
+  };
 
-	const isMenuOpen = Boolean(anchorEl);
-	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-	const handleLogin = () => {
-		if (loggedIn) {
-			setLogged(false);
-		} else {
-			navigate("/login");
-		}
-	};
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-	const handleProfileMenuOpen = event => {
-		setAnchorEl(event.currentTarget);
-	};
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
 
-	const handleMobileMenuClose = () => {
-		setMobileMoreAnchorEl(null);
-	};
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
 
-	const handleMenuClose = () => {
-		setAnchorEl(null);
-		handleMobileMenuClose();
-	};
-
-	const handleMobileMenuOpen = event => {
-		setMobileMoreAnchorEl(event.currentTarget);
-	};
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = loggedIn && (
@@ -184,134 +183,119 @@ const Navbar = () => {
     </Menu>
   );
 
-	return (
-		<Box sx={{ display: "flex", boxShadow: "0 !important" }}>
-			<AppBar
-				position="static"
-				sx={{
-					backgroundColor: "#ffffff",
-					padding: "15px",
-					boxShadow: "none !important",
-				}}
-			>
-				<Toolbar
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-				>
-					<Typography
-						variant="h3"
-						noWrap
-						component="div"
-						sx={{
-							display: { xs: "none", sm: "block" },
-							color: "#3563E9",
-							marginRight: "100px",
-						}}
-					>
-						<b> MORENT</b>
-					</Typography>
+  return (
+    <Box sx={{ display: "flex", boxShadow: "0 !important" }}>
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: "#ffffff",
+          padding: "15px",
+          boxShadow: "none !important",
+        }}
+      >
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography
+            variant="h3"
+            noWrap
+            component="div"
+            sx={{
+              display: { xs: "none", sm: "block" },
+              color: "#3563E9",
+              marginRight: "100px",
+            }}
+          >
+            <b> MORENT</b>
+          </Typography>
 
-					<NavLink className={({ isActive, isPending }) => (isPending || isActive ? styles.active : styles.disactive)} to="/home" end>
-						Home
-					</NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending || isActive ? styles.active : styles.disactive
+            }
+            to="/home"
+            end
+          >
+            Home
+          </NavLink>
 
-					<NavLink
-						className={({ isActive, isPending }) => (isPending || isActive ? styles.active : styles.disactive)}
-						to="/category"
-						end
-					>
-						Category
-					</NavLink>
-					<NavLink
-						className={({ isActive, isPending }) => (isPending || isActive ? styles.active : styles.disactive)}
-						to="/wishlist"
-						end
-					>
-						Wishlist
-					</NavLink>
-					<NavLink
-						className={({ isActive, isPending }) => (isPending || isActive ? styles.active : styles.disactive)}
-						to="/payment"
-						end
-					>
-						Payment
-					</NavLink>
-					<Box sx={{ display: { xs: "none", md: "flex" } }}>
-						{loggedIn && (
-							<IconButton sx={{ fontSize: "10px" }} aria-label="show 4 new mails" color="inherit">
-								<Badge badgeContent={4} color="error" sx={{ fontSize: "20px" }}>
-									<Favorite sx={{ color: "#596780", fontSize: "30px" }} />
-								</Badge>
-							</IconButton>
-						)}
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending || isActive ? styles.active : styles.disactive
+            }
+            to="/category"
+            end
+          >
+            Category
+          </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending || isActive ? styles.active : styles.disactive
+            }
+            to="/wishlist"
+            end
+          >
+            Wishlist
+          </NavLink>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {loggedIn && (
-              <IconButton
-                sx={{ fontSize: "10px" }}
-                aria-label="show 4 new mails"
-                color="inherit"
-              >
-                <Badge badgeContent={4} color="error" sx={{ fontSize: "20px" }}>
-                  <Favorite sx={{ color: "#596780", fontSize: "30px" }} />
-                </Badge>
-              </IconButton>
-            )}
-
-            {loggedIn && (
-              <IconButton
-                size="xx-large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <Avatar sx={{ color: "#596780" }} src={user.avatar} />
-              </IconButton>
-            )}
-            {!loggedIn && (
-              <Box>
-                <Button variant="contained" onClick={handleLogin}>
-                  <Login sx={{ mr: 1 }} />
-                  SignUp
-                </Button>
-              </Box>
-            )}
-            {loggedIn && (
-              <Stack justifyContent="center">
-                <Button
-                  variant="contained"
-                  sx={{
-                    ml: 4,
-                  }}
-                  onClick={() => {
-                    handleLogin();
-                    googleLogout();
-                    dispatch(setUser({ user: {} }));
-                    setCookie("");
-                    navigate("/");
-                  }}
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              {loggedIn && (
+                <IconButton
+                  size="xx-large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
                 >
-                  <Logout sx={{ mr: 1 }} />
-                  Signout
-                </Button>
-              </Stack>
-            )}
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="black"
-            >
-              <MoreIcon />
-            </IconButton>
+                  <Avatar sx={{ color: "#596780" }} src={user.avatar} />
+                </IconButton>
+              )}
+              {!loggedIn && (
+                <Box>
+                  <Button variant="contained" onClick={handleLogin}>
+                    <Login sx={{ mr: 1 }} />
+                    SignIn
+                  </Button>
+                </Box>
+              )}
+              {loggedIn && (
+                <Stack justifyContent="center">
+                  <Button
+                    variant="contained"
+                    sx={{
+                      ml: 4,
+                    }}
+                    onClick={() => {
+                      handleLogin();
+                      googleLogout();
+                      dispatch(setUser({ user: {} }));
+                      setCookie("");
+                      navigate("/");
+                    }}
+                  >
+                    <Logout sx={{ mr: 1 }} />
+                    Signout
+                  </Button>
+                </Stack>
+              )}
+            </Box>
+            <Box sx={{ display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="black"
+              >
+                <MoreIcon />
+              </IconButton>
+            </Box>
           </Box>
         </Toolbar>
       </AppBar>
@@ -319,6 +303,5 @@ const Navbar = () => {
       {renderMenu}
     </Box>
   );
-
 };
 export default Navbar;

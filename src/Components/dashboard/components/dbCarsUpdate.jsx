@@ -68,6 +68,7 @@ export default function UpdateModel({ carId }) {
     );
     setOpen(true);
     setformData(specificCar.data);
+    // console.log(specificCar.data);
   };
 
   const handleClose = () => setOpen(false);
@@ -127,7 +128,6 @@ export default function UpdateModel({ carId }) {
     e.preventDefault();
     const formErrors = validateValues(formData);
     if (Object.keys(formErrors).length === 0) {
-      console.log(updatedState);
       dispatch(updateCarAction({ id: carId, updatedInfo: updatedState }));
       setOpen(false);
       setformData({
@@ -206,7 +206,7 @@ export default function UpdateModel({ carId }) {
               <Stack direction={"row"} gap={2} my={1} alignItems={"end"}>
                 <img
                   borderRadius={2}
-                  width={"200px"}
+                  width={"300px"}
                   height={"100px"}
                   boxShadow={1}
                   my={2}
@@ -268,8 +268,8 @@ export default function UpdateModel({ carId }) {
                       }}
                       required
                     >
-                      <MenuItem value="manula">Manual</MenuItem>
-                      <MenuItem value="automatic">Automatic</MenuItem>
+                      <MenuItem value="Manula">Manual</MenuItem>
+                      <MenuItem value="Automatic">Automatic</MenuItem>
                     </Select>
                     {errors.steering && (
                       <p className="error" style={{ color: "red" }}>
@@ -294,11 +294,11 @@ export default function UpdateModel({ carId }) {
                       }}
                       required
                     >
-                      <MenuItem value="80">80L</MenuItem>
-                      <MenuItem value="90">90L</MenuItem>
-                      <MenuItem value="92">92L</MenuItem>
-                      <MenuItem value="95">95L</MenuItem>
-                      <MenuItem value="Gas">Gas</MenuItem>
+                      <MenuItem value="87">87L</MenuItem>
+                      <MenuItem value="89">89L</MenuItem>
+                      <MenuItem value="91">91L</MenuItem>
+                      <MenuItem value="91">92L</MenuItem>
+                      <MenuItem value="Electric">Electric</MenuItem>
                     </Select>
                     {errors.gasoline && (
                       <p className="error" style={{ color: "red" }}>

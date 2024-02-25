@@ -47,7 +47,6 @@ function DbCustomers() {
               <td> UserName</td>
               <td>UserEmail</td>
               <td>JobTitle </td>
-              <td title="No.Of Transaction">No.Of Trans..</td>
             </tr>
           </thead>
           <tbody>
