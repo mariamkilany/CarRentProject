@@ -14,14 +14,26 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import { Favorite, Login, Logout } from "@mui/icons-material";
 import { Avatar, Button, Stack } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { googleLogout } from "@react-oauth/google";
+import { setUser } from "../../features/authentication/authSlice";
 
 const Navbar = () => {
-	const [anchorEl, setAnchorEl] = React.useState(null);
-	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-	const { user } = useSelector(state => state.user);
-	const [loggedIn, setLogged] = React.useState(Object.keys(user).length > 0 ? true : false);
-	const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const { user } = useSelector((state) => state.user);
+  const [loggedIn, setLogged] = React.useState(user ? true : false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const setCookie = (payload) => {
+    const d = new Date();
+    d.setTime(d.getTime() + 2 * 24 * 60 * 60 * 1000);
+    let expires = "expires=" + d.toUTCString();
+    document.cookie =
+      "user=" + JSON.stringify(payload) + ";" + expires + ";path=/";
+  };
+
 
 	React.useEffect(() => {
 		console.log(user);
@@ -55,100 +67,122 @@ const Navbar = () => {
 		setMobileMoreAnchorEl(event.currentTarget);
 	};
 
-	const menuId = "primary-search-account-menu";
-	const renderMenu = !loggedIn && (
-		<Menu
-			anchorEl={anchorEl}
-			anchorOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
-			id={menuId}
-			keepMounted
-			transformOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
-			open={isMenuOpen}
-			onClose={handleMenuClose}
-		>
-			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
-			<MenuItem onClick={handleMenuClose}>Signup</MenuItem>
-		</Menu>
-	);
+  const menuId = "primary-search-account-menu";
+  const renderMenu = loggedIn && (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>{user.name}</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{user.email}</MenuItem>
+      {user.isAdmin && (
+        <a
+          href="/dashboard"
+          onClick={handleMenuClose}
+          style={{
+            color: "#596780",
+            textDecoration: "none",
+          }}
+        >
+          <MenuItem>Dashboard</MenuItem>
+        </a>
+      )}
+      {/* <MenuItem onClick={handleMenuClose}>Signup</MenuItem> */}
+    </Menu>
+  );
 
-	const mobileMenuId = "primary-search-account-menu-mobile";
-	const renderMobileMenu = (
-		<Menu
-			anchorEl={mobileMoreAnchorEl}
-			anchorOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
-			id={mobileMenuId}
-			keepMounted
-			transformOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
-			open={isMobileMenuOpen}
-			onClose={handleMobileMenuClose}
-		>
-			{loggedIn && (
-				<MenuItem>
-					<IconButton size="large" aria-label=" 2 " color="inherit">
-						<Badge badgeContent={17} color="error" sx={{ fontSize: "15px" }}>
-							<Favorite />
-						</Badge>
-					</IconButton>
-					<p> Favorites</p>
-				</MenuItem>
-			)}
-			{loggedIn && (
-				<MenuItem onClick={handleProfileMenuOpen}>
-					<IconButton
-						size="large"
-						aria-label="account of current user"
-						aria-controls="primary-search-account-menu"
-						aria-haspopup="true"
-						color="inherit"
-					>
-						<AccountCircle />
-					</IconButton>
-					<p>Profile</p>
-				</MenuItem>
-			)}
-			{!loggedIn && (
-				<MenuItem onClick={handleProfileMenuOpen}>
-					<IconButton
-						size="large"
-						aria-label="account of current user"
-						aria-controls="primary-search-account-menu"
-						aria-haspopup="true"
-						color="inherit"
-					>
-						<Login />
-					</IconButton>
-					<Button>Signup</Button>
-				</MenuItem>
-			)}
-			{loggedIn && (
-				<MenuItem onClick={handleProfileMenuOpen}>
-					<IconButton
-						size="large"
-						aria-label="account of current user"
-						aria-controls="primary-search-account-menu"
-						aria-haspopup="true"
-						color="inherit"
-					>
-						<Logout />
-					</IconButton>
-					<Button>SignOut</Button>
-				</MenuItem>
-			)}
-		</Menu>
-	);
+  const mobileMenuId = "primary-search-account-menu-mobile";
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      {loggedIn && (
+        <MenuItem>
+          <IconButton size="large" aria-label=" 2 " color="inherit">
+            <Badge badgeContent={17} color="error" sx={{ fontSize: "15px" }}>
+              <Favorite />
+            </Badge>
+          </IconButton>
+          <p> Favorites</p>
+        </MenuItem>
+      )}
+      {loggedIn && (
+        <MenuItem onClick={handleProfileMenuOpen}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          <p>Profile</p>
+        </MenuItem>
+      )}
+      {!loggedIn && (
+        <MenuItem onClick={handleProfileMenuOpen}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <Login />
+          </IconButton>
+          <Button>Signup</Button>
+        </MenuItem>
+      )}
+      {loggedIn && (
+        <MenuItem onClick={handleProfileMenuOpen}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <Logout />
+          </IconButton>
+          <Button
+            onClick={() => {
+              handleLogin();
+              googleLogout();
+              dispatch(setUser({ user: {} }));
+              setCookie("");
+              navigate("/");
+            }}
+          >
+            SignOut
+          </Button>
+        </MenuItem>
+      )}
+    </Menu>
+  );
 
 	return (
 		<Box sx={{ display: "flex", boxShadow: "0 !important" }}>
@@ -212,60 +246,79 @@ const Navbar = () => {
 								</Badge>
 							</IconButton>
 						)}
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            {loggedIn && (
+              <IconButton
+                sx={{ fontSize: "10px" }}
+                aria-label="show 4 new mails"
+                color="inherit"
+              >
+                <Badge badgeContent={4} color="error" sx={{ fontSize: "20px" }}>
+                  <Favorite sx={{ color: "#596780", fontSize: "30px" }} />
+                </Badge>
+              </IconButton>
+            )}
 
-						{loggedIn && (
-							<IconButton
-								size="xx-large"
-								edge="end"
-								aria-label="account of current user"
-								aria-controls={menuId}
-								aria-haspopup="true"
-								onClick={handleProfileMenuOpen}
-								color="inherit"
-							>
-								<Avatar sx={{ color: "#596780" }} />
-							</IconButton>
-						)}
-						{!loggedIn && (
-							<Box>
-								<Button variant="contained" onClick={handleLogin}>
-									<Login sx={{ mr: 1 }} />
-									SignUp
-								</Button>
-							</Box>
-						)}
-						{loggedIn && (
-							<Stack justifyContent="center">
-								<Button
-									variant="contained"
-									sx={{
-										ml: 4,
-									}}
-									onClick={handleLogin}
-								>
-									<Logout sx={{ mr: 1 }} />
-									Signout
-								</Button>
-							</Stack>
-						)}
-					</Box>
-					<Box sx={{ display: { xs: "flex", md: "none" } }}>
-						<IconButton
-							size="large"
-							aria-label="show more"
-							aria-controls={mobileMenuId}
-							aria-haspopup="true"
-							onClick={handleMobileMenuOpen}
-							color="black"
-						>
-							<MoreIcon />
-						</IconButton>
-					</Box>
-				</Toolbar>
-			</AppBar>
-			{renderMobileMenu}
-			{renderMenu}
-		</Box>
-	);
+            {loggedIn && (
+              <IconButton
+                size="xx-large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <Avatar sx={{ color: "#596780" }} src={user.avatar} />
+              </IconButton>
+            )}
+            {!loggedIn && (
+              <Box>
+                <Button variant="contained" onClick={handleLogin}>
+                  <Login sx={{ mr: 1 }} />
+                  SignUp
+                </Button>
+              </Box>
+            )}
+            {loggedIn && (
+              <Stack justifyContent="center">
+                <Button
+                  variant="contained"
+                  sx={{
+                    ml: 4,
+                  }}
+                  onClick={() => {
+                    handleLogin();
+                    googleLogout();
+                    dispatch(setUser({ user: {} }));
+                    setCookie("");
+                    navigate("/");
+                  }}
+                >
+                  <Logout sx={{ mr: 1 }} />
+                  Signout
+                </Button>
+              </Stack>
+            )}
+          </Box>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="black"
+            >
+              <MoreIcon />
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      {renderMobileMenu}
+      {renderMenu}
+    </Box>
+  );
+
 };
 export default Navbar;
