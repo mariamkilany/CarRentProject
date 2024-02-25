@@ -7,8 +7,10 @@ const withGuard = Component => {
 		const { isAdmin } = useSelector(state => state.user.user);
 		const navigate = useNavigate();
 
+		console.log(isAdmin);
+
 		useEffect(() => {
-			if (!isAdmin) navigate("/login");
+			if (!isAdmin) navigate("/error");
 		}, [isAdmin, navigate]);
 
 		return <Component {...props} />;
