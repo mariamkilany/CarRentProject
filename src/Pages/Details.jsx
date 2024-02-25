@@ -6,19 +6,17 @@ import Reviews from "../Components/Reviews/Reviews";
 
 const Details = () => {
   return (
-    <Container>
-      <Stack gap={2} p={7}>
-        <Grid container spacing={3} justifyContent={"center"}>
-          <Grid item md={6}>
-            <PhotoCard />
-          </Grid>
-          <Grid item md={6} sx={{ display: "flex", alignItems: "stretch" }}>
-            <InfoCard />
-          </Grid>
+    <Stack gap={2} p={4}>
+      <Grid container spacing={3} justifyContent={"center"}>
+        <Grid item md={6}>
+          <PhotoCard />
         </Grid>
-        <Reviews />
-      </Stack>
-    </Container>
+        <Grid item md={6} sx={{ display: "flex", alignItems: "stretch" }}>
+          <InfoCard />
+        </Grid>
+      </Grid>
+      <Reviews />
+    </Stack>
   );
 };
 
