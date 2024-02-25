@@ -58,7 +58,7 @@ const Navbar = () => {
   };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = !loggedIn && (
+  const renderMenu = loggedIn && (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -76,7 +76,11 @@ const Navbar = () => {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Signup</MenuItem>
+      {!loggedIn ? (
+        <MenuItem onClick={handleMenuClose}>Signup</MenuItem>
+      ) : (
+        <MenuItem onClick={handleMenuClose}>SignOut</MenuItem>
+      )}
     </Menu>
   );
 
@@ -132,7 +136,7 @@ const Navbar = () => {
           >
             <Login />
           </IconButton>
-          <Button>Signup</Button>
+          <Button onClick={handleLogin}>Signup</Button>
         </MenuItem>
       )}
       {loggedIn && (
@@ -146,7 +150,7 @@ const Navbar = () => {
           >
             <Logout />
           </IconButton>
-          <Button>SignOut</Button>
+          <Button onClick={handleLogin}>SignOut</Button>
         </MenuItem>
       )}
     </Menu>
