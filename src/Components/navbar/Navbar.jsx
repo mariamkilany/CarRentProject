@@ -14,19 +14,31 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import { Favorite, Login, Logout } from "@mui/icons-material";
 import { Avatar, Button, Stack } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { googleLogout } from "@react-oauth/google";
+import { setUser } from "../../features/authentication/authSlice";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const { user } = useSelector((state) => state.user);
   const [loggedIn, setLogged] = React.useState(
-    Object.keys(user).length > 0 ? true : false
+    Object.keys(user).length > 1 ? true : false
   );
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const setCookie = (payload) => {
+    const d = new Date();
+    d.setTime(d.getTime() + 2 * 24 * 60 * 60 * 1000);
+    let expires = "expires=" + d.toUTCString();
+    document.cookie =
+      "user=" + JSON.stringify(payload) + ";" + expires + ";path=/";
+  };
 
   React.useEffect(() => {
     console.log(user);
+    console.log(Object.keys(user));
     console.log(loggedIn);
   }, [loggedIn, user]);
 
@@ -58,7 +70,7 @@ const Navbar = () => {
   };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = !loggedIn && (
+  const renderMenu = loggedIn && (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -260,7 +272,13 @@ const Navbar = () => {
                   sx={{
                     ml: 4,
                   }}
-                  onClick={handleLogin}
+                  onClick={()=>{
+                    handleLogin()
+                      googleLogout();
+                      dispatch(setUser({ user: {} }));
+                      setCookie("{ user: {} }");
+                      navigate("/home");
+                  }}
                 >
                   <Logout sx={{ mr: 1 }} />
                   Signout

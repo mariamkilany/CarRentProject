@@ -195,7 +195,7 @@ export default function Login() {
                 navigate("/home");
               }}
             >
-              LogOut From Google
+              LogOut
             </Button>
             {/* <GoogleLogin onSuccess={responseMessage} onError={errorMessage} /> */}
             <Grid container>
