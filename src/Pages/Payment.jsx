@@ -4,71 +4,76 @@ import TransactionFilter from "../Components/dashboard_content/transactionFilter
 import BillingInfoCard from "../Components/BillingInfo/billingInfoCard";
 import { Stack, Typography } from "@mui/material";
 import RentalSummaryCard from "../Components/RentalSummary/rentalSummaryCard";
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+
+const sectionStyle = {
+	backgroundColor: "var(--clr-white)",
+	marginBottom: "50px",
+	padding: "3.2rem",
+	flexGrow: 1,
+};
 
 const Payment = () => {
-	const sectionStyle = {
-		backgroundColor: "var(--clr-white)",
-		marginBottom: "50px",
-		padding: "3.2rem",
-		flexGrow: 1,
-	};
-
-	const selectedCar = {
-		name: "Toyota Camry",
-		type: "Sedan",
-		image: ["https://www.example.com/toyota_camry.jpg", ""],
-		id: "1001",
-		steering: "Automatic",
-		chairCapacity: 5,
-		gasoline: 87,
-		price: 55000,
-		rating: 4.7,
-		carDesc: "The Toyota Camry is a reliable and fuel-efficient sedan, known for its comfortable ride and spacious interior.",
-		carDetails: "Model Year: 2023, Engine: 2.5L 4-cylinder, Transmission: 8-speed automatic, Fuel Economy: 28 mpg combined",
-		reviews: [
-			{
-				userId: "101",
-				userTitle: "Customer",
-				reviewText: "I love my Toyota Camry! It's comfortable, reliable, and great on gas.",
-				stars: 5,
-				userName: "Sarah Johnson",
-				userImage: "https://www.example.com/user1.jpg",
-				createdAt: "2023-07-20",
-			},
-		],
-		transactions: [
-			{
-				userId: "101",
-				date: 1692486000,
-				dropoff: {
-					location: {
-						latitude: 34.0522,
-						longitude: -118.2437,
-					},
-					date: 1693064400,
-				},
-				pickUp: {
-					location: {
-						latitude: 37.7749,
-						longitude: -122.4194,
-					},
-					date: 1692479200,
-				},
-			},
-		],
-	};
-
-	const currentUser = {
-		name: "Vernon Friesen I",
-		avatar: "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/940.jpg",
-		jobTitle: "Legacy Marketing Orchestrator",
-		isAdmin: true,
-		password: "_L2K3ylXXGNllxv",
-		email: "Hazel_Reynolds20@hotmail.com",
-		id: "101",
-	};
-
+	const [paymentInfo, setPaymentInfo] = useState({});
+	const [loading, setLoading] = useState(false);
+	const [message, setMessage] = useState(null);
+	const location = useLocation();
+	const selectedCar = location.state.car;
 	const [passed, setPassed] = useState(false);
+	const User = useSelector(state => state.user.user);
+	const [currentUser] = useState(User);
+	const elements = useElements();
+	const stripe = useStripe();
+
+	const handlePaymentSubmit = async event => {
+		event.preventDefault();
+		setLoading(true);
+		setMessage(null);
+
+		if (!stripe || !elements) {
+			setLoading(false);
+			return;
+		}
+
+		const cardElement = elements.getElement(CardElement);
+
+		const { error, paymentMethod } = await stripe.createPaymentMethod({
+			type: "card",
+			card: cardElement,
+		});
+
+		if (error) {
+			console.log("[error]", error);
+			setMessage(error.message);
+			setLoading(false);
+		} else {
+			const id = paymentMethod.id;
+			const amount = selectedCar.price; // replace this with the actual amount
+
+			const response = await fetch("http://localhost:3001/payment", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ id, amount }),
+			});
+
+			const data = await response.json();
+
+			console.log("Payment", data);
+
+			if (data.success) {
+				setMessage("Payment successful!");
+			} else {
+				setMessage("Payment failed.");
+				console.log("Error", data);
+			}
+
+			setLoading(false);
+		}
+	};
 
 	return (
 		<div
@@ -112,7 +117,14 @@ const Payment = () => {
 						<Typography variant="body2">Please enter your payment method</Typography>
 						<Typography variant="body2"> Step 3 of 3</Typography>
 					</Stack>
-					<PaymentForm passed={passed} setPassed={setPassed} />
+					<PaymentForm
+						passed={passed}
+						setPassed={setPassed}
+						onSubmitPayment={handlePaymentSubmit}
+						message={message}
+						loading={loading}
+						stripe={stripe}
+					/>
 				</div>
 			</div>
 		</div>

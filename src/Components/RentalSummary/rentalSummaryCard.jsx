@@ -13,7 +13,7 @@ const RentalSummaryCard = ({ selectedCar }) => {
 				<Grid container spacing={3} sx={{ display: "flex", alignItems: "center" }}>
 					<Grid item xs={12} md={3}>
 						<img
-							src="images/Look.png"
+							src={selectedCar.image}
 							alt="Car"
 							style={{
 								width: "150px",
@@ -40,7 +40,7 @@ const RentalSummaryCard = ({ selectedCar }) => {
 				<Typography variant="h3">Total Rental Price</Typography>
 
 				<Typography sx={{ justifyContent: "space-between" }} variant="h3">
-					<strong>${parseFloat(selectedCar.price)}.00</strong>
+					<strong>{parseFloat(selectedCar.price)}.00 LE</strong>
 				</Typography>
 			</Stack>
 			<Typography variant="body2">Overall price and includes rental discount</Typography>

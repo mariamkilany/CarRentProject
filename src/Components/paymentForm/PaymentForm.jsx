@@ -1,65 +1,12 @@
-import React, { useState } from "react";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import React from "react";
+import { CardElement } from "@stripe/react-stripe-js";
 import styles from "./payment-form.module.css";
 import { Alert, Checkbox, FormControlLabel } from "@mui/material";
 
-const PaymentForm = ({ passed, setPassed }) => {
-	const [loading, setLoading] = useState(false);
-	const [message, setMessage] = useState(null);
-	const stripe = useStripe();
-	const elements = useElements();
-
-	const handleSubmit = async event => {
-		event.preventDefault();
-		setLoading(true);
-		setMessage(null);
-
-		if (!stripe || !elements) {
-			setLoading(false);
-			return;
-		}
-
-		const cardElement = elements.getElement(CardElement);
-
-		const { error, paymentMethod } = await stripe.createPaymentMethod({
-			type: "card",
-			card: cardElement,
-		});
-
-		if (error) {
-			console.log("[error]", error);
-			setMessage(error.message);
-			setLoading(false);
-		} else {
-			const id = paymentMethod.id;
-			const amount = 1000; // replace this with the actual amount
-
-			const response = await fetch("http://localhost:3001/payment", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ id, amount }),
-			});
-
-			const data = await response.json();
-
-			console.log("Payment", data);
-
-			if (data.success) {
-				setMessage("Payment successful!");
-			} else {
-				setMessage("Payment failed.");
-				console.log("Error", data);
-			}
-
-			setLoading(false);
-		}
-	};
-
+const PaymentForm = ({ passed, setPassed, onSubmitPayment, message, loading, stripe }) => {
 	return (
 		<div className={styles.paymentForm}>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={onSubmitPayment}>
 				<CardElement
 					className={styles.cardElement}
 					id="payment-element"
