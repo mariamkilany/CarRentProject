@@ -114,21 +114,15 @@ const carSlice = createSlice({
     builder.addCase(getCarById.rejected, (state, action) => {
       state.loading = false;
     });
-    // builder.addCase(getCarsByTypes.fulfilled, (state, action) => {
-    //   state.car = action.payload;
-    //   console.log(state.car);
-    //   state.loading = false;
-    // });
-    // builder.addCase(getCarsByTypes.pending, (state, action) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(getCarsByTypes.rejected, (state, action) => {
-    //   state.loading = false;
-    // });
   },
 });
 
 export default carSlice.reducer;
 
-export const { reset, getCarsTypes, getCarsCapacity, getCarsByTypes } =
-  carSlice.actions;
+export const {
+  reset,
+  getCarsTypes,
+  getCarsCapacity,
+  getCarsByTypes,
+  getCarsTransactions,
+} = carSlice.actions;
