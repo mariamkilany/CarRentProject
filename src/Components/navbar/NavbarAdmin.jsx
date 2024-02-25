@@ -263,7 +263,7 @@ const NavbarAdmin = () => {
                 onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                <Avatar sx={{ color: "#596780" }} />
+                <Avatar sx={{ color: "#596780" }} src={user.avatar} />
               </IconButton>
             )}
             {!loggedIn && (

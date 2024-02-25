@@ -22,9 +22,7 @@ const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const { user } = useSelector((state) => state.user);
-  const [loggedIn, setLogged] = React.useState(
-    Object.keys(user).length > 1 ? true : false
-  );
+  const [loggedIn, setLogged] = React.useState(user ? true : false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -38,7 +36,6 @@ const Navbar = () => {
 
   React.useEffect(() => {
     console.log(user);
-    console.log(Object.keys(user));
     console.log(loggedIn);
   }, [loggedIn, user]);
 
@@ -86,9 +83,22 @@ const Navbar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Signup</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{user.name}</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{user.email}</MenuItem>
+      {user.isAdmin && (
+        <MenuItem onClick={handleMenuClose}>
+          <a
+            href="/dashboard"
+            style={{
+              color: "#596780",
+              textDecoration: "none",
+            }}
+          >
+            Dashboard
+          </a>
+        </MenuItem>
+      )}
+      {/* <MenuItem onClick={handleMenuClose}>Signup</MenuItem> */}
     </Menu>
   );
 
@@ -264,7 +274,7 @@ const Navbar = () => {
                 onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                <Avatar sx={{ color: "#596780" }} />
+                <Avatar sx={{ color: "#596780" }} src={user.avatar} />
               </IconButton>
             )}
             {!loggedIn && (

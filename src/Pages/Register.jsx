@@ -75,7 +75,9 @@ export default function Register() {
         ...newUser,
         name: newUser.firstName + " " + newUser.lastName,
       });
-      navigate("/home");
+      setTimeout(() => {
+        navigate("/home");
+      }, 3000);
     } else {
       setFaildRegister(true);
       console.log("Email Already Register");
@@ -83,7 +85,7 @@ export default function Register() {
 
     setTimeout(() => {
       setOpen(false);
-    }, 1500);
+    }, 3000);
   };
 
   const isFormValid = () => {
