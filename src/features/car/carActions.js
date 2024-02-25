@@ -65,18 +65,3 @@ export const updateCarAction = createAsyncThunk(
     }
   }
 );
-export const getCarById = createAsyncThunk(
-  "car/getCarById",
-  async (id, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
-    try {
-      const response = await axios.get(
-        `https://65d24788987977636bfc333b.mockapi.io/api/cars/${id}`
-      );
-      return response.data;
-    } catch (error) {
-      const message = error.response?.data || error.message;
-      return rejectWithValue(message);
-    }
-  }
-);

@@ -13,10 +13,28 @@ import LocalGasStationRoundedIcon from "@mui/icons-material/LocalGasStationRound
 import DataSaverOffRoundedIcon from "@mui/icons-material/DataSaverOffRounded";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import { useNavigate } from "react-router-dom";
+import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCarAction } from "../../features/car/carActions";
 export default function CarCard({ car }) {
   const theme = useTheme();
   const iconStyle = { color: "var(--clr-g-300)" };
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleAddToWishList = () => {
+    var oldItems = JSON.parse(localStorage.getItem("favs")) || [];
+    if (!isFav(oldItems)) oldItems.push(car);
+    else {
+      oldItems = oldItems.filter((ele) => ele.id !== car.id);
+    }
+    localStorage.setItem("favs", JSON.stringify(oldItems));
+    dispatch(getAllCarAction());
+  };
+
+  const isFav = (arr) => {
+    return arr.find((ele) => ele.id === car.id);
+  };
 
   return (
     <Box
@@ -36,8 +54,18 @@ export default function CarCard({ car }) {
             <Typography varient="h3">{car.name}</Typography>
             <Typography variant="caption">{car.type}</Typography>
           </Stack>
-          <IconButton size="large">
-            <FavoriteBorderRoundedIcon fontSize="large" />
+          <IconButton
+            size="large"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleAddToWishList();
+            }}
+          >
+            {!isFav(JSON.parse(localStorage.getItem("favs"))) ? (
+              <FavoriteBorderRoundedIcon fontSize="large" />
+            ) : (
+              <FavoriteRoundedIcon fontSize="large" color="error" />
+            )}
           </IconButton>
         </Stack>
         <Stack justifyContent={"center"} alignItems={"center"}>
@@ -77,7 +105,13 @@ export default function CarCard({ car }) {
             </Stack>
             <Typography variant="sale">$80.00</Typography>
           </Stack>
-          <Button variant="contained" onClick={() => navigate(`/payment`)}>
+          <Button
+            variant="contained"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(`/payment/${car.id}`);
+            }}
+          >
             Rent Now
           </Button>
         </Stack>
