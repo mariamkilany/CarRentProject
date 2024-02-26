@@ -181,7 +181,6 @@ export default function Login() {
             >
               Sign In
             </Button>
-            <Button onClick={() => console.log(user)}>Get User</Button>
             <GoogleLogin
               useOneTap
               onSuccess={responseMessage}
@@ -198,11 +197,6 @@ export default function Login() {
               LogOut
             </Button>
             <Grid container>
-              {/* <Grid item xs>
-                <Link href="" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid> */}
               <Grid item>
                 <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
