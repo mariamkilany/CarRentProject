@@ -26,7 +26,7 @@ export default function CarCard({ car }){
   };
 
   const isFav = (arr) => {
-    return arr.find((ele) => ele.id === car.id);
+    return arr?.find((ele) => ele.id === car.id);
   };
 
   return (
