@@ -65,19 +65,19 @@ export default function CarCard({ car }) {
 					<img src={car.image} width={"85%"} />
 				</Stack>
 				<Grid container justifyContent={"space-between"}>
-					<Grid md={4}>
+					<Grid item md={4}>
 						<Stack component={"div"} direction={"row"} spacing={1}>
 							<LocalGasStationRoundedIcon fontSize="large" style={iconStyle} />
 							<Typography variant="caption">{car.gasoline}L</Typography>
 						</Stack>
 					</Grid>
-					<Grid md={4}>
+					<Grid md={4} item>
 						<Stack component={"div"} direction={"row"} spacing={1}>
 							<DataSaverOffRoundedIcon fontSize="large" style={iconStyle} />
 							<Typography variant="caption">{car.steering}</Typography>
 						</Stack>
 					</Grid>
-					<Grid md={4}>
+					<Grid md={4} item>
 						<Stack component={"div"} direction={"row"} spacing={1}>
 							<GroupRoundedIcon fontSize="large" style={iconStyle} />
 							<Typography variant="caption">{car.chairCapacity} People</Typography>
