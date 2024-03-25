@@ -1,6 +1,6 @@
 # Job Hunter Website
 
-![Job Hunter Website]([https://your-website-url.com/assets/website-screenshot.png](https://res.cloudinary.com/dgobv1j6b/image/upload/v1711333831/Screenshot_25-3-2024_32111_localhost_lffuk6.jpg))
+![Job Hunter Website](https://your-website-url.com/assets/website-screenshot.png](https://res.cloudinary.com/dgobv1j6b/image/upload/v1711333831/Screenshot_25-3-2024_32111_localhost_lffuk6.jpg)
 
 ## Description
 
