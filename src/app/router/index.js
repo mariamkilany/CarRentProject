@@ -21,46 +21,46 @@ import { loadStripe } from "@stripe/stripe-js";
 import { STRIPE_PUBLIC_KEY } from "../../config";
 
 const routerConfig = [
-	{
-		path: "/",
-		element: <MainLayout />,
-		children: [
-			{ index: true, element: <LandingPage /> },
-			{ path: "home", element: <Home /> },
-			{
-				path: "category",
-				element: <CategoryLayout />,
-				children: [
-					{ path: "", element: <Category /> },
-					{ path: ":id", element: <Details /> },
-				],
-			},
-			{
-				path: "payment",
-				element: (
-					<Elements stripe={loadStripe(STRIPE_PUBLIC_KEY)}>
-						<Payment />
-					</Elements>
-				),
-			},
-			{ path: "wishlist", element: <Wishlist /> },
-			{ path: "land", element: <LandingPage /> },
-		],
-	},
-	{ path: "/login", element: <Login /> },
-	{ path: "/register", element: <Register /> },
-	{
-		path: "/dashboard",
-		element: <Dashboard />,
-		children: [
-			{ index: true, element: <MangerDashbord /> },
-			{ path: "cars", element: <DbCars></DbCars> },
-			{ path: "customers", element: <DbCustomers></DbCustomers> },
-			{ path: "transactions", element: <DbTransactions></DbTransactions> },
-			{ path: "cars:id", element: <DbCarsUpdate></DbCarsUpdate> },
-		],
-	},
-	{ path: "*", element: <NotFound /> },
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      { index: true, element: <LandingPage /> },
+      { path: "home", element: <Home /> },
+      {
+        path: "category",
+        element: <CategoryLayout />,
+        children: [
+          { path: "", element: <Category /> },
+          { path: ":id", element: <Details /> },
+        ],
+      },
+      {
+        path: "payment",
+        element: (
+          <Elements stripe={loadStripe(STRIPE_PUBLIC_KEY)}>
+            <Payment />
+          </Elements>
+        ),
+      },
+      { path: "wishlist", element: <Wishlist /> },
+      { path: "land", element: <LandingPage /> },
+    ],
+  },
+  { path: "/login", element: <Login /> },
+  { path: "/register", element: <Register /> },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      { index: true, element: <MangerDashbord /> },
+      { path: "cars", element: <DbCars /> },
+      { path: "customers", element: <DbCustomers /> },
+      { path: "transactions", element: <DbTransactions /> },
+      { path: "cars:id", element: <DbCarsUpdate /> },
+    ],
+  },
+  { path: "*", element: <NotFound /> },
 ];
 
 export const router = createBrowserRouter(routerConfig);
