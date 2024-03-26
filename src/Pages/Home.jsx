@@ -49,8 +49,8 @@ const Home = () => {
           {car?.map((car, index) => {
             if (index < 4)
               return (
-                <Grid item md={3} sm={6}>
-                  <CardCard car={car} />
+                <Grid item key={car.id} md={3} sm={6}>
+                  <CardCard key={car.id} car={car} />
                 </Grid>
               );
           })}

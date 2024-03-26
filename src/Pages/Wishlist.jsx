@@ -19,7 +19,7 @@ const Wishlist = () => {
   );
   const navigate = useNavigate();
   return (
-    <Container py={4}>
+    <Container py={4} style={{ overflow: "auto" }}>
       <Stack justifyContent={"center"} py={4}>
         <Typography variant="h2" color={"primary"} textAlign={"center"}>
           My WishList <FavoriteIcon fontSize="25px" />
@@ -70,7 +70,9 @@ const Wishlist = () => {
                   </Button>
                   <Button
                     variant="contained"
-                    onClick={() => navigate(`/payment/${car.id}`)}
+                    onClick={() =>
+                      navigate("../payment", { state: { car: car } })
+                    }
                   >
                     Rent Now
                   </Button>

@@ -27,11 +27,9 @@ const LandingLayout = () => {
           </div>
         </div>
       </div>
-
       <div className="choosingSection">
         <h6>why choose us ?</h6>
         <h5>Why choose MORENT ?</h5>
-
         <Grid container spacing={2}>
           <Grid item xs={12} md={4}>
             <div className="choosing">
@@ -74,65 +72,69 @@ const LandingLayout = () => {
         </Grid>
       </div>
 
-      <section class="section-how">
-        <div class="container">
-          <span class="subheading">How it works</span>
-          <h2 class="heading-secondary">It's as easy as 1, 2, 3</h2>
+      <section className="section-how">
+        <div className="container">
+          <span className="subheading">How it works</span>
+          <h2 className="heading-secondary">It's as easy as 1, 2, 3</h2>
         </div>
-
-        <div class="container grid grid--2-cols grid--center-v">
-          <div class="step-text-box">
-            <p class="step-number">01</p>
-            <h3 class="heading-tertiary">Select Your Dream Car</h3>
-            <p class="step-description">
-              Browse through our extensive collection of vehicles from luxury to
-              economy models. Use our intuitive search and filter tools to find
-              a car that suits your needs and preferences.
-            </p>
-          </div>
-          <div class="step-img-box">
-            <img
-              src="images/step1.svg"
-              class="step-img"
-              alt="iPhone app
+        <div className="container">
+          <div className=" grid grid--2-cols grid--center-v">
+            <div className="step-text-box">
+              <p className="step-number">01</p>
+              <h3 className="heading-tertiary">Select Your Dream Car</h3>
+              <p className="step-description">
+                Browse through our extensive collection of vehicles from luxury
+                to economy models. Use our intuitive search and filter tools to
+                find a car that suits your needs and preferences.
+              </p>
+            </div>
+            <div className="step-img-box">
+              <img
+                src="images/step1.svg"
+                className="step-img"
+                alt="iPhone app
             preferences selection screen"
-            />
+              />
+            </div>
           </div>
-
-          <div class="step-img-box">
-            <img
-              src="images/step2.svg"
-              class="step-img"
-              alt="iPhone app
+          <div className=" grid grid--2-cols grid--center-v">
+            {" "}
+            <div className="step-img-box">
+              <img
+                src="images/step2.svg"
+                className="step-img"
+                alt="iPhone app
             meal approving plan screen"
-            />
+              />
+            </div>
+            <div className="step-text-box">
+              <p className="step-number">02</p>
+              <h3 className="heading-tertiary">Reserve Your Dates</h3>
+              <p className="step-description">
+                Choose your pick-up and drop-off dates and locations. Our
+                flexible booking system allows you to rent for a few hours, a
+                day, or even for weeks at a time
+              </p>
+            </div>
           </div>
-          <div class="step-text-box">
-            <p class="step-number">02</p>
-            <h3 class="heading-tertiary">Reserve Your Dates</h3>
-            <p class="step-description">
-              Choose your pick-up and drop-off dates and locations. Our flexible
-              booking system allows you to rent for a few hours, a day, or even
-              for weeks at a time
-            </p>
-          </div>
-
-          <div class="step-text-box">
-            <p class="step-number">03</p>
-            <h3 class="heading-tertiary">Start Your Journey</h3>
-            <p class="step-description">
-              Pick up your car from the selected location. After a quick
-              check-in process, you'll be ready to hit the road. Enjoy your trip
-              and the freedom to explore at your own pace
-            </p>
-          </div>
-          <div class="step-img-box">
-            <img
-              src="images/step3.svg"
-              class="step-img"
-              alt="iPhone app
+          <div className=" grid grid--2-cols grid--center-v">
+            <div className="step-text-box">
+              <p className="step-number">03</p>
+              <h3 className="heading-tertiary">Start Your Journey</h3>
+              <p className="step-description">
+                Pick up your car from the selected location. After a quick
+                check-in process, you'll be ready to hit the road. Enjoy your
+                trip and the freedom to explore at your own pace
+              </p>
+            </div>
+            <div className="step-img-box">
+              <img
+                src="images/step3.svg"
+                className="step-img"
+                alt="iPhone app
             delivery screen"
-            />
+              />
+            </div>
           </div>
         </div>
       </section>

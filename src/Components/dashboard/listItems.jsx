@@ -181,7 +181,7 @@ export const SecondaryListItems = () => {
         <ListItemButton
           onClick={() => {
             googleLogout();
-            dispatch(setUser({ user: {} }));
+            dispatch(setUser(null));
             setCookie("");
             navigate("/");
           }}
