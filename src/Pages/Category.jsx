@@ -9,19 +9,35 @@ const Category = () => {
 	const { filteredCars, loading } = useSelector(store => store.car);
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(getAllCarAction());
-		if (loading) return <div>loading...</div>;
-	}, [dispatch]);
-	return (
-		<Grid container p={3} spacing={3} justifyContent={"center"}>
-			{filteredCars.map((car, index) => (
-				<Grid item md={4} sm={6} key={index}>
-					<CarCard car={car} />
-				</Grid>
-			))}
-		</Grid>
-	);
+
+  useEffect(() => {
+    console.log(filteredCars);
+    dispatch(getAllCarAction());
+    if (loading) return <div>loading...</div>;
+  }, [dispatch]);
+  return (
+    <Grid
+      container
+      p={3}
+      spacing={3}
+      alignContent={"start"}
+      justifyContent={"start"}
+    >
+      {filteredCars.map((car) => (
+        <Grid
+          item
+          md={4}
+          sm={6}
+          sx={{ height: "fit-content" }}
+          justifyContent={"start"}
+          key={car.id}
+        >
+          <CarCard car={car} />
+        </Grid>
+      ))}
+    </Grid>
+  );
+
 };
 
 export default Category;

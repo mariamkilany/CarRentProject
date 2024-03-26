@@ -30,9 +30,9 @@ const setCookie = (payload) => {
 
 const userSlice = createSlice({
   name: "user",
-  initialState: getCookie("user")
-    ? { user: JSON.parse(getCookie("user")) }
-    : { user: {} },
+  initialState: {
+    user: getCookie("user") ? JSON.parse(getCookie("user")) : null,
+  },
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
@@ -43,7 +43,7 @@ const userSlice = createSlice({
       state.user = action.payload;
     });
     builder.addCase(canUserLogin.rejected, (state, action) => {
-      state.user = { user: {} };
+      state.user = null;
     });
     builder.addCase(RegisterUser.fulfilled, (state, action) => {
       state.user = action.payload;

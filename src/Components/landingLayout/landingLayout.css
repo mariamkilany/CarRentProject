@@ -83,7 +83,7 @@
 .headerText {
     width: 60%;
     height: 100%;
-    padding: 0 10rem;
+    padding: 0 5rem;
     color: white;
     display: flex;
     flex-direction: column;
@@ -177,6 +177,8 @@
     display: grid;
     column-gap: 6.4rem;
     row-gap: 9.6rem;
+    border-bottom: 1px solid rgb(203, 203, 203);
+    padding-bottom: 80px;
 }
 
 .grid:not(:last-child) {
@@ -248,4 +250,16 @@
 .step-img {
     width: 35%;
     /* z-index: 10; */
+}
+
+@media (max-width:690px) {
+    .grid--2-cols {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .step-img {
+        width: 80%;
+        /* z-index: 10; */
+    }
+
 }

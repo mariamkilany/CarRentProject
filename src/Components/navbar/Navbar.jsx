@@ -37,7 +37,8 @@ const Navbar = () => {
   React.useEffect(() => {
     console.log(user);
     console.log(loggedIn);
-  }, [loggedIn, user]);
+    setLogged(user ? true : false);
+  }, []);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
