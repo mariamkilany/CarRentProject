@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCarAction } from "../features/car/carActions";
 
 const Category = () => {
-  const { filteredCars, loading } = useSelector((store) => store.car);
-  const dispatch = useDispatch();
+	const { filteredCars, loading } = useSelector(store => store.car);
+	const dispatch = useDispatch();
+
 
   useEffect(() => {
     console.log(filteredCars);
@@ -36,6 +37,7 @@ const Category = () => {
       ))}
     </Grid>
   );
+
 };
 
 export default Category;

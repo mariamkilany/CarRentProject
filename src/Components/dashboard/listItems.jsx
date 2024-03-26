@@ -7,7 +7,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
-import { LogoutOutlined } from "@mui/icons-material";
+import { ArrowBack, LogoutOutlined } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "@emotion/react";
 import { Badge, Typography } from "@mui/material";
@@ -178,6 +178,43 @@ export const SecondaryListItems = () => {
   return (
     <>
       <React.Fragment>
+        <ListItemButton
+          onClick={() => {
+            navigate("/home");
+          }}
+          sx={{
+            flexDirection: "row",
+            "&:hover": {
+              color: "white",
+              bgcolor: "var(--clr-m)",
+              "& .MuiBadge-root, & .MuiTypography-root": {
+                color: "white",
+              },
+            },
+          }}
+        >
+          <Link to="" style={{ display: "contents" }}>
+            <Badge
+              sx={{
+                width: "56px",
+                color:
+                  location.pathname === "/login" ? "white" : "var(--clr-m)",
+              }}
+            >
+              <ArrowBack sx={{ fontSize: "2rem" }} />
+            </Badge>
+            <Typography
+              sx={{
+                color:
+                  location.pathname === "/login" ? "white" : "var(--clr-m)",
+                fontSize: "1.7rem",
+              }}
+            >
+              {" "}
+              Back To Home{" "}
+            </Typography>
+          </Link>
+        </ListItemButton>
         <ListItemButton
           onClick={() => {
             googleLogout();

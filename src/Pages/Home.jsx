@@ -8,13 +8,13 @@ import CardCard from "../Components/carCard/CarCard";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const { car, loading } = useSelector((store) => store.car);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+	const { car, loading } = useSelector(store => store.car);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(getAllCarAction());
-  }, [dispatch]);
+	useEffect(() => {
+		dispatch(getAllCarAction());
+	}, [dispatch]);
 
   return (
     <Grid container p={3} justifyContent={"center"} spacing={3}>
@@ -64,6 +64,7 @@ const Home = () => {
       </Stack>
     </Grid>
   );
+
 };
 
 export default Home;

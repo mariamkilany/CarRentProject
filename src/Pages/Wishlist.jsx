@@ -1,19 +1,10 @@
-import {
-  Button,
-  Container,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { Button, Container, Stack, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import React, { useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
 
 const Wishlist = () => {
+
   const [wishlist, setWishList] = useState(
     JSON.parse(localStorage.getItem("favs")) || []
   );
@@ -84,6 +75,7 @@ const Wishlist = () => {
       </Table>
     </Container>
   );
+
 };
 
 export default Wishlist;

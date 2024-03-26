@@ -11,7 +11,9 @@ const TransactionFilter = ({ title = "Transaction Details", locations = GEOS.map
 					<p>Locations</p>
 					<select name="location" id="location">
 						{locations.map(location => (
-							<option value={location}>{location}</option>
+							<option value={location} key={location.toString()}>
+								{location}
+							</option>
 						))}
 					</select>
 				</div>

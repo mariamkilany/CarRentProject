@@ -7,7 +7,7 @@ import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const LandingLayout = () => {
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
   return (
     <div>
@@ -139,25 +139,25 @@ const LandingLayout = () => {
         </div>
       </section>
 
-      <div className="choosingSection joining">
-        <Grid container spacing={2} justifyContent="center" alignItems="center">
-          {/* looping on the data */}
-          <Grid item xs={12} md={6}>
-            <div className="joiningSection">
-              <h6>Join us Now</h6>
-              <h5>Get Your Comfortable car</h5>
-              Complete the login process to join and rent our cars
-            </div>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <button className="getStarted" onClick={() => navigate(`/login`)}>
-              Get Started
-            </button>
-          </Grid>
-        </Grid>
-      </div>
-    </div>
-  );
+			<div className="choosingSection joining">
+				<Grid container spacing={2} justifyContent="center" alignItems="center">
+					{/* looping on the data */}
+					<Grid item xs={12} md={6}>
+						<div className="joiningSection">
+							<h6>Join us Now</h6>
+							<h5>Get Your Comfortable car</h5>
+							Complete the login process to join and rent our cars
+						</div>
+					</Grid>
+					<Grid item xs={12} md={6}>
+						<button className="getStarted" onClick={() => navigate(`/login`)}>
+							Get Started
+						</button>
+					</Grid>
+				</Grid>
+			</div>
+		</div>
+	);
 };
 
 export default LandingLayout;
