@@ -17,20 +17,21 @@ import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCarAction } from "../../features/car/carActions";
 export default function CarCard({ car }) {
+
   const theme = useTheme();
   const iconStyle = { color: "var(--clr-g-300)" };
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleAddToWishList = () => {
-    var oldItems = JSON.parse(localStorage.getItem("favs")) || [];
-    if (!isFav(oldItems)) oldItems.push(car);
-    else {
-      oldItems = oldItems.filter((ele) => ele.id !== car.id);
-    }
-    localStorage.setItem("favs", JSON.stringify(oldItems));
-    dispatch(getAllCarAction());
-  };
+	const handleAddToWishList = () => {
+		var oldItems = JSON.parse(localStorage.getItem("favs")) || [];
+		if (!isFav(oldItems)) oldItems.push(car);
+		else {
+			oldItems = oldItems.filter(ele => ele.id !== car.id);
+		}
+		localStorage.setItem("favs", JSON.stringify(oldItems));
+		dispatch(getAllCarAction());
+	};
 
   const isFav = (arr) => {
     return arr?.find((ele) => ele.id === car.id);
@@ -118,4 +119,5 @@ export default function CarCard({ car }) {
       </Stack>
     </Box>
   );
+
 }

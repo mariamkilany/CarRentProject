@@ -186,7 +186,7 @@ export default function Login() {
               onSuccess={responseMessage}
               onError={errorMessage}
             />
-            <Button
+            {/* <Button
               onClick={() => {
                 googleLogout();
                 dispatch(setUser({ user: {} }));
@@ -195,8 +195,8 @@ export default function Login() {
               }}
             >
               LogOut
-            </Button>
-            <Grid container>
+            </Button> */}
+            <Grid container sx={{ my: 1 }}>
               <Grid item>
                 <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
