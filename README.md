@@ -28,5 +28,11 @@ MORENT is a car rental website that allows users to browse and rent available ca
   - React Router for navigation
   - Axios for handling HTTP requests
 
+- **Backend:**
+  - MockAPI for simulating backend data and APIs
+  - Cloudinary for image upload and storage
+
+- **Payment Processing:**
+  - Stripe for handling payment transactions
 
 
