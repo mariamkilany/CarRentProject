@@ -1,5 +1,7 @@
 # MORENT - Car Rental Website
 
+![Job Hunter Website](https://res.cloudinary.com/dgobv1j6b/image/upload/v1711514725/oubh8zu3qun025sfiuu1.jpg)
+
 MORENT is a car rental website that allows users to browse and rent available cars. Users can filter cars based on type, capacity, and fuel efficiency. Additionally, users can add cars to their wishlist and view reviews from other users. The website also provides an admin dashboard for managing cars, transactions, and user information.
 
 ## Features
