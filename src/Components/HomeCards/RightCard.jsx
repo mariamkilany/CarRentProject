@@ -20,21 +20,21 @@ export default function RightCard() {
             variant={"h1"}
             color={theme.palette.common.smokeWhite}
             gutterBottom
-            width={320}
+            sx={{ width: { md: "70%" } }}
           >
             Easy way to rent a car at a low price
           </Typography>
           <Typography
             variant="body1"
             color={theme.palette.common.smokeWhite}
-            width={350}
+            sx={{ width: { md: "60%" } }}
           >
             Providing cheap car rental services and safe and comfortable
             facilities.
           </Typography>
           <Box
             className={styles.card_img_continer}
-            style={{ width: "50%" }}
+            sx={{ width: { md: "50%", xs: "80%" } }}
             mt={5}
           >
             <img src="/Images/car-1.png" width={"100%"} height={"100px"} />
