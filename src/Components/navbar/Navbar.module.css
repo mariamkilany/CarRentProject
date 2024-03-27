@@ -3,7 +3,9 @@
   text-decoration: none;
   padding: 10px;
   color: var(--clr-g);
+  /* margin-right: 20px; */
 }
+
 .active {
   color: var(--clr-m);
   border-bottom: 3px solid var(--clr-m);

@@ -7,7 +7,7 @@ import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const LandingLayout = () => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -90,7 +90,7 @@ const LandingLayout = () => {
             </div>
             <div className="step-img-box">
               <img
-                src="images/step1.svg"
+                src="Images/step1.svg"
                 className="step-img"
                 alt="iPhone app
             preferences selection screen"
@@ -101,7 +101,7 @@ const LandingLayout = () => {
             {" "}
             <div className="step-img-box">
               <img
-                src="images/step2.svg"
+                src="Images/step2.svg"
                 className="step-img"
                 alt="iPhone app
             meal approving plan screen"
@@ -129,7 +129,7 @@ const LandingLayout = () => {
             </div>
             <div className="step-img-box">
               <img
-                src="images/step3.svg"
+                src="Images/step3.svg"
                 className="step-img"
                 alt="iPhone app
             delivery screen"
@@ -139,25 +139,25 @@ const LandingLayout = () => {
         </div>
       </section>
 
-			<div className="choosingSection joining">
-				<Grid container spacing={2} justifyContent="center" alignItems="center">
-					{/* looping on the data */}
-					<Grid item xs={12} md={6}>
-						<div className="joiningSection">
-							<h6>Join us Now</h6>
-							<h5>Get Your Comfortable car</h5>
-							Complete the login process to join and rent our cars
-						</div>
-					</Grid>
-					<Grid item xs={12} md={6}>
-						<button className="getStarted" onClick={() => navigate(`/login`)}>
-							Get Started
-						</button>
-					</Grid>
-				</Grid>
-			</div>
-		</div>
-	);
+      <div className="choosingSection joining">
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
+          {/* looping on the data */}
+          <Grid item xs={12} md={6}>
+            <div className="joiningSection">
+              <h6>Join us Now</h6>
+              <h5>Get Your Comfortable car</h5>
+              Complete the login process to join and rent our cars
+            </div>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <button className="getStarted" onClick={() => navigate(`/login`)}>
+              Get Started
+            </button>
+          </Grid>
+        </Grid>
+      </div>
+    </div>
+  );
 };
 
 export default LandingLayout;

@@ -1,22 +1,35 @@
-import { Button, Container, Stack, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
 
 const Wishlist = () => {
-
   const [wishlist, setWishList] = useState(
     JSON.parse(localStorage.getItem("favs")) || []
   );
   const navigate = useNavigate();
   return (
-    <Container py={4} style={{ overflow: "auto" }}>
+    <Container style={{ overflow: "auto" }}>
       <Stack justifyContent={"center"} py={4}>
         <Typography variant="h2" color={"primary"} textAlign={"center"}>
           My WishList <FavoriteIcon fontSize="25px" />
         </Typography>
       </Stack>
-      <Table stickyHeader aria-label="sticky table">
+      <Table
+        stickyHeader
+        aria-label="sticky table"
+        sx={{ marginBottom: "50px" }}
+      >
         <TableHead>
           <TableRow>
             <TableCell align={"center"}>
@@ -75,7 +88,6 @@ const Wishlist = () => {
       </Table>
     </Container>
   );
-
 };
 
 export default Wishlist;

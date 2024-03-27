@@ -18,15 +18,17 @@ export default function LeftCard() {
         <Stack p={2} spacing={2}>
           <Typography
             variant={"h1"}
+            component={"div"}
             color={theme.palette.common.smokeWhite}
             gutterBottom
-            width={320}
+            width={"70%"}
+            sx={{ width: { md: "70%" } }}
           >
             The Best Platform for Car Rental
           </Typography>
           <Typography
             variant="body1"
-            width={350}
+            sx={{ width: { md: "60%" } }}
             color={theme.palette.common.smokeWhite}
           >
             Ease of doing a car rental safely and reliably. Of course at a low
@@ -34,7 +36,7 @@ export default function LeftCard() {
           </Typography>
           <Box
             className={styles.card_img_continer}
-            style={{ width: "50%" }}
+            sx={{ width: { md: "50%", xs: "80%" } }}
             mt={5}
           >
             <img src="/Images/car-4.png" width={"100%"} height={"100px"} />
