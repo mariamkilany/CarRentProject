@@ -23,33 +23,6 @@ const carSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => initialState,
-    getCarsTypes: (state) => {
-      const types = [
-        ...new Set(
-          state.car.map((ele) => {
-            return ele.type;
-          })
-        ),
-      ];
-      return {
-        ...state,
-        carsTypes: types,
-      };
-    },
-    getCarsCapacity: (state) => {
-      const capacity = [
-        ...new Set(
-          state.car.map((ele) => {
-            return Number(ele.chairCapacity);
-          })
-        ),
-      ];
-      capacity.sort((a, b) => a - b);
-      return {
-        ...state,
-        carsCapacity: capacity,
-      };
-    },
     getCarsByTypes: (state, action) => {
       let filteredCars = [];
       Object.keys(action.payload).map((key) => {
@@ -95,6 +68,23 @@ const carSlice = createSlice({
     builder.addCase(getAllCarAction.fulfilled, (state, action) => {
       state.car = action.payload;
       state.filteredCars = action.payload;
+      const types = [
+        ...new Set(
+          action.payload.map((ele) => {
+            return ele.type;
+          })
+        ),
+      ];
+      const capacity = [
+        ...new Set(
+          state.car.map((ele) => {
+            return Number(ele.chairCapacity);
+          })
+        ),
+      ];
+      capacity.sort((a, b) => a - b);
+      state.carsCapacity = capacity;
+      state.carsTypes = types;
       state.loading = false;
     });
     builder.addCase(getAllCarAction.pending, (state, action) => {
@@ -119,10 +109,4 @@ const carSlice = createSlice({
 
 export default carSlice.reducer;
 
-export const {
-  reset,
-  getCarsTypes,
-  getCarsCapacity,
-  getCarsByTypes,
-  getCarsTransactions,
-} = carSlice.actions;
+export const { reset, getCarsByTypes, getCarsTransactions } = carSlice.actions;

@@ -21,7 +21,7 @@ const Details = () => {
   }, []);
   if (!car) <div>loading....</div>;
   return (
-    <Stack gap={2} p={4}>
+    <Stack gap={2} p={{ xs: 1, md: 4 }}>
       <Grid container spacing={3} justifyContent={"center"}>
         <Grid item md={6}>
           <PhotoCard car={car} />

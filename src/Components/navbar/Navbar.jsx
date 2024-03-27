@@ -9,16 +9,17 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import styles from "./Navbar.module.css";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MoreIcon from "@mui/icons-material/MoreVert";
-
+// import IconButton from "@mui/material/IconButton";
 import { Favorite, Login, Logout } from "@mui/icons-material";
 import { Avatar, Button, Stack } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { googleLogout } from "@react-oauth/google";
 import { setUser } from "../../features/authentication/authSlice";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Navbar = () => {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const { user } = useSelector((state) => state.user);
@@ -48,6 +49,10 @@ const Navbar = () => {
     } else {
       navigate("/login");
     }
+  };
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
   };
 
   const handleProfileMenuOpen = (event) => {
@@ -194,25 +199,26 @@ const Navbar = () => {
           boxShadow: "none !important",
         }}
       >
-        <Toolbar
+        <Box
           sx={{
+            flexGrow: 1,
             display: "flex",
-            justifyContent: "space-between",
+            flexDirection: { md: "row", xs: "column" },
+            justifyContent: "space-around",
+            alignItems: "center",
+            gap: "10px",
           }}
         >
           <Typography
+            component="div"
             variant="h3"
             noWrap
-            component="div"
             sx={{
-              display: { xs: "none", sm: "block" },
               color: "#3563E9",
-              marginRight: "100px",
             }}
           >
             <b> MORENT</b>
           </Typography>
-
           <NavLink
             className={({ isActive, isPending }) =>
               isPending || isActive ? styles.active : styles.disactive
@@ -222,7 +228,6 @@ const Navbar = () => {
           >
             Home
           </NavLink>
-
           <NavLink
             className={({ isActive, isPending }) =>
               isPending || isActive ? styles.active : styles.disactive
@@ -241,64 +246,50 @@ const Navbar = () => {
           >
             Wishlist
           </NavLink>
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              {loggedIn && (
-                <IconButton
-                  size="xx-large"
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <Avatar sx={{ color: "#596780" }} src={user.avatar} />
-                </IconButton>
-              )}
-              {!loggedIn && (
-                <Box>
-                  <Button variant="contained" onClick={handleLogin}>
-                    <Login sx={{ mr: 1 }} />
-                    SignIn
-                  </Button>
-                </Box>
-              )}
-              {loggedIn && (
-                <Stack justifyContent="center">
-                  <Button
-                    variant="contained"
-                    sx={{
-                      ml: 4,
-                    }}
-                    onClick={() => {
-                      handleLogin();
-                      googleLogout();
-                      dispatch(setUser({ user: {} }));
-                      setCookie("");
-                      navigate("/");
-                    }}
-                  >
-                    <Logout sx={{ mr: 1 }} />
-                    Signout
-                  </Button>
-                </Stack>
-              )}
-            </Box>
-            <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ display: "flex" }}>
+            {loggedIn && (
               <IconButton
-                size="large"
-                aria-label="show more"
-                aria-controls={mobileMenuId}
+                size="xx-large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
                 aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="black"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
               >
-                <MoreIcon />
+                <Avatar sx={{ color: "#596780" }} src={user.avatar} />
               </IconButton>
-            </Box>
+            )}
+            {!loggedIn && (
+              <Box>
+                <Button variant="contained" onClick={handleLogin}>
+                  <Login sx={{ mr: 1 }} />
+                  SignIn
+                </Button>
+              </Box>
+            )}
+            {loggedIn && (
+              <Stack justifyContent="center">
+                <Button
+                  variant="contained"
+                  sx={{
+                    ml: 4,
+                  }}
+                  onClick={() => {
+                    handleLogin();
+                    googleLogout();
+                    dispatch(setUser({ user: {} }));
+                    setCookie("");
+                    navigate("/");
+                  }}
+                >
+                  <Logout sx={{ mr: 1 }} />
+                  Signout
+                </Button>
+              </Stack>
+            )}
           </Box>
-        </Toolbar>
+        </Box>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
