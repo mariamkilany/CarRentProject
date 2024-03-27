@@ -1,1 +1,30 @@
+# MORENT - Car Rental Website
+
+MORENT is a car rental website that allows users to browse and rent available cars. Users can filter cars based on type, capacity, and fuel efficiency. Additionally, users can add cars to their wishlist and view reviews from other users. The website also provides an admin dashboard for managing cars, transactions, and user information.
+
+## Features
+
+- **User Features:**
+  - Browse available cars
+  - Filter cars by type, capacity, and fuel efficiency
+  - Add cars to wishlist
+  - View reviews from other users
+  - Rent cars and make payments
+
+- **Admin Features:**
+  - Dashboard with analytics on cars and transactions
+  - CRUD operations on cars (Create, Read, Update, Delete)
+  - Manage user information
+  - View location of car rentals
+
+## Technologies Used
+
+- **Frontend:**
+  - React.js for building the user interface
+  - Material-UI for styling components
+  - Redux for state management
+  - React Router for navigation
+  - Axios for handling HTTP requests
+
+
 
